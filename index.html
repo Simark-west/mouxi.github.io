@@ -164,6 +164,18 @@
         <v-list id="sub-menu" class="font-weight-medium" dense>
             
                 
+                    <v-list-item href="/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>搭博客的血与泪</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
                     <v-list-item href="/categories/%E8%A7%A3%E5%BF%A7/" link>
                         <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
                             <v-hover v-model="menuHover">
@@ -269,6 +281,55 @@
 </v-row>
 
                             <v-card class="elevation-2 index-card">
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2020-10-14
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/hexo/ >hexo</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/">搭博客的血与泪></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/">【小白向】搭建hexo的各种bug</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          1、不要直接复制粘贴代码安装百度推送插件npm install hexo-baidu-url-submit –-save
+按照网上给的教程[https://zhuanlan.zhihu.com/p/128033054]打开站点文件_config.yml添加配置：
+baidu_url_submit: 
+ count: 200  # 比如200，代表提交最新的200个链接  
+host: xxxx.xxx # 在百度站长平台中注册的域名  
+token: your_token # 百度站长密钥  
+path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里，这...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
   
     <article class="index-article">
       
@@ -457,54 +518,20 @@
       </div>
       <v-divider></v-divider>
     </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2020-09-21
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
-                
-                  <span class="index-article-header-tag-content">
-                    <v-icon>fas fa-tag</v-icon>
-                    <a rel="tag" href = /tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/ >神话传说</a>
-                  </span>
-                
-              </v-card>
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/categories/%E8%A7%A3%E5%BF%A7/">解忧></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/2020/09/21/%E8%A7%A3%E5%BF%A7/">初穗</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          00
-她的记忆里始终流淌着一条诡谲的河流。
-不似她后来曾遍历过的世间各异的水路，那条潜藏在她记忆中的河流泛着罕见的澄黄晶莹的波纹，河底是盘亘万年之久的迷你王国。
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/2020/09/21/%E8%A7%A3%E5%BF%A7/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
    
 </v-card>  
 
+
+  <div id="pagination" class="text-center">
+    <v-pagination 
+      v-model="currentPage" 
+      :length=2 
+      @input="PageChange" 
+      prev-icon="chevron_left"
+      next-icon="chevron_right"
+      color="secondary"
+    ></v-pagination>
+  </div>
          
                             <div id="mobile-footer" class="d-block d-md-none">
                                 <v-divider></v-divider>
