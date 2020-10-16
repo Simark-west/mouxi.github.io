@@ -419,26 +419,28 @@
         
 
 
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-  <div id="gitalk-container"></div>
+  <div id="vcomments"></div>
 
   <script>
-    const gitalk = new Gitalk({
-      clientID: '1a34105b2867c783a234',
-      clientSecret: '698a10d3aa2d748e2c946a9ee5c2947a06b706e0',
-      repo: 'mouxi.github.io',
-      owner: 'Simark-west',
-      admin: ['Simark-west'],
-      id: location.pathname,
-      distractionFreeMode: false
+    new Valine({
+      el: '#vcomments',
+      appId: 'toPrhrE2Uhc0b66svoBOs8nj-gzGzoHsz',
+      appKey: 'GjTeHV9IxK0Y2nIDMloJQEyF',
+      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+      avatar: 'retro',
+      lang: 'zh-CN'
     })
-
-    gitalk.render('gitalk-container')
   </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
 
 
       </div>
