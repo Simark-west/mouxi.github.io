@@ -6,7 +6,7 @@
   <link href="https://github.com/Simark-west/mouxi.github.io/atom.xml" rel="self"/>
   <link href="http://www.ximou.ren/" rel="hub"/>
   <link href="https://github.com/Simark-west/mouxi.github.io/"/>
-  <updated>2020-10-16T03:39:51.257Z</updated>
+  <updated>2020-10-16T14:52:20.548Z</updated>
   <id>https://github.com/Simark-west/mouxi.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>【小白向】搭建hexo的各种bug</title>
+    <title>【记录向】为了拥有评论区我心力交瘁之评论区的启动与测试</title>
+    <link href="https://github.com/Simark-west/mouxi.github.io/2020/10/16/%E8%AF%84%E8%AE%BA/"/>
+    <id>https://github.com/Simark-west/mouxi.github.io/2020/10/16/%E8%AF%84%E8%AE%BA/</id>
+    <published>2020-10-16T13:08:03.000Z</published>
+    <updated>2020-10-16T14:52:20.548Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;hexo的主题从next跳转到insulin再到orange，我的评论区终于能用了！  来讲讲这中间遇到让人心塞的小问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;1、不是所有主题都自带评论区的&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="搭博客的血与泪" scheme="https://github.com/Simark-west/mouxi.github.io/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/"/>
+    
+    
+    <category term="hexo" scheme="https://github.com/Simark-west/mouxi.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【记录向】搭建hexo的各种bug</title>
     <link href="https://github.com/Simark-west/mouxi.github.io/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/"/>
     <id>https://github.com/Simark-west/mouxi.github.io/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/</id>
     <published>2020-10-14T03:38:24.000Z</published>
-    <updated>2020-10-16T03:39:51.257Z</updated>
+    <updated>2020-10-16T13:04:55.261Z</updated>
     
     
       
