@@ -3,11 +3,11 @@
   <title>若木巽有终</title>
   
   
-  <link href="https://github.com/Simark-west/mouxi.github.io/atom.xml" rel="self"/>
+  <link href="https://ximou.ren/atom.xml" rel="self"/>
   <link href="http://www.ximou.ren/" rel="hub"/>
-  <link href="https://github.com/Simark-west/mouxi.github.io/"/>
+  <link href="https://ximou.ren/"/>
   <updated>2020-10-16T14:55:23.379Z</updated>
-  <id>https://github.com/Simark-west/mouxi.github.io/</id>
+  <id>https://ximou.ren/</id>
   
   <author>
     <name>某西</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>【记录向】为了拥有评论区我心力交瘁之评论区的启动与测试</title>
-    <link href="https://github.com/Simark-west/mouxi.github.io/2020/10/16/%E8%AF%84%E8%AE%BA/"/>
-    <id>https://github.com/Simark-west/mouxi.github.io/2020/10/16/%E8%AF%84%E8%AE%BA/</id>
+    <link href="https://ximou.ren/2020/10/16/%E8%AF%84%E8%AE%BA/"/>
+    <id>https://ximou.ren/2020/10/16/%E8%AF%84%E8%AE%BA/</id>
     <published>2020-10-16T13:08:03.000Z</published>
     <updated>2020-10-16T14:55:23.379Z</updated>
     
@@ -37,17 +37,17 @@
     
     
     
-    <category term="搭博客的血与泪" scheme="https://github.com/Simark-west/mouxi.github.io/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/"/>
+    <category term="搭博客的血与泪" scheme="https://ximou.ren/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/"/>
     
     
-    <category term="hexo" scheme="https://github.com/Simark-west/mouxi.github.io/tags/hexo/"/>
+    <category term="hexo" scheme="https://ximou.ren/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>【记录向】搭建hexo的各种bug</title>
-    <link href="https://github.com/Simark-west/mouxi.github.io/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/"/>
-    <id>https://github.com/Simark-west/mouxi.github.io/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/</id>
+    <link href="https://ximou.ren/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/"/>
+    <id>https://ximou.ren/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/</id>
     <published>2020-10-14T03:38:24.000Z</published>
     <updated>2020-10-16T13:04:55.261Z</updated>
     
@@ -62,17 +62,17 @@
     
     
     
-    <category term="搭博客的血与泪" scheme="https://github.com/Simark-west/mouxi.github.io/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/"/>
+    <category term="搭博客的血与泪" scheme="https://ximou.ren/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/"/>
     
     
-    <category term="hexo" scheme="https://github.com/Simark-west/mouxi.github.io/tags/hexo/"/>
+    <category term="hexo" scheme="https://ximou.ren/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>起篇04</title>
-    <link href="https://github.com/Simark-west/mouxi.github.io/2020/10/05/%E8%B5%B7%E7%AF%8704/"/>
-    <id>https://github.com/Simark-west/mouxi.github.io/2020/10/05/%E8%B5%B7%E7%AF%8704/</id>
+    <link href="https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8704/"/>
+    <id>https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8704/</id>
     <published>2020-10-05T15:53:17.000Z</published>
     <updated>2020-10-09T14:35:51.344Z</updated>
     
@@ -82,17 +82,17 @@
     
     
     
-    <category term="有虞谣" scheme="https://github.com/Simark-west/mouxi.github.io/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/"/>
+    <category term="有虞谣" scheme="https://ximou.ren/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/"/>
     
     
-    <category term="神话传说" scheme="https://github.com/Simark-west/mouxi.github.io/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
+    <category term="神话传说" scheme="https://ximou.ren/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
     
   </entry>
   
   <entry>
     <title>起篇03</title>
-    <link href="https://github.com/Simark-west/mouxi.github.io/2020/10/05/%E8%B5%B7%E7%AF%8703/"/>
-    <id>https://github.com/Simark-west/mouxi.github.io/2020/10/05/%E8%B5%B7%E7%AF%8703/</id>
+    <link href="https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8703/"/>
+    <id>https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8703/</id>
     <published>2020-10-05T15:51:32.000Z</published>
     <updated>2020-10-09T14:35:43.472Z</updated>
     
@@ -102,17 +102,17 @@
     
     
     
-    <category term="有虞谣" scheme="https://github.com/Simark-west/mouxi.github.io/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/"/>
+    <category term="有虞谣" scheme="https://ximou.ren/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/"/>
     
     
-    <category term="神话传说" scheme="https://github.com/Simark-west/mouxi.github.io/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
+    <category term="神话传说" scheme="https://ximou.ren/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
     
   </entry>
   
   <entry>
     <title>起篇02</title>
-    <link href="https://github.com/Simark-west/mouxi.github.io/2020/10/05/%E8%B5%B7%E7%AF%8702/"/>
-    <id>https://github.com/Simark-west/mouxi.github.io/2020/10/05/%E8%B5%B7%E7%AF%8702/</id>
+    <link href="https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8702/"/>
+    <id>https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8702/</id>
     <published>2020-10-05T15:49:27.000Z</published>
     <updated>2020-10-09T14:35:34.899Z</updated>
     
@@ -122,17 +122,17 @@
     
     
     
-    <category term="有虞谣" scheme="https://github.com/Simark-west/mouxi.github.io/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/"/>
+    <category term="有虞谣" scheme="https://ximou.ren/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/"/>
     
     
-    <category term="神话传说" scheme="https://github.com/Simark-west/mouxi.github.io/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
+    <category term="神话传说" scheme="https://ximou.ren/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
     
   </entry>
   
   <entry>
     <title>起篇01</title>
-    <link href="https://github.com/Simark-west/mouxi.github.io/2020/10/05/%E8%B5%B7%E7%AF%8701/"/>
-    <id>https://github.com/Simark-west/mouxi.github.io/2020/10/05/%E8%B5%B7%E7%AF%8701/</id>
+    <link href="https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8701/"/>
+    <id>https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8701/</id>
     <published>2020-10-05T15:16:10.000Z</published>
     <updated>2020-10-09T01:44:45.300Z</updated>
     
@@ -153,17 +153,17 @@
     
     
     
-    <category term="有虞谣" scheme="https://github.com/Simark-west/mouxi.github.io/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/"/>
+    <category term="有虞谣" scheme="https://ximou.ren/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/"/>
     
     
-    <category term="神话传说" scheme="https://github.com/Simark-west/mouxi.github.io/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
+    <category term="神话传说" scheme="https://ximou.ren/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
     
   </entry>
   
   <entry>
     <title>初穗</title>
-    <link href="https://github.com/Simark-west/mouxi.github.io/2020/09/21/%E8%A7%A3%E5%BF%A7/"/>
-    <id>https://github.com/Simark-west/mouxi.github.io/2020/09/21/%E8%A7%A3%E5%BF%A7/</id>
+    <link href="https://ximou.ren/2020/09/21/%E8%A7%A3%E5%BF%A7/"/>
+    <id>https://ximou.ren/2020/09/21/%E8%A7%A3%E5%BF%A7/</id>
     <published>2020-09-21T04:29:11.000Z</published>
     <updated>2020-10-10T13:47:01.946Z</updated>
     
@@ -174,10 +174,10 @@
     
     
     
-    <category term="解忧" scheme="https://github.com/Simark-west/mouxi.github.io/categories/%E8%A7%A3%E5%BF%A7/"/>
+    <category term="解忧" scheme="https://ximou.ren/categories/%E8%A7%A3%E5%BF%A7/"/>
     
     
-    <category term="神话传说" scheme="https://github.com/Simark-west/mouxi.github.io/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
+    <category term="神话传说" scheme="https://ximou.ren/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/"/>
     
   </entry>
   
