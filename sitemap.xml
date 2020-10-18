@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ximou.ren/about/index.html</loc>
+    
+    <lastmod>2020-10-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ximou.ren/friends/index.html</loc>
     
     <lastmod>2020-10-18</lastmod>
@@ -52,13 +59,6 @@
   
   <url>
     <loc>https://ximou.ren/2020/10/05/%E8%B5%B7%E7%AF%8702/</loc>
-    
-    <lastmod>2020-10-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ximou.ren/about/index.html</loc>
     
     <lastmod>2020-10-09</lastmod>
     
