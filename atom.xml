@@ -6,7 +6,7 @@
   <link href="https://ximou.ren/atom.xml" rel="self"/>
   <link href="http://www.ximou.ren/" rel="hub"/>
   <link href="https://ximou.ren/"/>
-  <updated>2020-10-16T14:55:23.379Z</updated>
+  <updated>2020-10-19T13:54:54.792Z</updated>
   <id>https://ximou.ren/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【记录向】Orange主题的小小优化之字数统计与阅读时长</title>
+    <link href="https://ximou.ren/2020/10/19/Orange%E4%B8%BB%E9%A2%98%E7%9A%84%E5%B0%8F%E5%B0%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%AF%BB%E6%97%B6%E5%B8%B8/"/>
+    <id>https://ximou.ren/2020/10/19/Orange%E4%B8%BB%E9%A2%98%E7%9A%84%E5%B0%8F%E5%B0%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%AF%BB%E6%97%B6%E5%B8%B8/</id>
+    <published>2020-10-19T13:04:39.000Z</published>
+    <updated>2020-10-19T13:54:54.792Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;正如我前文表达的宝藏主题Orange什么都好，但没有字数统计和我之前的友邻页出了点问题，最近都解决了，每天爬上站点来云撸猫也是十分快乐的。这篇讲如何搞定字数统计和阅读时长。&lt;del&gt;后面那项你明明没写！&lt;/del&gt;&lt;/p&gt;
+&lt;/blockquote</summary>
+        
+      
+    
+    
+    
+    <category term="搭博客的血与泪" scheme="https://ximou.ren/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/"/>
+    
+    
+    <category term="hexo" scheme="https://ximou.ren/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【记录向】Orange主题的小小优化之字数统计与阅读时长</title>
+    <link href="https://ximou.ren/2020/10/19/Orange%E4%B8%BB%E9%A2%98%E7%9A%84%E5%B0%8F%E5%B0%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%AF%BB%E6%97%B6%E9%95%BF/"/>
+    <id>https://ximou.ren/2020/10/19/Orange%E4%B8%BB%E9%A2%98%E7%9A%84%E5%B0%8F%E5%B0%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%AF%BB%E6%97%B6%E9%95%BF/</id>
+    <published>2020-10-19T13:04:39.000Z</published>
+    <updated>2020-10-19T13:52:49.042Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;正如我前文表达的宝藏主题Orange什么都好，但没有字数统计和我之前的友邻页出了点问题，最近都解决了，每天爬上站点来云撸猫也是十分快乐的。这篇讲如何搞定字数统计和阅读时常。&lt;del&gt;后面那项你明明没写！&lt;/del&gt;&lt;/p&gt;
+&lt;/blockquote</summary>
+        
+      
+    
+    
+    
+    <category term="搭博客的血与泪" scheme="https://ximou.ren/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/"/>
+    
+    
+    <category term="hexo" scheme="https://ximou.ren/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>【记录向】为了拥有评论区我心力交瘁之评论区的启动与测试</title>
@@ -49,7 +103,7 @@
     <link href="https://ximou.ren/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/"/>
     <id>https://ximou.ren/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/</id>
     <published>2020-10-14T03:38:24.000Z</published>
-    <updated>2020-10-16T13:04:55.261Z</updated>
+    <updated>2020-10-19T13:04:02.374Z</updated>
     
     
       
