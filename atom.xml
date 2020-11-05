@@ -6,7 +6,7 @@
   <link href="https://ximou.ren/atom.xml" rel="self"/>
   <link href="http://www.ximou.ren/" rel="hub"/>
   <link href="https://ximou.ren/"/>
-  <updated>2020-10-23T12:24:32.579Z</updated>
+  <updated>2020-11-05T03:03:16.499Z</updated>
   <id>https://ximou.ren/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【记录向】hexo不蒜子统计阅读量和站点信息</title>
+    <link href="https://ximou.ren/2020/11/05/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BB%9F%E8%AE%A1%E9%98%85%E8%AF%BB%E9%87%8F%E5%92%8C%E7%AB%99%E7%82%B9%E4%BF%A1%E6%81%AF/"/>
+    <id>https://ximou.ren/2020/11/05/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BB%9F%E8%AE%A1%E9%98%85%E8%AF%BB%E9%87%8F%E5%92%8C%E7%AB%99%E7%82%B9%E4%BF%A1%E6%81%AF/</id>
+    <published>2020-11-04T16:00:00.000Z</published>
+    <updated>2020-11-05T03:03:16.499Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;1、Orange主题下插入页面内阅读量&quot;&gt;&lt;a href=&quot;#1、Orange主题下插入页面内阅读量&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="搭博客的那些事" scheme="https://ximou.ren/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/"/>
+    
+    
+    <category term="hexo" scheme="https://ximou.ren/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>却把青梅嗅</title>
