@@ -6,7 +6,7 @@
   <link href="https://ximou.ren/atom.xml" rel="self"/>
   <link href="http://www.ximou.ren/" rel="hub"/>
   <link href="https://ximou.ren/"/>
-  <updated>2021-08-31T15:14:57.902Z</updated>
+  <updated>2023-12-07T13:31:52.289Z</updated>
   <id>https://ximou.ren/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测试迁移</title>
+    <link href="https://ximou.ren/2023/12/07/%E6%B5%8B%E8%AF%95%E8%BF%81%E7%A7%BB/"/>
+    <id>https://ximou.ren/2023/12/07/%E6%B5%8B%E8%AF%95%E8%BF%81%E7%A7%BB/</id>
+    <published>2023-12-07T13:26:48.000Z</published>
+    <updated>2023-12-07T13:31:52.289Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​    &lt;del&gt;没睡着爬起来折腾hexo到新电脑的迁移，那就以经典开头测试吧&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;  Hello</summary>
+        
+      
+    
+    
+    
+    
+    <category term="闲来碎念" scheme="https://ximou.ren/tags/%E9%97%B2%E6%9D%A5%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>一个不算总结的总结？</title>
