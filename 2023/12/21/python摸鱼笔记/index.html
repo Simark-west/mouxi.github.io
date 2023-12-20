@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
   
-  <title>【记录向】搭建hexo的各种bug | 若木巽有终</title>
+  <title>python摸鱼笔记 | 若木巽有终</title>
 
   
     <link rel="apple-touch-icon" href="https://i.loli.net/2020/10/22/ac4gLu3SJzsfxdR.png">
@@ -106,15 +106,15 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">【记录向】搭建hexo的各种bug</div>
+      <div class="post-title">python摸鱼笔记</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="更新时间"></i>
-          2020-10-14
+          2023-12-21
         </span>  
 		
          <span>
-  <i class="iconfont icon-edit"></i> 847 字
+  <i class="iconfont icon-edit"></i> 2.2k 字
 </span>
 
 
@@ -123,59 +123,130 @@
 	    &nbsp;<i class="iconfont icon-eye"> </i><span id="busuanzi_value_page_pv"> </span> 次
       </div>
       <div class="markdown-body">
-        <h4 id="1、不要直接复制粘贴代码"><a href="#1、不要直接复制粘贴代码" class="headerlink" title="1、不要直接复制粘贴代码"></a>1、不要直接复制粘贴代码</h4><p>安装百度推送插件<code>npm install hexo-baidu-url-submit –-save</code></p>
-<p>按照网上给的教程 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/128033054">https://zhuanlan.zhihu.com/p/128033054</a> 打开站点文件_config.yml添加配置：</p>
-<pre><code class="yaml">baidu_url_submit: 
- count: 200  # 比如200，代表提交最新的200个链接  
-host: xxxx.xxx # 在百度站长平台中注册的域名  
-token: your_token # 百度站长密钥  
-path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里，这个默认</code></pre>
-<p>和</p>
-<pre><code class="yaml">deploy: 
-- type: git
-  repo: 
-    github: # 域名格式是git@github.com:xx/xx.github,io.git,即你存放静态网页的仓库地址
-  branch: master
+        <p>想当初曾经许下豪情壮志，想要一年学会数据分析，玩转爬虫……而如今，还在艰难起步爬坡阶段……</p>
+<p><del>能更新这个废弃已久的笔记本，说明我真的很无聊</del></p>
+<h3 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h3><p><em>学习图像处理的过程就是无数个摸鱼的时段叠加</em></p>
+<p>更新至2023/12/20</p>
+<h4 id="废话章节"><a href="#废话章节" class="headerlink" title="废话章节"></a>废话章节</h4><p>“python作为目前最好上手且最热门的语言，不学习一下实在血亏，万一毕业找不到工作还可以转行当数据分析师。”这样的想法在我给我导搬砖的时候就萌生了，不过我一向拖延，加上mathematica和orign处理大部分数据绰绰有余，于是我就继续耽搁着了。</p>
+<p>疫情被困在家无聊到发疯，我不可思议地产生了学习的冲动。在看完B站各种python入门视频且跟着视频学习了一段时间，并成功地在一个月没碰电脑，忘光知识点之后，我悟了：</p>
+<p>若不根据自己需求来写程序，并从中查找各种函数的用途，直接刷课程这种学习模式压根不适合我。 </p>
+<p>意识到这点的我欣然地接受了自己的半途而废，毫无愧疚感地将自己的热情投入到其他爱好上去了。</p>
+<p>辗转到进入社畜阶段，再继续接触Python则是因为我用Origin用腻了（怎么有种嫌弃糟糠之妻的既视感），而且后续工作内容使用zemax和rsoft比较多，zemax的内置看光斑模式又太死板了，需要点开多个窗口，还得用鼠标读取点的位置再返回（2016版本以上自带了光斑尺寸计算，但我感觉和我需要的那个能量定义有点差异）。如果能直接读取zemax里面的光斑像素点，酷炫地3d建模，拟合曲线并返回参数。那我就不用每次手动把zemax里探测器的数据复制粘贴到excel里再画图了。</p>
+<p>除了处理光斑，如果python能帮我一键给所有物体镀膜就好了（这个还在琢磨中），每次一个一个点开再向下拉取选择镀膜系数真的费眼睛。</p>
+<p>我看了下这两软件都支持python和matlab的接口，matlab快是快，但占用内存太大了，就想转成python试试。</p>
+<h4 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h4><p>参考案例是：《python处理高斯光束的分布图像》</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37816922/article/details/102943533">python处理高斯光束的分布图像_如何判断图形为高斯-CSDN博客</a></p>
+<p>博主的代码过程很详细，除了一些不常用的数据包，结尾附上了成功的图像，评论里感谢留言和有人提出的疑惑，博主也及时给出了解答，所以给了我这个程序应该很容易成功的错觉。</p>
+<p>处理问题地思路十分清晰：</p>
+<p>1、选择一张典型的光斑图像，裁掉多余暗色背景，只留下光斑（该步骤交给python，不用改变原图）</p>
+<p>2、对图片进行灰度处理（<strong>这里很关键很关键！我就在这里踩坑了！</strong>）</p>
+<p>3、将图片上每个像素点转换成（x,y,z）形式并提取出来</p>
+<p>4、将三个通道数值分别提取出来，依次放入数组X,Y,Z中。</p>
+<p>5、以上述X,Y为坐标绘制面元图（网格化X,Y），将Z轴的数据仿真在网格化的二维XY图里。</p>
+<p>案例给出的光斑图如下：</p>
+<p><img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210040112.png" alt="1"></p>
+<p>我信心满满地开始照搬，随后开始长达十个月（……）的自闭过程：）</p>
+<p>一边测试一边疑惑，没人真的没有发现有bug嘛，你们就光搁那收藏点赞了是吧。</p>
+<p><del>实际上认真弄不用那么久，不过我一向贯彻三天打鱼四天晒网的摆烂精神，中间还跑出去旅游沉迷打乙游看剧。</del></p>
+<p><img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210039052.png" alt="4"></p>
+<p>到这一步，大部人应该都没有什么问题。</p>
+<p><del>显然，我不是大部分人：）</del></p>
+<p>如果显示不出来图片，那应该是jupyter notebook或者其他编译器的动画设置出现问题。</p>
+<p>在前面加上如下语句即可：</p>
+<pre><code class="python">mport matplotlib.image as mping
+matplotlib.use(&#39;TKAgg&#39;)</code></pre>
+<p>当我们成功修改尺寸后，可以看到光斑明显被集中放置在图片中央：</p>
+<p><img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210039212.png" alt="3"></p>
+<p>接着继续敲原代码。</p>
+<p>这一步开始报错：</p>
+<p><img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210039179.png" alt="2"></p>
+<p>报错如图： </p>
+<p><img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210040439.png" alt="5"></p>
+<p>这指的是你的数据溢出了。查看roi.shape为(23, 40, 4)，很明显roi具有三个单元，每个单元里分别有23、40、4个数据数，如果我们仅只用x,y两个列表去接收roi的数据，那多出去的z就没有处理了，所以报错了。</p>
+<h4 id="走的一些弯路"><a href="#走的一些弯路" class="headerlink" title="走的一些弯路"></a>走的一些弯路</h4><details>
+  <summary>接下来就是我的茫茫是错之旅了，不感兴趣地可以折叠该部分或者直接拉到最后。正确的代码我放在最后了。</summary>  
+    <br>
+    如果仅仅只是为了解决这一步的错误，可以改写成：<br>
+    <br>
+    <code>xs,ys,zs=np.indices(roi.shape)</code> <br>
+    <br>
+    没有继续报错了。对于上诉错误我先开始以为是作者手误，所以没有放在心上。<br>
+    <br>
+    然后，就是我的茫茫是错之旅了。<br>
+    <br>
+    建立面元图的时候，出现了新问题：<br>
+    <img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210044248.png"/>
+    <br>
+     这里是说我的Z不是二维数据，所以没办法放在x,y张成的网格上。于是我开始想方设法的将Z轴的数据变成二维的，参考维度升级，后面突然意识到就算维度升级了，Z的数据长度也和X,Y的长度不一样。接下来的试错之路歪到学习插值法，不停修修补补Z轴的数据点，还做了平滑。最后得出的图像： <br>
+    <br>
+    <img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210044655.png"/>
+    <br>
+      甚至还有当时的笔记备注。<br>
+    <br>
+  遇到困难我就搁浅了。<br>
+</details>
 
-- type: baidu_url_submitter #百度推送</code></pre>
-<p><strong>这里需要注意一点，type是baidu_url_submitter，配置是baidu_url_submit ，这俩不一样</strong>，不然会报错<code>ERROR Deployer not found: baidu_url_submitter</code></p>
-<p>不过上面那个问题是我后续才遇到的，最开始我遇到的问题是不能愉快地<code>hexo clean</code>……出现：</p>
-<p><em>can not read a block mapping entry; a multiline key may not be an implicit key at line 2, column 5:</em></p>
-<p>有很大概率是你在2行5列的空格或是缩进有问题。这是由于直接复制别人的代码可能会缺省空格和缩进，这里提供一个 <a target="_blank" rel="noopener" href="http://www.bejson.com/validators/yaml_editor/">http://www.bejson.com/validators/yaml_editor/</a> 来验证你打代码，^指向处代表你哪里缺空格。</p>
-<p>虽然方法很简单……实际上我几乎耗费了半天时间去调整空格，没办法小白对语言书写规则不熟。</p>
-<p>再接下来就可以<code>hexo clean</code>了。</p>
-<h4 id="2、-ERROR-Deployer-not-found-git"><a href="#2、-ERROR-Deployer-not-found-git" class="headerlink" title="2、 ERROR Deployer not found: git"></a>2、 ERROR Deployer not found: git</h4><p>这个是在上一步结束后遇到的。<code>hexo g</code>没问题，但<code>hexo d</code>出现：</p>
-<p><em>ERROR Deployer not found: git repo锛歡<a href="mailto:&#105;&#116;&#64;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#109;">&#105;&#116;&#64;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#109;</a>:Simark-west/mouxi.github.io.git</em></p>
-<p>我先开始怀疑是没有安装git，于是：</p>
-<pre><code class="yaml">npm install  hexo-deployer-git --save</code></pre>
-<p>然而还是相同的报错，看着那个乱码我十分怀疑是不是冒号有问题，原文本是：</p>
-<pre><code class="yaml">deploy: 
- - type: git
-    repo: git@github.com:Simark-west/mouxi.github.io.git 
-   branch: master
 
- - type: baidu_url_submitter # 百度推送</code></pre>
-<p>看起来是git没有被识别。</p>
-<p>为了消除乱码，我把<code>git@github.com:Simark-west/mouxi.github.io.git</code> 改写成<code>https//:github.com:Simark-west/mouxi.github.io.git </code>，然后用YAML校验器 <a target="_blank" rel="noopener" href="http://www.bejson.com/validators/yaml_editor/">http://www.bejson.com/validators/yaml_editor/</a> 检查发现仍然是空格的问题！！！</p>
-<p><img src="https://i.loli.net/2020/10/13/j1xp9nsYBgMuSIN.png" alt="image-20201013155501358"></p>
-<p>把冒号后面的空格消除之后再<code>hexo clean</code>和<code>hexo d</code>就没有报错提示了。我不太明白为什么我之前打空格验证时没有报错……</p>
-<hr>
-<p>先记录这么多吧，目前先折腾到了看板娘也出现很多奇奇怪怪的问题，有些网上有解决方案有些没有（大概是我自带debug体质），在另一篇草稿里。等到什么时候把个人博客折腾到比较满意的状态我在发上来。</p>
-<p>写于10月13日</p>
-<hr>
-<p>10月14日继续折腾……</p>
-<p>今天报错又推翻了我前几天的努力，在疯狂翻阅了好几个网页后，看着大家说yaml是个严格的语法还是需要在冒号：后加入空格<strong>（注意是在英文状态下）</strong>。</p>
-<p>于是我重新修改了语法调整空格，发现这样也没有报错（<strong>在本地调试</strong>）:</p>
-<p><img src="https://i.loli.net/2020/10/14/K9rxP4851wzWElg.png" alt="image-20201014113211840"></p>
-<p>看到有说法git 2.0之后的版本type要写成git而不是github，repo的格式也是git模式，我又改回去了……</p>
-<p><code>hexo clean</code>和<code>hexo d</code>十分丝滑……我觉得我要好好琢磨它的语法了。</p>
+<h4 id="灰度处理"><a href="#灰度处理" class="headerlink" title="灰度处理"></a>灰度处理</h4><p>直到后面（起码过了几个月了）很偶然的某天半夜失眠，我突发奇想地爬起来是看图像处理的课程<del>（一直收藏但没看）</del>。然后了解到了之前roi.shape里的（A，B，C）三个分别代表了高度，宽度和通道数。通道数是指的颜色数目。图片的色彩使用三原色或这四原色按不同比例混合而成。</p>
+<p>我突然福至心灵，我在处理光斑的时候真的需要光斑那一处是什么颜色这样具体的信息嘛？我不是只需要强度就可以了吗，如果只要强度，黑白图也可以看得出强度啊。</p>
+<p>……所以，我需要的信息可能只有（A,B）而不需要C？</p>
+<p>那么试试看删掉C的信息呢？</p>
+<p>那就是被忽略掉的灰度处理。然后，我找到了解决bug的正确道路（应该）。</p>
+<p>比较简单粗暴的方式是：通过读取每个像素点的R，G，B值，进行灰度计算，将灰度值代替原有的值。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34840129/article/details/93137238">RGB图像转换为灰度图像的原理_rgba 怎么转为灰色-CSDN博客</a></p>
+<p>代码如下：</p>
+<pre><code class="python">R, G, B = img[:,:,0], img[:,:,1], img[:,:,2] #每个通道的数字
+imgGray = 0.2989 * R + 0.5870 * G + 0.1140 * B  # 灰度赋值</code></pre>
+<p>然后，问题解决了！附上我的拟合，拟合和原作者不一样因为我抓的边界点不同，改一下拟合的初始值应该可以修正过来。</p>
+<p><img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210040237.png" alt="8"></p>
+<p><img src="https://raw.githubusercontent.com/Simark-west/picgo/main/img/202312210051444.png"></p>
+<h4 id="这里有代码"><a href="#这里有代码" class="headerlink" title="这里有代码"></a>这里有代码</h4><p>最后，附上完整代码：</p>
+<pre><code>import numpy as np
+import matplotlib
+import matplotlib.image as mping
+matplotlib.use(&#39;TKAgg&#39;)
+import matplotlib.pyplot as plt
+img=plt.imread(r&quot;XXXX\XXX.JPG&quot;).astype(float) #填写你图片的位置
+R, G, B = img[:,:,0], img[:,:,1], img[:,:,2] #每个通道的数字
+imgGray = 0.2989 * R + 0.5870 * G + 0.1140 * B  # 灰度赋值
+plt.ginput(2) #截取图片
+</code></pre>
+<p>将你选取的图片位置返回的点记住，赋给新列表，并进行坐标网格化处理，创建面元图。</p>
+<pre><code class="python">roi=imgGray[167:205,350:390]
+xNum,yNum = roi.shape #获取roi的维度
+xAxis,yAxis = np.meshgrid(range(yNum),range(xNum)) #创建长度为xNum的自然数列
+ax = plt.gca(projection=&#39;3d&#39;) #建立3D坐标轴
+ax.plot_surface(xAxis,yAxis,roi) #创建面元图
+
+plt.show()</code></pre>
+<p>进行数据拟合：</p>
+<pre><code class="python">arr = np.max(roi,0)
+x = np.arange(len(arr))
+plt.plot(x,arr)
+
+from scipy.optimize import curve_fit #规范一点可以写在开头
+def gauss(x,a,b,c):
+     return a*np.exp(-(x-b)**2/c**2)
+
+
+
+abc, para = curve_fit(gauss,x,arr,[1.2, 0, 8])
+ #即上式中的a,b,c
+#np.array([89.72326971, 35.58522403, 20.86186403])
+fitValue = gauss(x,abc[0],abc[1],abc[2]) #拟合值
+plt.scatter(x,arr)
+
+plt.plot(x,fitValue) #绘制拟合数据的曲线图
+print(abc)
+plt.show()
+</code></pre>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2020/10/05/%E8%B5%B7%E7%AF%8704/" target="_self">
+              <a href="/2023/12/07/%E6%B5%8B%E8%AF%95%E8%BF%81%E7%A7%BB/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>上一页</span>
               </a>
@@ -184,26 +255,15 @@ path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本�
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="更新时间"></i>
-              2020-10-14
+              2023-12-21
             </span>
             
-                  <span class="post-categories">
-                    <i class="iconfont icon-bookmark" title="分类"></i>
-                    
-                    <span class="span--category">
-                      <a href="/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/" title="搭博客的血与泪">
-                        <b></b> 搭博客的血与泪
-                      </a>
-                    </span>
-                    
-                  </span>
-              
                   <span class="post-tags">
                     <i class="iconfont icon-tags" title="标签"></i>
                     
                     <span class="span--tag">
-                      <a href="/tags/hexo/" title="hexo">
-                        <b></b> hexo
+                      <a href="/tags/%E6%91%B8%E9%B1%BC%E7%AC%94%E8%AE%B0/" title="摸鱼笔记">
+                        <b></b> 摸鱼笔记
                       </a>
                     </span>
                     
@@ -211,11 +271,6 @@ path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本�
               
           </div>
           <div class="post-foot-prev">
-            
-              <a href="/2020/10/16/%E4%B8%BA%E4%BA%86%E6%8B%A5%E6%9C%89%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%88%91%E5%BF%83%E5%8A%9B%E4%BA%A4%E7%98%81%E4%B9%8B%E8%AF%84%E8%AE%BA%E5%8C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%B5%8B%E8%AF%95/" target="_self">
-                <span>下一页</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
             
           </div>
         </div>
@@ -225,7 +280,7 @@ path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本�
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%B8%8D%E8%A6%81%E7%9B%B4%E6%8E%A5%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E4%BB%A3%E7%A0%81"><span class="toc-text">1、不要直接复制粘贴代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81-ERROR-Deployer-not-found-git"><span class="toc-text">2、 ERROR Deployer not found: git</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%9F%E8%AF%9D%E7%AB%A0%E8%8A%82"><span class="toc-text">废话章节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-text">案例分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BC%AF%E8%B7%AF"><span class="toc-text">走的一些弯路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%81%B0%E5%BA%A6%E5%A4%84%E7%90%86"><span class="toc-text">灰度处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%99%E9%87%8C%E6%9C%89%E4%BB%A3%E7%A0%81"><span class="toc-text">这里有代码</span></a></li></ol></li></ol>
     </div>
   </div>
 

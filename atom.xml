@@ -6,7 +6,7 @@
   <link href="https://ximou.ren/atom.xml" rel="self"/>
   <link href="http://www.ximou.ren/" rel="hub"/>
   <link href="https://ximou.ren/"/>
-  <updated>2023-12-07T13:31:52.289Z</updated>
+  <updated>2023-12-20T16:51:48.916Z</updated>
   <id>https://ximou.ren/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python摸鱼笔记</title>
+    <link href="https://ximou.ren/2023/12/21/python%E6%91%B8%E9%B1%BC%E7%AC%94%E8%AE%B0/"/>
+    <id>https://ximou.ren/2023/12/21/python%E6%91%B8%E9%B1%BC%E7%AC%94%E8%AE%B0/</id>
+    <published>2023-12-20T16:47:00.000Z</published>
+    <updated>2023-12-20T16:51:48.916Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;想当初曾经许下豪情壮志，想要一年学会数据分析，玩转爬虫……而如今，还在艰难起步爬坡阶段……&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;能更新这个废弃已久的笔记本，说明我真的很无聊&lt;/del&gt;&lt;/p&gt;
+&lt;h3 id=&quot;图像处理&quot;&gt;&lt;a href=&quot;#图像处理&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="摸鱼笔记" scheme="https://ximou.ren/tags/%E6%91%B8%E9%B1%BC%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>测试迁移</title>
