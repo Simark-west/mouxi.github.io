@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>【记录向】搭建hexo的各种bug | 若木巽有终</title>
+
+  
+    <link rel="apple-touch-icon" href="https://i.loli.net/2020/10/22/ac4gLu3SJzsfxdR.png">
+    <link rel="icon" href="https://i.loli.net/2020/10/22/ac4gLu3SJzsfxdR.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="若木巽有终" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="https://i.loli.net/2020/10/18/zQwkG1Ahs9MCy7d.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">某西</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">分类</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">朋友</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【记录向】搭建hexo的各种bug</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-10-14
+        </span>  
+		
+         <span>
+  <i class="iconfont icon-edit"></i> 847 字
+</span>
+
+
+
+
+	    &nbsp;<i class="iconfont icon-eye"> </i><span id="busuanzi_value_page_pv"> </span> 次
+      </div>
+      <div class="markdown-body">
+        <h4 id="1、不要直接复制粘贴代码"><a href="#1、不要直接复制粘贴代码" class="headerlink" title="1、不要直接复制粘贴代码"></a>1、不要直接复制粘贴代码</h4><p>安装百度推送插件<code>npm install hexo-baidu-url-submit –-save</code></p>
+<p>按照网上给的教程 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/128033054">https://zhuanlan.zhihu.com/p/128033054</a> 打开站点文件_config.yml添加配置：</p>
+<pre><code class="yaml">baidu_url_submit: 
+ count: 200  # 比如200，代表提交最新的200个链接  
+host: xxxx.xxx # 在百度站长平台中注册的域名  
+token: your_token # 百度站长密钥  
+path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里，这个默认</code></pre>
+<p>和</p>
+<pre><code class="yaml">deploy: 
+- type: git
+  repo: 
+    github: # 域名格式是git@github.com:xx/xx.github,io.git,即你存放静态网页的仓库地址
+  branch: master
+
+- type: baidu_url_submitter #百度推送</code></pre>
+<p><strong>这里需要注意一点，type是baidu_url_submitter，配置是baidu_url_submit ，这俩不一样</strong>，不然会报错<code>ERROR Deployer not found: baidu_url_submitter</code></p>
+<p>不过上面那个问题是我后续才遇到的，最开始我遇到的问题是不能愉快地<code>hexo clean</code>……出现：</p>
+<p><em>can not read a block mapping entry; a multiline key may not be an implicit key at line 2, column 5:</em></p>
+<p>有很大概率是你在2行5列的空格或是缩进有问题。这是由于直接复制别人的代码可能会缺省空格和缩进，这里提供一个 <a target="_blank" rel="noopener" href="http://www.bejson.com/validators/yaml_editor/">http://www.bejson.com/validators/yaml_editor/</a> 来验证你打代码，^指向处代表你哪里缺空格。</p>
+<p>虽然方法很简单……实际上我几乎耗费了半天时间去调整空格，没办法小白对语言书写规则不熟。</p>
+<p>再接下来就可以<code>hexo clean</code>了。</p>
+<h4 id="2、-ERROR-Deployer-not-found-git"><a href="#2、-ERROR-Deployer-not-found-git" class="headerlink" title="2、 ERROR Deployer not found: git"></a>2、 ERROR Deployer not found: git</h4><p>这个是在上一步结束后遇到的。<code>hexo g</code>没问题，但<code>hexo d</code>出现：</p>
+<p><em>ERROR Deployer not found: git repo锛歡<a href="mailto:&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a>:Simark-west/mouxi.github.io.git</em></p>
+<p>我先开始怀疑是没有安装git，于是：</p>
+<pre><code class="yaml">npm install  hexo-deployer-git --save</code></pre>
+<p>然而还是相同的报错，看着那个乱码我十分怀疑是不是冒号有问题，原文本是：</p>
+<pre><code class="yaml">deploy: 
+ - type: git
+    repo: git@github.com:Simark-west/mouxi.github.io.git 
+   branch: master
+
+ - type: baidu_url_submitter # 百度推送</code></pre>
+<p>看起来是git没有被识别。</p>
+<p>为了消除乱码，我把<code>git@github.com:Simark-west/mouxi.github.io.git</code> 改写成<code>https//:github.com:Simark-west/mouxi.github.io.git </code>，然后用YAML校验器 <a target="_blank" rel="noopener" href="http://www.bejson.com/validators/yaml_editor/">http://www.bejson.com/validators/yaml_editor/</a> 检查发现仍然是空格的问题！！！</p>
+<p><img src="https://i.loli.net/2020/10/13/j1xp9nsYBgMuSIN.png" alt="image-20201013155501358"></p>
+<p>把冒号后面的空格消除之后再<code>hexo clean</code>和<code>hexo d</code>就没有报错提示了。我不太明白为什么我之前打空格验证时没有报错……</p>
+<hr>
+<p>先记录这么多吧，目前先折腾到了看板娘也出现很多奇奇怪怪的问题，有些网上有解决方案有些没有（大概是我自带debug体质），在另一篇草稿里。等到什么时候把个人博客折腾到比较满意的状态我在发上来。</p>
+<p>写于10月13日</p>
+<hr>
+<p>10月14日继续折腾……</p>
+<p>今天报错又推翻了我前几天的努力，在疯狂翻阅了好几个网页后，看着大家说yaml是个严格的语法还是需要在冒号：后加入空格<strong>（注意是在英文状态下）</strong>。</p>
+<p>于是我重新修改了语法调整空格，发现这样也没有报错（<strong>在本地调试</strong>）:</p>
+<p><img src="https://i.loli.net/2020/10/14/K9rxP4851wzWElg.png" alt="image-20201014113211840"></p>
+<p>看到有说法git 2.0之后的版本type要写成git而不是github，repo的格式也是git模式，我又改回去了……</p>
+<p><code>hexo clean</code>和<code>hexo d</code>十分丝滑……我觉得我要好好琢磨它的语法了。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/10/05/%E8%B5%B7%E7%AF%8704/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-10-14
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/" title="搭博客的血与泪">
+                        <b></b> 搭博客的血与泪
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/hexo/" title="hexo">
+                        <b></b> hexo
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/10/16/%E4%B8%BA%E4%BA%86%E6%8B%A5%E6%9C%89%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%88%91%E5%BF%83%E5%8A%9B%E4%BA%A4%E7%98%81%E4%B9%8B%E8%AF%84%E8%AE%BA%E5%8C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%B5%8B%E8%AF%95/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%B8%8D%E8%A6%81%E7%9B%B4%E6%8E%A5%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E4%BB%A3%E7%A0%81"><span class="toc-text">1、不要直接复制粘贴代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81-ERROR-Deployer-not-found-git"><span class="toc-text">2、 ERROR Deployer not found: git</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'toPrhrE2Uhc0b66svoBOs8nj-gzGzoHsz',
+      appKey: 'GjTeHV9IxK0Y2nIDMloJQEyF',
+      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+      avatar: 'robohash',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <script async src="/js/busuanzi.pure.mini.js"></script>
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="email" href="mailto:westmark.april@gmail.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Simark-west/mouxi.github.io">Copyright © 若木巽有终 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  	
+  
+        <!-- 不蒜子统计 -->
+  <div class="vistor">
+          您是某西的第<span id="busuanzi_value_site_uv"></span>个小伙伴
+  </div>
+    
+</div>
+
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"live2dw/","model":{"jsonPath":"/live2dw/live2dw/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>

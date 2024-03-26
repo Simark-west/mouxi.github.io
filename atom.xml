@@ -6,7 +6,7 @@
   <link href="https://ximou.ren/atom.xml" rel="self"/>
   <link href="http://www.ximou.ren/" rel="hub"/>
   <link href="https://ximou.ren/"/>
-  <updated>2023-12-20T16:51:48.916Z</updated>
+  <updated>2024-03-26T15:24:08.516Z</updated>
   <id>https://ximou.ren/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://ximou.ren/2023/12/21/python%E6%91%B8%E9%B1%BC%E7%AC%94%E8%AE%B0/"/>
     <id>https://ximou.ren/2023/12/21/python%E6%91%B8%E9%B1%BC%E7%AC%94%E8%AE%B0/</id>
     <published>2023-12-20T16:47:00.000Z</published>
-    <updated>2023-12-20T16:51:48.916Z</updated>
+    <updated>2024-03-26T15:24:08.516Z</updated>
     
     
       
@@ -42,18 +42,18 @@
   </entry>
   
   <entry>
-    <title>测试迁移</title>
-    <link href="https://ximou.ren/2023/12/07/%E6%B5%8B%E8%AF%95%E8%BF%81%E7%A7%BB/"/>
-    <id>https://ximou.ren/2023/12/07/%E6%B5%8B%E8%AF%95%E8%BF%81%E7%A7%BB/</id>
+    <title>迁移测试</title>
+    <link href="https://ximou.ren/2023/12/07/%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/"/>
+    <id>https://ximou.ren/2023/12/07/%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/</id>
     <published>2023-12-07T13:26:48.000Z</published>
-    <updated>2023-12-07T13:31:52.289Z</updated>
+    <updated>2024-03-26T15:30:47.390Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;​    &lt;del&gt;没睡着爬起来折腾hexo到新电脑的迁移，那就以经典开头测试吧&lt;/del&gt;&lt;/p&gt;
+    <summary type="html">&lt;p&gt;&lt;del&gt;没睡着爬起来折腾hexo到新电脑的迁移，那就以经典开头测试吧&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;  Hello</summary>
         
       
