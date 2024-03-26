@@ -144,7 +144,7 @@
 
   <url>
     <loc>https://ximou.ren/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -152,42 +152,42 @@
   
   <url>
     <loc>https://ximou.ren/tags/hexo/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ximou.ren/tags/%E6%91%B8%E9%B1%BC%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2023-12-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ximou.ren/tags/%E9%97%B2%E6%9D%A5%E7%A2%8E%E5%BF%B5/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ximou.ren/tags/%E6%A2%85%E6%9E%97%E4%BC%A0%E5%A5%87/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ximou.ren/tags/%E5%93%88%E5%88%A9%E6%B3%A2%E7%89%B9/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ximou.ren/tags/%E9%97%B2%E6%9D%A5%E7%A2%8E%E5%BF%B5/</loc>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ximou.ren/tags/%E7%A5%9E%E8%AF%9D%E4%BC%A0%E8%AF%B4/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -196,28 +196,28 @@
   
   <url>
     <loc>https://ximou.ren/categories/%E6%90%AD%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%A1%80%E4%B8%8E%E6%B3%AA/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ximou.ren/categories/%E5%90%8C%E4%BA%BA/</loc>
-    <lastmod>2023-12-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ximou.ren/categories/%E8%A7%A3%E5%BF%A7/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ximou.ren/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/</loc>
-    <lastmod>2023-12-20</lastmod>
+    <lastmod>2024-03-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ximou.ren/categories/%E8%A7%A3%E5%BF%A7/</loc>
+    <lastmod>2024-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
