@@ -1,6 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【记录向】Orange主题的小小优化之字数统计与阅读时长</title>
+    <url>/2020/10/19/Orange%E4%B8%BB%E9%A2%98%E7%9A%84%E5%B0%8F%E5%B0%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%AF%BB%E6%97%B6%E5%B8%B8/</url>
+    <content><![CDATA[<blockquote>
+<p>正如我前文表达的宝藏主题Orange什么都好，但没有字数统计和我之前的友邻页出了点问题，最近都解决了，每天爬上站点来云撸猫也是十分快乐的。这篇讲如何搞定字数统计和阅读时长。<del>后面那项你明明没写！</del></p>
+</blockquote>
+<h3 id="字数统计和阅读时长"><a href="#字数统计和阅读时长" class="headerlink" title="字数统计和阅读时长"></a>字数统计和阅读时长</h3><p>其实这俩应该是一起出现的，但于我而言阅读时长太鸡肋了我删掉了。</p>
+<p>下图是Orange已经具有的功能：</p>
+<p><img src="https://i.loli.net/2020/10/19/amozMe6fdOlVYKy.png" alt="image-20201019212130389"></p>
+<p>可以看出，Orange主题没有自带的阅读字数统计和阅读时长，但没有关系，操作起来也不难。<del>话虽如此我折腾两天到三天的样子，不过我是新手不能当作普遍案例。</del></p>
+<p>简单思路就是安装wordcount插件和建立对应的ejs文件（因为Orange主题是使用的ejs，其他next这种可能会用swig或者jade，稍微改一下格式就好），再加上主题配置文件的修改：</p>
+<h4 id="安装wordcount-插件："><a href="#安装wordcount-插件：" class="headerlink" title="安装wordcount 插件："></a>安装wordcount 插件：</h4><p><code>npm install hexo-wordcount --save</code></p>
+<h4 id="编写ejs文件"><a href="#编写ejs文件" class="headerlink" title="编写ejs文件"></a>编写ejs文件</h4><p>在_partial文件夹下新建word.ejs文件，文件中写入：</p>
+<pre><code>&lt;span&gt;
+  &lt;i class=&quot;fa fa-keyboard-o&quot;&gt;&lt;/i&gt; &amp;nbsp;字数统计 : &lt;%= wordcount(page.content) %&gt; 字
+&lt;/span&gt;
+
+&lt;span&gt;
+  &lt;i class=&quot;fa fa-hourglass-half&quot;&gt;&lt;/i&gt; &amp;nbsp;阅读时长 : &lt;%= min2read(page.content) %&gt; 分
+&lt;/span&gt;</code></pre>
+<p> 第一项是字数统计（第二项是阅读时长，接下来的操作基本一致就不再赘述），前面i class代表所用的图标，这个需要根据你主题使用的图标类型调整，不然可能显示不出来。比如Orange主题是iconfont（在source文件夹中可查看），就把相应的代码改写为：</p>
+<pre class=" language-&lt;span&gt;"><code class="language-&lt;span&gt;"><span>
+  <i class="iconfont icon-edit"></i> <%= wordcount(page.content) %> 字
+</span></code></pre>
+<p>为了美观我删除了汉字和空格。</p>
+<p>再找到你的文章页（可能是article.ejs，post.ejs，反正点开来试试），在<strong>合适</strong>的位置放入以下代码：</p>
+<pre><code>&lt;% if(theme.word_count) &#123; %&gt;
+  &lt;%- partial(&quot;_partial/word.ejs&quot;) %&gt;
+&lt;% &#125; %&gt;</code></pre>
+<p> 这里我想深深吐槽，我找了好多资料都说是<strong>合适</strong>这个模棱两可的词汇，这种对于需要找教程看的入门新手来说不亚于第一次做饭然后菜谱告诉你食盐适量的绝望！！所以对于Orange主题，我测试了一下合适的位置，按我们的阅读习惯把字数统计放在更新日期后、tag之前会比较舒服，即下图中圈出的位置：</p>
+<p><img src="https://i.loli.net/2020/10/19/UsQSnF2Hzv9cIql.png" alt="image-20201019214246514"></p>
+<p>前面那个YYYY-MM-DD很明显是指年月日，后面的循环是对你tag的列出。</p>
+<p>其他主题应该也可以这样操作。</p>
+<h4 id="主题配置文件添加："><a href="#主题配置文件添加：" class="headerlink" title="主题配置文件添加："></a>主题配置文件添加：</h4><pre><code>word_count: true</code></pre>
+<p>记得注意yaml的语法规则。</p>
+<p>最后三联，愉快地搞定，效果图：</p>
+<p><img src="https://i.loli.net/2020/10/19/pu7UZJtl4BLTvYW.png" alt="image-20201019214749886"></p>
+<p>图标要是觉得不好看也可以换成其他的，我懒得再找了。</p>
+<p>以及之前tag后面会有#这种我觉得不好看也删了。</p>
+<p>感觉自己的小窝又变好看了一点呢。</p>
+]]></content>
+      <categories>
+        <category>搭博客的血与泪</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【记录向】hexo不蒜子统计阅读量和站点信息</title>
+    <url>/2020/11/05/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BB%9F%E8%AE%A1%E9%98%85%E8%AF%BB%E9%87%8F%E5%92%8C%E7%AB%99%E7%82%B9%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<h3 id="1、Orange主题下插入页面内阅读量"><a href="#1、Orange主题下插入页面内阅读量" class="headerlink" title="1、Orange主题下插入页面内阅读量"></a>1、Orange主题下插入页面内阅读量</h3><p>orange 主题没有自带不蒜子计数，我们可以添加几行代码就解决。<del>是个十分简单的操作。</del></p>
+<h4 id="1-1、相关代码"><a href="#1-1、相关代码" class="headerlink" title="1.1、相关代码"></a>1.1、相关代码</h4><pre><code>&lt;script asyncsrc=&quot;//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;
+
+&lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;
+本站总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt;
+
+</code></pre>
+<p>第一行代码是在所需要用到不蒜子计数（页面内阅读、总站点计数）引入脚本。</p>
+<p>这里为防止网址失效，建议将打开网址后对应的内容下载到本地并保存为.js格式放入你所选用的主题对应的js文件夹。</p>
+<p>不蒜子提供两种算法模式：</p>
+<p>pv方式计算点击量，同一个用户连续点击n篇文章，记录n次访问量：</p>
+<p><code>&lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;</code></p>
+<p>uv方式计算ip地址（用户），同一个用户多次点击n篇文章，只算1次访问量：</p>
+<p><code>&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;</code></p>
+<h4 id="1-2、页面阅读量"><a href="#1-2、页面阅读量" class="headerlink" title="1.2、页面阅读量"></a>1.2、页面阅读量</h4><p>在Orange主题或其他非next主题的post.ejs文件里合适的位置插入：</p>
+<p><code>&lt;script async src=&quot;/js/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</code></p>
+<pre><code>&lt;i class=&quot;iconfont icon-eye&quot;&gt; &lt;/i&gt;&lt;span id=&quot;busuanzi_value_page_pv&quot;&gt; &lt;/span&gt; 次
+</code></pre>
+<p>第一项是我本地保存busuanzi.pure.mini.js文件的路径。这里我为了和字数统计保持一致，稍微修改了一点，没有使用汉字。效果图：</p>
+<p><img src="https://i.loli.net/2020/11/05/BXAM8huLtroZFVK.png" alt="image-20201105102221371"></p>
+<p>本地调试时可能数字无限大，等部署到网络就会正常了。</p>
+<h3 id="2-、引入站点信息"><a href="#2-、引入站点信息" class="headerlink" title="2 、引入站点信息"></a>2 、引入站点信息</h3><h4 id="2-1、站点信息没有居中对齐"><a href="#2-1、站点信息没有居中对齐" class="headerlink" title="2.1、站点信息没有居中对齐"></a>2.1、站点信息没有居中对齐</h4><p>理论上站点信息就是在footer.ejs文件内做如上相同就好了，但我遇到一个奇妙的bug。<del>bug体质再次发作。</del></p>
+<p>我引入脚本和代码调试，文字信息出是出来了……但，它好难看！它没有像其他文字一样居中对齐，而是跑到了最左边……这是什么毛病！！</p>
+<p><img src="https://i.loli.net/2020/11/05/KwpzdaY7bX5qB3S.jpg"></p>
+<p>经过各种作死尝试，发现了是Orange这个主题的footer文件写的时候都强调了居中，于是稍微改了一下代码：</p>
+<pre><code> &lt;div class=&quot;vistor&quot;&gt;
+          您是某西的第&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;个小伙伴
+  &lt;/div&gt;</code></pre>
+<p>我也跟着强调一下，并把这一行文字做了一个类。</p>
+<p>三联之后无事发生……因为我定义了class后没去css文件里修改了……</p>
+<h4 id="2-2、页脚的站点信息美化"><a href="#2-2、页脚的站点信息美化" class="headerlink" title="2.2、页脚的站点信息美化"></a>2.2、页脚的站点信息美化</h4><p>当然你想放在页头header也行，看你的博客布局，我这是比较适合放在页脚。</p>
+<p><del>要是站点信息能和看板娘结合就更美妙了，比如猫猫说“欢迎第XX位客人来撸我</del>”停下来你在想什么不要给自己挖坑！~~</p>
+<p>打开主题文件source里css文件夹，寻找到可能性最大的那个文件，什么main，base这种命名，大致就是用来渲染页面文字效果的。</p>
+<p>找到页脚信息：</p>
+<img src="https://i.loli.net/2020/11/05/gUILQMr9uzT5D2p.png" alt="image-20201105104902256" style="zoom:50%;" />
+
+<p>依葫芦画瓢插入vistor项，我只设置了居中，其他文字大小颜色这种也可以按喜好调整。</p>
+<p>然后，三联，站点信息居中对齐了。效果图：</p>
+<p><img src="https://i.loli.net/2020/11/05/LBwmfD5sYFC2g6n.jpg"></p>
+<p>还是不好看，不过最初目的达到了，接下来就慢慢调整咯。</p>
+]]></content>
+      <categories>
+        <category>搭博客的血与泪</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【记录向】搭建hexo的各种bug</title>
+    <url>/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/</url>
+    <content><![CDATA[<h4 id="1、不要直接复制粘贴代码"><a href="#1、不要直接复制粘贴代码" class="headerlink" title="1、不要直接复制粘贴代码"></a>1、不要直接复制粘贴代码</h4><p>安装百度推送插件<code>npm install hexo-baidu-url-submit –-save</code></p>
+<p>按照网上给的教程 <a href="https://zhuanlan.zhihu.com/p/128033054">https://zhuanlan.zhihu.com/p/128033054</a> 打开站点文件_config.yml添加配置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">baidu_url_submit</span><span class="token punctuation">:</span> 
+ <span class="token key atrule">count</span><span class="token punctuation">:</span> <span class="token number">200  </span><span class="token comment" spellcheck="true"># 比如200，代表提交最新的200个链接  </span>
+<span class="token key atrule">host</span><span class="token punctuation">:</span> xxxx.xxx <span class="token comment" spellcheck="true"># 在百度站长平台中注册的域名  </span>
+<span class="token key atrule">token</span><span class="token punctuation">:</span> your_token <span class="token comment" spellcheck="true"># 百度站长密钥  </span>
+<span class="token key atrule">path</span><span class="token punctuation">:</span> baidu_urls.txt <span class="token comment" spellcheck="true"># 文本文档的地址， 新链接会保存在此文本文档里，这个默认</span></code></pre>
+<p>和</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span> 
+<span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> git
+  <span class="token key atrule">repo</span><span class="token punctuation">:</span> 
+    <span class="token key atrule">github</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 域名格式是git@github.com:xx/xx.github,io.git,即你存放静态网页的仓库地址</span>
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> master
+
+<span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> baidu_url_submitter <span class="token comment" spellcheck="true">#百度推送</span></code></pre>
+<p><strong>这里需要注意一点，type是baidu_url_submitter，配置是baidu_url_submit ，这俩不一样</strong>，不然会报错<code>ERROR Deployer not found: baidu_url_submitter</code></p>
+<p>不过上面那个问题是我后续才遇到的，最开始我遇到的问题是不能愉快地<code>hexo clean</code>……出现：</p>
+<p><em>can not read a block mapping entry; a multiline key may not be an implicit key at line 2, column 5:</em></p>
+<p>有很大概率是你在2行5列的空格或是缩进有问题。这是由于直接复制别人的代码可能会缺省空格和缩进，这里提供一个 <a href="http://www.bejson.com/validators/yaml_editor/">http://www.bejson.com/validators/yaml_editor/</a> 来验证你打代码，^指向处代表你哪里缺空格。</p>
+<p>虽然方法很简单……实际上我几乎耗费了半天时间去调整空格，没办法小白对语言书写规则不熟。</p>
+<p>再接下来就可以<code>hexo clean</code>了。</p>
+<h4 id="2、-ERROR-Deployer-not-found-git"><a href="#2、-ERROR-Deployer-not-found-git" class="headerlink" title="2、 ERROR Deployer not found: git"></a>2、 ERROR Deployer not found: git</h4><p>这个是在上一步结束后遇到的。<code>hexo g</code>没问题，但<code>hexo d</code>出现：</p>
+<p><em>ERROR Deployer not found: git repo锛歡<a href="mailto:&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#x63;&#111;&#109;">&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#x63;&#111;&#109;</a>:Simark-west/mouxi.github.io.git</em></p>
+<p>我先开始怀疑是没有安装git，于是：</p>
+<pre class=" language-yaml"><code class="language-yaml">npm install  hexo<span class="token punctuation">-</span>deployer<span class="token punctuation">-</span>git <span class="token punctuation">-</span><span class="token punctuation">-</span>save</code></pre>
+<p>然而还是相同的报错，看着那个乱码我十分怀疑是不是冒号有问题，原文本是：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span> 
+ <span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> git
+    <span class="token key atrule">repo</span><span class="token punctuation">:</span> git@github.com<span class="token punctuation">:</span>Simark<span class="token punctuation">-</span>west/mouxi.github.io.git 
+   <span class="token key atrule">branch</span><span class="token punctuation">:</span> master
+
+ <span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> baidu_url_submitter <span class="token comment" spellcheck="true"># 百度推送</span></code></pre>
+<p>看起来是git没有被识别。</p>
+<p>为了消除乱码，我把<code>git@github.com:Simark-west/mouxi.github.io.git</code> 改写成<code>https//:github.com:Simark-west/mouxi.github.io.git </code>，然后用YAML校验器 <a href="http://www.bejson.com/validators/yaml_editor/">http://www.bejson.com/validators/yaml_editor/</a> 检查发现仍然是空格的问题！！！</p>
+<p><img src="https://i.loli.net/2020/10/13/j1xp9nsYBgMuSIN.png" alt="image-20201013155501358"></p>
+<p>把冒号后面的空格消除之后再<code>hexo clean</code>和<code>hexo d</code>就没有报错提示了。我不太明白为什么我之前打空格验证时没有报错……</p>
+<hr>
+<p>先记录这么多吧，目前先折腾到了看板娘也出现很多奇奇怪怪的问题，有些网上有解决方案有些没有（大概是我自带debug体质），在另一篇草稿里。等到什么时候把个人博客折腾到比较满意的状态我在发上来。</p>
+<p>写于10月13日</p>
+<hr>
+<p>10月14日继续折腾……</p>
+<p>今天报错又推翻了我前几天的努力，在疯狂翻阅了好几个网页后，看着大家说yaml是个严格的语法还是需要在冒号：后加入空格<strong>（注意是在英文状态下）</strong>。</p>
+<p>于是我重新修改了语法调整空格，发现这样也没有报错（<strong>在本地调试</strong>）:</p>
+<p><img src="https://i.loli.net/2020/10/14/K9rxP4851wzWElg.png" alt="image-20201014113211840"></p>
+<p>看到有说法git 2.0之后的版本type要写成git而不是github，repo的格式也是git模式，我又改回去了……</p>
+<p><code>hexo clean</code>和<code>hexo d</code>十分丝滑……我觉得我要好好琢磨它的语法了。</p>
+]]></content>
+      <categories>
+        <category>搭博客的血与泪</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python摸鱼笔记</title>
     <url>/2023/12/21/python%E6%91%B8%E9%B1%BC%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>想当初曾经许下豪情壮志，想要一年学会数据分析，玩转爬虫……而如今，还在艰难起步爬坡阶段……</p>
@@ -126,16 +282,6 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
       </tags>
   </entry>
   <entry>
-    <title>测试迁移</title>
-    <url>/2023/12/07/%E6%B5%8B%E8%AF%95%E8%BF%81%E7%A7%BB/</url>
-    <content><![CDATA[<p>​    <del>没睡着爬起来折腾hexo到新电脑的迁移，那就以经典开头测试吧</del></p>
-<p>  Hello world!</p>
-]]></content>
-      <tags>
-        <tag>闲来碎念</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一个不算总结的总结？</title>
     <url>/2021/08/31/%E4%B8%80%E4%B8%AA%E4%B8%8D%E7%AE%97%E6%80%BB%E7%BB%93%E7%9A%84%E6%80%BB%E7%BB%93%EF%BC%9F/</url>
     <content><![CDATA[<blockquote>
@@ -179,48 +325,54 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
       </tags>
   </entry>
   <entry>
-    <title>【记录向】hexo不蒜子统计阅读量和站点信息</title>
-    <url>/2020/11/05/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BB%9F%E8%AE%A1%E9%98%85%E8%AF%BB%E9%87%8F%E5%92%8C%E7%AB%99%E7%82%B9%E4%BF%A1%E6%81%AF/</url>
-    <content><![CDATA[<h3 id="1、Orange主题下插入页面内阅读量"><a href="#1、Orange主题下插入页面内阅读量" class="headerlink" title="1、Orange主题下插入页面内阅读量"></a>1、Orange主题下插入页面内阅读量</h3><p>orange 主题没有自带不蒜子计数，我们可以添加几行代码就解决。<del>是个十分简单的操作。</del></p>
-<h4 id="1-1、相关代码"><a href="#1-1、相关代码" class="headerlink" title="1.1、相关代码"></a>1.1、相关代码</h4><pre><code>&lt;script asyncsrc=&quot;//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;
-
-&lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;
-本站总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt;
-
-</code></pre>
-<p>第一行代码是在所需要用到不蒜子计数（页面内阅读、总站点计数）引入脚本。</p>
-<p>这里为防止网址失效，建议将打开网址后对应的内容下载到本地并保存为.js格式放入你所选用的主题对应的js文件夹。</p>
-<p>不蒜子提供两种算法模式：</p>
-<p>pv方式计算点击量，同一个用户连续点击n篇文章，记录n次访问量：</p>
-<p><code>&lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;</code></p>
-<p>uv方式计算ip地址（用户），同一个用户多次点击n篇文章，只算1次访问量：</p>
-<p><code>&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;</code></p>
-<h4 id="1-2、页面阅读量"><a href="#1-2、页面阅读量" class="headerlink" title="1.2、页面阅读量"></a>1.2、页面阅读量</h4><p>在Orange主题或其他非next主题的post.ejs文件里合适的位置插入：</p>
-<p><code>&lt;script async src=&quot;/js/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</code></p>
-<pre><code>&lt;i class=&quot;iconfont icon-eye&quot;&gt; &lt;/i&gt;&lt;span id=&quot;busuanzi_value_page_pv&quot;&gt; &lt;/span&gt; 次
-</code></pre>
-<p>第一项是我本地保存busuanzi.pure.mini.js文件的路径。这里我为了和字数统计保持一致，稍微修改了一点，没有使用汉字。效果图：</p>
-<p><img src="https://i.loli.net/2020/11/05/BXAM8huLtroZFVK.png" alt="image-20201105102221371"></p>
-<p>本地调试时可能数字无限大，等部署到网络就会正常了。</p>
-<h3 id="2-、引入站点信息"><a href="#2-、引入站点信息" class="headerlink" title="2 、引入站点信息"></a>2 、引入站点信息</h3><h4 id="2-1、站点信息没有居中对齐"><a href="#2-1、站点信息没有居中对齐" class="headerlink" title="2.1、站点信息没有居中对齐"></a>2.1、站点信息没有居中对齐</h4><p>理论上站点信息就是在footer.ejs文件内做如上相同就好了，但我遇到一个奇妙的bug。<del>bug体质再次发作。</del></p>
-<p>我引入脚本和代码调试，文字信息出是出来了……但，它好难看！它没有像其他文字一样居中对齐，而是跑到了最左边……这是什么毛病！！</p>
-<p><img src="https://i.loli.net/2020/11/05/KwpzdaY7bX5qB3S.jpg"></p>
-<p>经过各种作死尝试，发现了是Orange这个主题的footer文件写的时候都强调了居中，于是稍微改了一下代码：</p>
-<pre><code> &lt;div class=&quot;vistor&quot;&gt;
-          您是某西的第&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;个小伙伴
-  &lt;/div&gt;</code></pre>
-<p>我也跟着强调一下，并把这一行文字做了一个类。</p>
-<p>三联之后无事发生……因为我定义了class后没去css文件里修改了……</p>
-<h4 id="2-2、页脚的站点信息美化"><a href="#2-2、页脚的站点信息美化" class="headerlink" title="2.2、页脚的站点信息美化"></a>2.2、页脚的站点信息美化</h4><p>当然你想放在页头header也行，看你的博客布局，我这是比较适合放在页脚。</p>
-<p><del>要是站点信息能和看板娘结合就更美妙了，比如猫猫说“欢迎第XX位客人来撸我</del>”停下来你在想什么不要给自己挖坑！~~</p>
-<p>打开主题文件source里css文件夹，寻找到可能性最大的那个文件，什么main，base这种命名，大致就是用来渲染页面文字效果的。</p>
-<p>找到页脚信息：</p>
-<img src="https://i.loli.net/2020/11/05/gUILQMr9uzT5D2p.png" alt="image-20201105104902256" style="zoom:50%;" />
-
-<p>依葫芦画瓢插入vistor项，我只设置了居中，其他文字大小颜色这种也可以按喜好调整。</p>
-<p>然后，三联，站点信息居中对齐了。效果图：</p>
-<p><img src="https://i.loli.net/2020/11/05/LBwmfD5sYFC2g6n.jpg"></p>
-<p>还是不好看，不过最初目的达到了，接下来就慢慢调整咯。</p>
+    <title>【记录向】为了拥有评论区我心力交瘁之评论区的启动与测试</title>
+    <url>/2020/10/16/%E4%B8%BA%E4%BA%86%E6%8B%A5%E6%9C%89%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%88%91%E5%BF%83%E5%8A%9B%E4%BA%A4%E7%98%81%E4%B9%8B%E8%AF%84%E8%AE%BA%E5%8C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<blockquote>
+<p>hexo的主题从next跳转到insulin再到orange，我的评论区终于能用了！  来讲讲这中间遇到让人心塞的小问题。</p>
+</blockquote>
+<h3 id="1、不是所有主题都自带评论区的"><a href="#1、不是所有主题都自带评论区的" class="headerlink" title="1、不是所有主题都自带评论区的"></a>1、不是所有主题都自带评论区的</h3><p>我第一眼相中的是hexo的热门主题next，黑白配色很极简，侧边栏也有种梦回百度空间的时代，更何况next主题的自设教程也是最多。……但就在这种情况下不知道出了什么问题，我的侧边栏死活不显示，对刚入门的我而言，那段时间翻遍谷歌都没遇到解决方式（当然很有可能是我关键词搜索有问题）。我怀疑是站点设置文件和主题设置文件哪里冲突了但那个时候我看不懂报错……我就直接换主题了。</p>
+<p>可能next主题的配置过于全面了点给了我“所有主题都自带评论区”的错觉，在换到insulin之前我试的几个主题都！没！有！评论区！！！</p>
+<p>我试图造轮子从修改主题站点文件_config.yml到修改ejs/swig文件再到报错……我放弃，这样我不如自己从头开始设计主题。由于不熟悉语法经常有种走着走着就偏了自己还不知道错哪的无力感……</p>
+<p>于是当我换到白月光主题insulin时我以为终于守得云开见月明见月明了。</p>
+<p>然而并没有。</p>
+<p>这是另一个悲伤故事的开始。</p>
+<h3 id="2、insulin很好，是我不配"><a href="#2、insulin很好，是我不配" class="headerlink" title="2、insulin很好，是我不配"></a>2、insulin很好，是我不配</h3><p>Insulin简洁的画风类lofter，对我等lofter逃难民众而言很是亲切。</p>
+<p>设计者还设计更新发表日期和更新日期与结束语标识，而且提供了本地搜索。</p>
+<p>Insulin的主题长这个样子，原谅我直接把设计者博客页面搬上来了：</p>
+<p><img src="https://i.loli.net/2020/10/16/QSkAKwd5mRGaFZv.png" alt="image-20201016214214486"></p>
+<p>打开文档后是这样的：</p>
+<p><img src="https://i.loli.net/2020/10/16/mZwntecYdHA4E26.png" alt="image-20201016214401732"></p>
+<p>主题配置文件_config.yml提供了好几种评论插件：</p>
+<p><img src="https://i.loli.net/2020/10/16/6SP89DbHY4Wvtas.jpg" alt="insulin评论区"></p>
+<p>我选了Valine。因为Valine的模板是最简洁的而且不要求登录。</p>
+<p>主题是已经集成的Valine，我们只需要去LeanCoud注册并查找appid和appkey就好了。具体教程见 <a href="https://valine.js.org/quickstart.html">https://valine.js.org/quickstart.html</a> 教程里面关于html那段如果你的主题自带了评论系统就可以跳过，npm那一步也可以跳过……我试过，无事发生。</p>
+<p>然后三连<code>hexo s</code>，<code>hexo g</code>，<code>hexo d</code>，这个故事没如我预期那么顺利，它报错了：</p>
+<p><img src="https://i.loli.net/2020/10/16/VD2pfMla5XhAq7y.png" alt="image-20201016220923935"></p>
+<p>可能是路径没有查找到，但文件夹相关路径下ejs文件明明存在，也不是常见的app_id和appid的错误。拖着程序员基友，我们从layout改到head再改到post……仍然是同样的报错。我觉得我得缓缓。</p>
+<p>我发了一份邮件给设计者就不知道对方会不会回复了。</p>
+<h3 id="3、Orange自带的评论Valine和Gitalk可用"><a href="#3、Orange自带的评论Valine和Gitalk可用" class="headerlink" title="3、Orange自带的评论Valine和Gitalk可用"></a>3、Orange自带的评论Valine和Gitalk可用</h3><h4 id="3-1、Valine的安全域名需要注意"><a href="#3-1、Valine的安全域名需要注意" class="headerlink" title="3.1、Valine的安全域名需要注意"></a>3.1、Valine的安全域名需要注意</h4><p>这个很宝藏的主题是我无意间发现的，网站的橙子的图标一下戳中了我。</p>
+<p>页面也极其极简，没有字数统计阅读统计这类的（虽然我挺希望它有的），而且字体设置得还算舒服？于是我选用了它。</p>
+<p>Orange的评论也提供了几个选择，我还是Valine。最初我的想法是我已经申请到了id和key，我不想再申请其他的了……不过后面我还是用Gitalk做了一个对比。</p>
+<p>修改好主题配置文件后没有像Insulin出现同样的问题，是个好兆头。</p>
+<p>本地测试结果是可以的，但网页端出现了无法提交的问题：</p>
+<p><img src="https://i.loli.net/2020/10/16/rAMY57E3KXDGHwa.png" alt="image-20201016222612141"></p>
+<p><strong>这是安全域名设定有问题。</strong></p>
+<p>这是正确的写法：</p>
+<p><img src="https://i.loli.net/2020/10/16/WT1PYrJoECyBdg4.png" alt="image-20201016222804123"></p>
+<p>最开始我直接把自己的域名写成了：<a href="https://ximou.ren/">https://ximou.ren/</a></p>
+<p>就是多的那个s导致LeanCloud没有放我的域名通过……</p>
+<p>我总是会被这种很不小心的错误给绊住。</p>
+<p>然后再刷新就可以愉快评论了，下图是一个Valine评论区的测试：</p>
+<p><img src="https://i.loli.net/2020/10/16/k4v9inga6ACJdOW.png" alt="image-20201016223139964"></p>
+<p>需要删除哪些评论，进LeanCloud删除就可以了：</p>
+<p><img src="https://i.loli.net/2020/10/16/J3ls6avIrntVEUD.png" alt="image-20201016224255758"></p>
+<h4 id="3-2、Gitalk是依托于Github"><a href="#3-2、Gitalk是依托于Github" class="headerlink" title="3.2、Gitalk是依托于Github"></a>3.2、Gitalk是依托于Github</h4><p>其实Gitalk的评论区和我的看板娘更适配，毕竟都是猫。</p>
+<p>Gitalk的启动要比Valine简单的多，我是按照 <a href="https://www.jianshu.com/p/02fc71f3633f">https://www.jianshu.com/p/02fc71f3633f</a> 来的，这篇讲得详细，也考虑到会发生的问题。</p>
+<p>Gitalk在网页端的效果是这样的：</p>
+<p><img src="https://i.loli.net/2020/10/16/6lor37UVXCdztEP.png" alt="image-20201016223931627"></p>
+<p>每次都需要登录才能发言太劝退了。考虑到Valine后续会不会崩，Gitalk做个备选也不错。其他的评论区我还没做测试……</p>
+<hr>
+<p>当然还有一些小问题想什么默认头像亟待解决，等后续有时间再一一补上。解决完了我再去看看友邻界面出了啥问题一直显示失败，再我加了Categories页面后手机端显示也有点问题……<del>还有字数统计和阅读统计，这些我都要有，就算自己搭也要有</del></p>
 ]]></content>
       <categories>
         <category>搭博客的血与泪</category>
@@ -418,6 +570,241 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
       <tags>
         <tag>梅林传奇</tag>
         <tag>哈利波特</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>测试迁移</title>
+    <url>/2023/12/07/%E6%B5%8B%E8%AF%95%E8%BF%81%E7%A7%BB/</url>
+    <content><![CDATA[<p>​    <del>没睡着爬起来折腾hexo到新电脑的迁移，那就以经典开头测试吧</del></p>
+<p>  Hello world!</p>
+]]></content>
+      <tags>
+        <tag>闲来碎念</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>起篇01</title>
+    <url>/2020/10/05/%E8%B5%B7%E7%AF%8701/</url>
+    <content><![CDATA[<blockquote>
+<p>很久很久以前。</p>
+<p>沧海如旧，桑田未改。</p>
+<p>山川相缭，云雾浮滥。日出扶桑，月映望舒。</p>
+<p>百鸟尖啸，层林凄飒。湘沅清涧，不见其源。</p>
+<p>风息蛰盛，竹影斑驳，削木而书，终成戏说。</p>
+</blockquote>
+<h4 id="01"><a href="#01" class="headerlink" title="01"></a>01</h4><p>这是一个遗落在文字成熟前的时光里的故事。</p>
+<p>故事的开端，是一个贵族家的少年携着自己的小伙伴们离家出走的熟悉剧目。</p>
+<p>“梼杌啊，你说为什么我爹不待见我。”</p>
+<p>“因为你蠢。”</p>
+<p>有那么一瞬间，丹朱觉得自己差一点就认同了梼杌的说法了。</p>
+<p>彼时，他伫立在阡陌纵横的路口，面对一片郁郁青青茂盛生长着的不知名的农作物发愣。身后背着的风狸杖已然无用，在经过不算漫长的思量后，丹朱不得不认命地转过身去对着后面四个小伙伴承认自己迷路了。</p>
+<p>后者们一副意料之中的淡定回应。</p>
+<p>“明明记得这个方向就是不周山的方向啊。”</p>
+<p>众人闻言默默抬起头，极不信任地盯着眼前信誓旦旦的少年。回想起此人八次离家出走然后七次走错路被乖乖抓回去的记录。</p>
+<p> 这是第八次。</p>
+<p>“等等，我看到那边有人，我去问问，一会儿就回来。”</p>
+<p>混沌目送着丹朱一溜烟消失的方向，一袭朱衣卷起滚滚烟尘。思索半晌，才小心翼翼向同伴们发问：</p>
+<p>“你们觉得，他会记得回来时的路么。”</p>
+<p>回答他的是集体的静默。</p>
+<p>混沌本打算追过去找回丹朱，只是很可惜在迟疑的那会时间里他们就被随后追来的气急败坏的族人们逮到了。</p>
+<p>丹朱跌跌撞撞地绕出那一片密林，身上的华裳尽染泥尘，灰头土面的好像一只逡巡在田野的狸。</p>
+<p>出口处有水声，他循着声音而去，溪流清澈，跃入眼帘，潺潺婉转。</p>
+<p>岸边有嶙峋怪石，姿态若女子哺育时敞开的怀抱，之中盛卧着一个人，不仔细看还会误认为神女母子在人间行泽感怀。</p>
+<p>距离稍远，并不能看清楚对方的模样。</p>
+<p>如若平时，丹朱定会好好打量这对奇怪的组合，但现下他满脑子都是寻找出路。于是他上前去，试探性弄出稍许响声。</p>
+<p>似乎是惊扰了对方的沉湎。那人匆匆瞥了他一眼，而后低头沉浸在刚刚未尽的事情中了。</p>
+<p>丹朱翘望四周都是不熟悉的景色，思索片刻，终是死马当活马医的心里开口问道：</p>
+<p>“你知道不周山在哪么？”</p>
+<p>那人很是讶异：</p>
+<p>“不周山？在这个方向的反面啊。你要去那怎么往这个方向走？”</p>
+<p>原来有人知道不周山的存在啊。</p>
+<p>丹朱的眼睛亮了起来，难道真的有人知道不周山在哪！</p>
+<p>经过无数次询问，但所有人都对他的热切报以不以为然或是嘲笑的态度，他渐渐怀疑起来那真的只是存在传说中的神山而已。</p>
+<p>梼杌他们也曾劝过他把心思收收，但他仍然不死心，现在有人告诉他不周山的传说原来真的有迹可循。</p>
+<p>“我迷路了。”</p>
+<p>“……”</p>
+<p>所幸那个人并没有像梼杌一样逮着机会就说他蠢，而且还非常好脾气地表示自己愿意送他到村落里休息，只是需要等自己一会儿。</p>
+<p>丹朱安静地看着那个似乎和他年纪相当的人在那里结绳。内心有些诧异，自黄帝时代仓颉创造文字开始，他许久没有看到有人结绳了。那些流传在神话之前的技艺如今真正展现在眼前，他起了万分兴趣。</p>
+<p>“你在记录？结绳？”</p>
+<p> “嗯。”</p>
+<p>“记录什么呢？”</p>
+<p>他一向管不住自己泛滥的好奇心，其他人一向不会去拒绝回答他的问题。除了博学多识的羲和偶尔会训斥他成天想些稀奇古怪的东西，但也会知无不言言无不尽。</p>
+<p>那个少年抬头，很是无语地瞥了他一眼。发觉丹朱纯粹好奇，并非带着蓄意伤害的意味，近乎天真的好奇让他觉得如果拒绝了反而是一种残忍。</p>
+<p>“我挨打的次数。”</p>
+<p>“和我一样呢，我每次被我爹打骂之后都会哭着去刻字。”</p>
+<p>虽然自己会在开心起来后又会不计前嫌地把记录自家老爹罪行的龟壳烧掉。丹朱觉得自己发现这世上还有和自己同病相怜的人，不禁对眼前这个既知道不周山又和自己遭遇相似的少年多了一丝奇妙的亲近感。</p>
+<p>“贵族家的少年也会挨打？”</p>
+<p>那个少年上下打量了一眼丹朱身上的华丽的朱红色深衣和束发用的晶莹圆润的珍珠贝壳装饰品，它们在明亮的太阳光映射下夺目而耀眼，让他想起只有祭祀的大祭司才会佩戴珍珠发饰。</p>
+<p>少年一脸不相信。</p>
+<p>“我父亲嫌我没才能，不像他，一点都不喜欢我！”</p>
+<p>“……”</p>
+<p>“你手臂上那些密密麻麻的伤是你父亲打的么？”</p>
+<p>丹朱眼尖地发现少年赤裸的胳臂上布满的伤痕，内心震惊，突然觉得相比起眼前这个少年所经历的打骂，自家老父对自己的打骂简直就是在无聊时逗弄猫儿。</p>
+<p>“……”</p>
+<p>“你不想说就算了，我来给你包扎。”</p>
+<p>说着便准备撕下衣裳的一角，蓦地扫了一眼自己的手掌脏兮兮的，略带嫌弃地思索了会后便转身跳进了那条浅浅的溪流里，细细地洗濯起双手，直至确定里里外外都干净。其实他挺想连带着洗个澡，毕竟风尘仆仆了好几日，但是考虑到有他人在场……</p>
+<p>洗涤后，丹朱从水里爬了出来，不理会自己衣衫浸湿，扯下来袖口一大块细葛布要给少年包扎。</p>
+<p>少年挣扎着不愿意接受。</p>
+<p>“部落里的巫医说伤口需要包扎，不然肉会烂掉，要剁掉手臂。”</p>
+<p>恐吓起了效果，少年果然安静下来任由丹朱包扎。</p>
+<p>一个认真地包扎，另一个则若有所思地沉默着。</p>
+<p>谁都没有说话，耳畔只有清风飒飒的声音和远处竹海澎湃的回响。</p>
+<p>“我叫丹朱，在丹渊出生，以丹为姓，而朱是因为我出生通体彤红，宛如朝霞。”</p>
+<p>丹朱一股脑地把自己的信息给说出来了，全然遗忘了出门在外须警惕陌生人的部落祭司们警句良言。少年笑了笑。</p>
+<p>“重华，有虞氏，姚姓。”</p>
+<p>“重华？两个太阳？好少见的取名法？”</p>
+<p>“你没发现我是重瞳吗？”</p>
+<p>闻言，丹朱这才认认真真端详起那个名为重华的少年的眼瞳。</p>
+<p>他见到了只在传说中听闻过的重瞳子，上古黄帝、仓颉均为传说中的重瞳子，今日见到了果然如黑曜石般晶亮透彻，其中双目重瞳，幽深如井，让他想起曾经西王母氏送来的境外宝石。</p>
+<p>“是啊，真的是很漂亮的眼睛。”丹朱赞叹道。</p>
+<p>他想起日出旸谷悬落于扶桑树下的光辉壮丽的十只金乌，美丽夺目不忍让人直视。而眼前这个重瞳少年的眼睛如同扶桑拂日，遮去过于盛烈的光芒，恰到好处的和煦明亮。让人不禁沉迷。</p>
+<p>重华惊讶地直视着他。</p>
+<p>“怎么了？”</p>
+<p>“你是第一个说它们漂亮的人。”</p>
+<p>“？！”</p>
+<p>“其他人都说这是上古妖魔的眼瞳，是天神的诅咒。我出生的那一日我母亲便去世了，而我父亲则在那一日失去了他的眼睛。部落里的祭司们说我的眼睛吞噬了我父亲的眼睛，我的后母还有族人因此一直想把它们挖掉辟邪。”</p>
+<p>重华顿了顿，似乎下定了某种决心，而后这样解释说道。</p>
+<p>丹朱听了不以为然，他才不会觉得那么漂亮的眼瞳会是妖魔的眼睛亦或是天神的诅咒，倒应该是天神赐予凡人的礼物才对。</p>
+<p>人们总是对过于美丽的事物产生畏惧之心。</p>
+<p>羲和曾这么说过。</p>
+<p>再说了，他自己的父亲就是人间唯一的神，而他的父亲怎么会下那么奇怪的诅咒呢。</p>
+<p>原来在京畿之外的部落里的祭司水准那么差啊。</p>
+<p>他内心默默记录下来，决定回去跟父亲说说各地风土人文，全然忘了自己出门前就做好不打算回家的准备。</p>
+<p>“别挖啊，长在你脸上多好看啊……不过有一天你不想要了，能不能送给我啊？”</p>
+<p> “……”</p>
+<p>“对了重华，你知道附近哪里有村落吗？”丹朱十分自来熟地唤起了那少年之名，他望着日中高悬的太阳，估摸着还是得先歇歇脚才能继续出发。还要等一等梼杌他们，等会合了再去不周山。到时候他还要请这个少年做向导，他们一定可以找到不周山的。</p>
+<p>至于他们怎么找到自己……反正梼杌只要没有被抓回去，总能找到自己的。</p>
+<p>丹朱想，这是他以前离家时得到的经验。</p>
+<p>那名叫重华的少年从丹朱提问起就目不转睛地凝视着他，直到丹朱被看得感觉发毛，打算放弃继续询问时重华才回复。</p>
+<p>“跟我来。”</p>
+<p>丹朱跟在重华身后重新穿过那片他先前迷失的密林。</p>
+<p>他有些奇怪，这不是他方才走过的地方吗。</p>
+<p>难道说，他走了很多次，结果每次完美错过出口？</p>
+<p>果然路痴的悲哀，在任何一个时代都是相似的。</p>
+<p>他重新打量重华，先前只关注对方的眼睛。看身量和声音应该比自己大不了多少岁？</p>
+<p>虽然身量比自己稍高一些，但着实瘦弱了些。</p>
+<p>他想着想着不一会就到了村落里。正值中午，有袅袅炊烟升起。这个村落和他先前经过的村落基本大同小异，京畿之外的生活总是相似，虽然有万国万民，不过还是在同一太阳之下。</p>
+<p>丹朱敲开其中升起炊烟的一户人家的家门，用贝壳项链和一个妇人交换了点蒸好的黍饼。</p>
+<p>重华看着对方轻车熟路地交换，也不考虑这交换是否等价，无法想象这孩子一路上是怎么走到这的。</p>
+<p>他们来到村落里一棵大树底下休息。</p>
+<p>丹朱捧着热乎乎的黍饼，从中间分成两瓣，其中一份递给重华。</p>
+<p>不像之前拒绝包扎，重华没有拒绝直接拿过大口吃了起来。丹朱松了口气，边吃边猜想重华可能没有吃的，经常挨饿。顿时同情心泛滥了，继续掰下自己手里的一半大义凛然地塞到了对方的嘴里。丹朱宣布：“我吃饱了！”</p>
+<p>重华用那双漂亮幽深的眸子深深地看了他一眼，感觉到对方的手指还塞在自己的嘴中，毫不犹豫地用力咬下去了。</p>
+<p>意料之中耳畔传来响遏穹苍的痛呼。</p>
+<p>重华看着在一旁躺在草地上捧着自己肿起的手指暗自腹诽的那人，本来稍阴郁的心情都微微明媚了起来。</p>
+<p>“你把我弄伤了我还要怎么去不周山。”</p>
+<p>丹朱泪眼婆娑地控诉。</p>
+<p>“你走不到的。”</p>
+<p>“路途很遥远么？”</p>
+<p>丹朱无不忧伤地遥望延伸到苍穹的那一端，内心充满着非去不可的决绝。</p>
+<p>“不远。”</p>
+<p>重华语气平淡。</p>
+<p>没等丹朱愤怒地追问，迅速地补充道：</p>
+<p>“可是你会迷路。”</p>
+<p>“……”</p>
+<p>有理有据无法反驳…………</p>
+<p>丹朱一哽。</p>
+<p>“据说不周山上有很多神奇的东西呢。传说中山上生长着一种很美味的果实，叫作嘉果，味道吃起来像桃子，叶子的形状像枣子，黄色的果皮上却是红色的经脉，人吃了之后就不会感到疲劳。”</p>
+<p>“谁告诉你的？”重华看起来有点兴趣了。</p>
+<p>“族里的人都这么说。”</p>
+<p>虽然族里的人大多都不知道不周山在哪，不过丹朱还是再三缠着祭司们才问出了大致方位。重华不置可否。</p>
+<p>“我部落里的歌谣里讲诉过我的祖先曾在不周山上与共工一战，他亲眼见过。”</p>
+<p>“共工……颛顼？！你来自西面的陶地？”虽然是疑问句，但是语气却是肯定。</p>
+<p>丹朱哽然了一下……所幸他反应及时，回应道：</p>
+<p>“好吧，其实我是伊祁氏女，伊祁氏首领与散宜氏之女。”</p>
+<p>丹朱想到了自己并不亲近的名义上的姐姐们，反正千里之外的不明之地，谁也不会认真去追究谁是谁。</p>
+<p>然后眨着无比真诚的双眼，</p>
+<p>“我想出来看看嘛，又怕被父亲担心。”</p>
+<p>千万不要被当成是细作抓起来才好……我父亲愿不愿意交付赎金还是问题。</p>
+<p>“……”</p>
+<p>重华显然一脸不相信，不过看着窘迫到极致的丹朱没有戳穿继续追问这个话题。</p>
+<p>“你是为了嘉果跑了那么远？”</p>
+<p>要知道，陶唐到东夷有虞并非一日之行程。何况多年来，夷夏一向没什么民生往来，也无地域之争，井水不犯河水。虽然流传上归于同一脉，语言也相近，但礼仪祭祀上却微妙地走向了不同的道路。</p>
+<p>“不周山上遗留着颛顼与共工当年一战的神器残骸。我要找到他们，带回去给我父亲看。”</p>
+<p> 这样他就不会一直摇头叹息说我不肖了。</p>
+<p>重华莫名地笑了起来。</p>
+<p>“不周山的神器？”</p>
+<p>丹朱听出了讽刺，他有点沮丧。</p>
+<p>一个个都不相信他说的。</p>
+<p>族人不相信，一起长大的同伴们不相信，重华这个知道不周山的位置的人也不相信。</p>
+<p>“时间不早了，我得上路了，你要不要跟我一起去！”</p>
+<p>丹朱试图邀请新队友。梼杌他们还没有来，估计是被抓回去了。</p>
+<p>他会继续努力前进，完成他们未尽的伟大事业。</p>
+<p>丹朱期待地望向重华。</p>
+<p>“回去吧，你的父亲一定很焦急地等你。”</p>
+<p>重华委婉地拒绝了。</p>
+<p>丹朱有些失望，不过也在他意料之中，他收拾好行囊。把放在一旁的风狸杖背到了身后。</p>
+<p>“你能告诉我不周山在哪里吗？”</p>
+<p>丹朱问道，重华不语。</p>
+<p>僵持了一会看到丹朱似乎没有放弃的想法，重华拿起一根小木枝，在地上开始画图。他指着其中一个圆圈说道：</p>
+<p> “这是我们所在的地方，有虞氏。”</p>
+<p>木棍掠过画着河流标识的图案，重华继续讲解：“这条河流你一定知道，赤水，又称丹水。”</p>
+<p>丹朱点头。</p>
+<p>“逆河而上，向西走到河尽头，有一片干涸荒凉之地，几乎没人居住，叫做北海。”</p>
+<p>丹朱感到奇怪，干涸荒凉之地却叫做海？</p>
+<p>重华看出了他的困惑，解释道：“传闻这里曾经有一望无际不可丈量的湖水，后来消失了。你看这，在这北海大荒之地，有山不合，是你要找的不周山。”</p>
+<p>重华语毕，看了一眼仍然在注视他画的地图的丹朱。</p>
+<p>“你非去不可吗？”</p>
+<p>丹朱盘算了一下这个路程，默默发现还挺遥远的，自己走上一年说不定都不能走到，特别是梼杌他们还不在。出门为了不暴露行踪，他们特地没有选择可以日行千里的神兽。</p>
+<p>看见丹朱似乎有些动摇，重华继续补刀：</p>
+<p>“而且不周山常年飘雪，寒冷至极。”就算到了那里也怕是会冻死。</p>
+<p>“……”丹朱还是挣扎着，好不容易走那么远了他不想放弃。</p>
+<p>他求助地看着重华。</p>
+<p>重华移开目光。</p>
+<p>“我没办法离开有虞氏。”重华看穿了他的想法，拒绝道。</p>
+<p>“丹朱，你太小了，去不了的。”</p>
+<p>第一次，重华叫了丹朱的名字。</p>
+<p>“你真的想要颛顼的神器？有可能丢掉性命也在所不惜？”</p>
+<p>重华问丹朱这个问题时并没有看向他，而是眺望着远方他们进来村落的那片密林。</p>
+<p>丹朱一愣，重华严肃的语气使他不得不认真思考起来。一路上他和同伴们走来基本没遇到什么事，有梼杌混沌在前，穷奇在后，还有个十分能搞到各种干粮的饕餮，自己似乎没有担心过什么，除了害怕被族人追到挨骂。</p>
+<p>“可是……”丹朱心有不甘地开口。</p>
+<p>“丹朱，我送你回去。”重华语气强硬，没有拒绝的余地。</p>
+<p>于是他们又回到最初相见的那条河的河边。</p>
+<p>“要不……你跟我一起回家？”丹朱眼睛一亮。</p>
+<p>如果重华跟自己回家，就不会受人虐待了，自己以后去不周山还有了向导，再也不用担心迷路了。</p>
+<p>重华摇头，“我是有虞氏之子。”</p>
+<p>好吧。丹朱叹息，意料之中，意料之中。</p>
+<p>“你向着这条路一直走，走到尽头然后等着你的族人，应该很快就会看见他们。”</p>
+<p>分别前丹朱十分磨蹭，不想离开。</p>
+<p>“我以后还能见到你吗？”丹朱有些难过地问。</p>
+<p>他想自己这一次跑到这么远，下次出来可就麻烦了。不过他记住了重华刚刚画的地图，从陶唐到东夷的那条路他记住了。</p>
+<p>“会的。你不是擅长离家出走吗。”</p>
+<p>“……”丹朱不想说话。“我有机会就找你玩，我会做好一切准备，然后你要带我去不周山。”</p>
+<p>重华点头：“好，我等你，我也想见识不周山的神器。”</p>
+<p>丹朱很是不舍：“你要等我！！！”</p>
+<p>在后续故事里，丹朱重新百无聊赖地蹲在路口，直至天黑被族人找到然后带回了部落。</p>
+<p>免不了被帝尧一顿骂加上一阵子的絮絮叨叨。但丹朱知道父亲从来舍不得真正生自己的气的。</p>
+<p>就像自己经常宴请朋友到家里来玩，将珍馐玉食大方地分给周围人，常常喜爱身着一身华丽的朱红华服，虽然经常被父亲周围的人指责骄奢浪费。</p>
+<p>但是父亲却不会真正去惩罚他，象征性地批评几句话展示给周围人看。</p>
+<p>年少时，他常以为老爹是真的不喜欢自己，打骂皆因厌恶。</p>
+<p>直至很多年后他伏跪在承载着帝尧的浮厝旁，感觉到手里的温度一点一点流失的时候，他才意识到，原来自己没有真正恨过父亲，就如帝尧那一次次意味深长的“不肖汝父”的叹息里，自己从未读懂过里面不只是痛惜。</p>
+<p>这一次的离家出走范围之远和时间之久引起了帝尧的警惕。他下达了对丹朱的禁足令，且没收一堆法宝后，转身去了祭祀厅和多年的老友羲和讨论怎么教育孩子，最后经过一番谁也不知道的激烈争吵后两者达成共识：丹朱纯粹是闲的。于是他们考虑到丹朱也到了该正规学习治国之道的年纪了，便竭力寻找天下有智之士招为丹朱之师……也不指望他会真的学成什么。</p>
+<p>对于丹朱来说治理之道学习课程并不枯燥。父亲找了很多这世间近乎为神的人跟他讲各种各样的故事，许由、羲和、鲧、放齐，他们会跟自己讲自己祖先的故事，讲那些曾经是人，现在被人们奉为神的英雄的故事。</p>
+<p>丹朱有的时候也慢慢地琢磨出一个道理：英雄之所以是英雄，是因为作出了伟大的事迹。</p>
+<p>现在活着的人里面，世间上唯一能被称为神明的人，是自己的父亲。</p>
+<p>可是身上流着相似血的，以血缘缔结在一起的自己却丝毫没有和他相似之处。意识到这一点使他泄气。“不肖汝父”这是人们对他最多的评价。</p>
+<p>无论是王宫还是民间，大家会把伟大的人所做的伟大的事编成歌谣传唱，伯父弃播种良田而被称颂为“稷”，鲧长年治水，毛发脱落光秃，皮肤苍白透明近乎鱼鳞不像是人类，而被人们描绘为“像一条鱼，从洪水里游到了人间”。</p>
+<p>他也曾向偶尔能抽时间见面的小伙伴打听过，民间是否有过自己相关的传唱歌谣。</p>
+<p>对于这个问题梼杌选择了沉默，混沌的反应是顾左右而言他，穷奇表示京畿地区和少皞氏存在文化代沟所以自己听不懂。而饕餮是个诚实温顺的小女孩，在松软香甜的栗子酥的诱惑下怯声道：“心既顽嚣，又好争讼。”</p>
+<p>……此后丹朱再也没问过这类问题了。</p>
+<hr>
+<h4 id="注释："><a href="#注释：" class="headerlink" title="注释："></a>注释：</h4><p>1、风狸杖：传说中的风狸（<a href="https://baike.baidu.com/item/%E9%A3%8E%E7%94%9F%E5%85%BD">风生兽</a>）的宝物，状如草茎，长尺许，飞禽走兽随指而毙。</p>
+<p>我也不知道我当初为啥选了这个当做武器，大概觉得好听？？</p>
+<p>四凶：《左传·文公十八年》道：“舜尧，宾于四门，流四凶族<a href="https://baike.baidu.com/item/%E6%B7%B7%E6%B2%8C/16184675">混沌</a>、<a href="https://baike.baidu.com/item/%E7%A9%B7%E5%A5%87/75581">穷奇</a>、<a href="https://baike.baidu.com/item/%E6%A2%BC%E6%9D%8C/79638">梼杌</a>、<a href="https://baike.baidu.com/item/%E9%A5%95%E9%A4%AE/6223">饕餮</a>，投诸<a href="https://baike.baidu.com/item/%E5%9B%9B%E8%A3%94">四裔</a>，以御<a href="https://baike.baidu.com/item/%E9%AD%91%E9%AD%85/7331827">魑魅</a>。”</p>
+<p>虽然本文设定基本基于山海经，会出现各种神兽，但四凶被太史公直接定义为四个大家族的不才子被人取的外号，听起来有点惨烈。其实我是偏向认为神兽们都是存在过后来氏族当做族徽图腾之类。做这里设定为一起长大的小伙伴的外号，他们各自都有自己本来的名字的。</p>
+<p>2、上古男子称氏不称姓，但这里便于理解以及个人真的很喜欢丹朱这两字，就沿用现代人的叫法，重华同理。其实感觉文中写“虞舜”是不是会更有历史同人的感觉，但是重华这个名字太好听我也不想放弃。</p>
+<p>3、重瞳这个就不用说了。反正古人认为重瞳为圣人之相，实质是一种医学病变。不要去百度！不要去百度！不要去百度！（重要的事情说三遍）百度图片掉san而且并不真实。</p>
+<p>4、黍古代专指一种子实叫黍子的一年生草本植物。其子实煮熟后有粘性，可以酿酒、做糕等。——百度。我参考了重华他出生的地方好歹是北方，我当初设定忘了考虑这点，于是这里改成了黍。</p>
+<p>5、《<a href="https://baike.baidu.com/item/%E5%B1%B1%E6%B5%B7%E7%BB%8F">山海经</a>·西山经》：“ 不周之山 ……爰有嘉果，其实如桃，其叶如枣，黄华而赤柎，食之不劳。” </p>
+<p>6、《列子·汤问》：“共工氏与颛顼争为帝，怒而触不周之山，折天柱，地维绝，天倾西北，故日月星辰移焉；地不满东南，故百川水潦归焉。”</p>
+<p>7、《<a href="https://baike.baidu.com/item/%E5%B1%B1%E6%B5%B7%E7%BB%8F">山海经</a>·大荒西经》“西北海之外，大荒之隅，有山而不合，名曰不周。”不周山的原型之说有很多种，这里参考为昆仑山。</p>
+<p>8、《史记·五帝本纪》：“放齐曰：’嗣子丹朱开明。’尧曰：’吁！顽凶，不用。’”张守节正义：“凶，讼也。言丹朱<em>心既顽</em>嚚，<em>又好争讼</em>，不可用之。”</p>
+]]></content>
+      <categories>
+        <category>有虞谣</category>
+      </categories>
+      <tags>
+        <tag>神话传说</tag>
       </tags>
   </entry>
   <entry>
@@ -713,397 +1100,263 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
       </tags>
   </entry>
   <entry>
-    <title>【记录向】Orange主题的小小优化之字数统计与阅读时长</title>
-    <url>/2020/10/19/Orange%E4%B8%BB%E9%A2%98%E7%9A%84%E5%B0%8F%E5%B0%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%AF%BB%E6%97%B6%E5%B8%B8/</url>
-    <content><![CDATA[<blockquote>
-<p>正如我前文表达的宝藏主题Orange什么都好，但没有字数统计和我之前的友邻页出了点问题，最近都解决了，每天爬上站点来云撸猫也是十分快乐的。这篇讲如何搞定字数统计和阅读时长。<del>后面那项你明明没写！</del></p>
-</blockquote>
-<h3 id="字数统计和阅读时长"><a href="#字数统计和阅读时长" class="headerlink" title="字数统计和阅读时长"></a>字数统计和阅读时长</h3><p>其实这俩应该是一起出现的，但于我而言阅读时长太鸡肋了我删掉了。</p>
-<p>下图是Orange已经具有的功能：</p>
-<p><img src="https://i.loli.net/2020/10/19/amozMe6fdOlVYKy.png" alt="image-20201019212130389"></p>
-<p>可以看出，Orange主题没有自带的阅读字数统计和阅读时长，但没有关系，操作起来也不难。<del>话虽如此我折腾两天到三天的样子，不过我是新手不能当作普遍案例。</del></p>
-<p>简单思路就是安装wordcount插件和建立对应的ejs文件（因为Orange主题是使用的ejs，其他next这种可能会用swig或者jade，稍微改一下格式就好），再加上主题配置文件的修改：</p>
-<h4 id="安装wordcount-插件："><a href="#安装wordcount-插件：" class="headerlink" title="安装wordcount 插件："></a>安装wordcount 插件：</h4><p><code>npm install hexo-wordcount --save</code></p>
-<h4 id="编写ejs文件"><a href="#编写ejs文件" class="headerlink" title="编写ejs文件"></a>编写ejs文件</h4><p>在_partial文件夹下新建word.ejs文件，文件中写入：</p>
-<pre><code>&lt;span&gt;
-  &lt;i class=&quot;fa fa-keyboard-o&quot;&gt;&lt;/i&gt; &amp;nbsp;字数统计 : &lt;%= wordcount(page.content) %&gt; 字
-&lt;/span&gt;
-
-&lt;span&gt;
-  &lt;i class=&quot;fa fa-hourglass-half&quot;&gt;&lt;/i&gt; &amp;nbsp;阅读时长 : &lt;%= min2read(page.content) %&gt; 分
-&lt;/span&gt;</code></pre>
-<p> 第一项是字数统计（第二项是阅读时长，接下来的操作基本一致就不再赘述），前面i class代表所用的图标，这个需要根据你主题使用的图标类型调整，不然可能显示不出来。比如Orange主题是iconfont（在source文件夹中可查看），就把相应的代码改写为：</p>
-<pre class=" language-&lt;span&gt;"><code class="language-&lt;span&gt;"><span>
-  <i class="iconfont icon-edit"></i> <%= wordcount(page.content) %> 字
-</span></code></pre>
-<p>为了美观我删除了汉字和空格。</p>
-<p>再找到你的文章页（可能是article.ejs，post.ejs，反正点开来试试），在<strong>合适</strong>的位置放入以下代码：</p>
-<pre><code>&lt;% if(theme.word_count) &#123; %&gt;
-  &lt;%- partial(&quot;_partial/word.ejs&quot;) %&gt;
-&lt;% &#125; %&gt;</code></pre>
-<p> 这里我想深深吐槽，我找了好多资料都说是<strong>合适</strong>这个模棱两可的词汇，这种对于需要找教程看的入门新手来说不亚于第一次做饭然后菜谱告诉你食盐适量的绝望！！所以对于Orange主题，我测试了一下合适的位置，按我们的阅读习惯把字数统计放在更新日期后、tag之前会比较舒服，即下图中圈出的位置：</p>
-<p><img src="https://i.loli.net/2020/10/19/UsQSnF2Hzv9cIql.png" alt="image-20201019214246514"></p>
-<p>前面那个YYYY-MM-DD很明显是指年月日，后面的循环是对你tag的列出。</p>
-<p>其他主题应该也可以这样操作。</p>
-<h4 id="主题配置文件添加："><a href="#主题配置文件添加：" class="headerlink" title="主题配置文件添加："></a>主题配置文件添加：</h4><pre><code>word_count: true</code></pre>
-<p>记得注意yaml的语法规则。</p>
-<p>最后三联，愉快地搞定，效果图：</p>
-<p><img src="https://i.loli.net/2020/10/19/pu7UZJtl4BLTvYW.png" alt="image-20201019214749886"></p>
-<p>图标要是觉得不好看也可以换成其他的，我懒得再找了。</p>
-<p>以及之前tag后面会有#这种我觉得不好看也删了。</p>
-<p>感觉自己的小窝又变好看了一点呢。</p>
+    <title>初穗</title>
+    <url>/2020/09/21/%E8%A7%A3%E5%BF%A7/</url>
+    <content><![CDATA[<h4 id="00"><a href="#00" class="headerlink" title="00"></a>00</h4><p>她的记忆里始终流淌着一条诡谲的河流。</p>
+<p>不似她后来曾遍历过的世间各异的水路，那条潜藏在她记忆中的河流泛着罕见的澄黄晶莹的波纹，河底是盘亘万年之久的迷你王国。 上万年前天神降下的洪水席卷了陆地上的每一寸生机，也将世界上曾经最富庶奢靡的王朝卷入洪水之下。他们的国民在浩瀚的水域里与幸免生灵结成盟誓，融为一体，相互依存。他们长出了伞状的轻灵躯壳，蛇鳞的双腿和碧绿丝絮般的茸毛，在蜃气浓重的暮夏时节爬上来铺满河道，碧玉的茸毛像发丝一样交错盘结，支撑一张没有缝隙的网面，将流水包络在自身的怀抱里。冬日为躲避陆地的敌人，他们回归河底，蛰伏于一隅暗影。</p>
+<p>从未有人见过她所描述的河流。</p>
+<h4 id="01"><a href="#01" class="headerlink" title="01"></a>01</h4><p>抚育她的村落同生育她的母亲有着如出一辙的荒蛮与敦厚。</p>
+<p>她出生在盛夏入伏日头最毒的时候，临盆前一脚的母亲仍淌在水田里吆喝着水牛的耕作。宽厚的手掌挥舞着盘桓在水牛周围的蚊蚋，下一刻一股急促的疼痛蔓延到她母亲的全身。养育过六个子女的母亲没有被疼痛弄得惊慌失措，她高声呼号请求一旁劳作的女子的帮忙。人群聚拢过来，七手八脚抬起母亲的四肢送往组里巫师的住所，那是族里女人们共同的产房。族人们相信在闯生死关的时刻，巫师的唱祷驱散厄运带来生机。在巫师高低起伏的嗓音里，古老陈旧、如今无人听懂的歌谣遥远得宛若从天界飘来。族里拥有最多子女的妇女会将手探进孕育着生命的盆地，小心翼翼地托起幼嫩脆弱的四肢或头颅，带领懵懂的胎儿滑进狭窄幽暗的小径，挣扎于光与暗的边界。</p>
+<p>她的出生不是从前在巫师的住所上演过无数次的一幕。那是一节崭新而奇异的变调，突兀地将场景由一成不变的巫师住处转回了水田。或许是因为她急切地要来这人世间走一遭。</p>
+<p>关于她出生的场景，她糅合了帮忙接生地妇人的回忆和自己在意识深处残留着某种奇异的幻觉，在想象里补全。</p>
+<p>她的母亲未知巫师的家门预感到自己腹腔中那条生命的蠢蠢欲动。血水从她的双腿间漫溢着，扑落在水田里，如一场突如其来的夏季暴雨。</p>
+<p>女人们钻进她的裙里看到婴儿露出的半只脚掌，惊叫了起来。倒着出生的孩子！在水田里！</p>
+<p>母亲只好在水田里生产，等巫师赶来时她已经平安坠地。从一片温暖的巢穴滑入冰凉的水域，水草和穗的清香于她的哭声之前潜进了她的意识。妇女们将她在水田里洗涤干净，脱离了母体尚未尝到泪水咸涩的她在一片喧嚣中蓦地嗅到来自冰凉河水的温情，一种和母体一致的温情。</p>
+<h4 id="02"><a href="#02" class="headerlink" title="02"></a>02</h4><p>巫师因她不符常理的出生方式为她取名为仪。</p>
+<p>仪者，度也，法制也。</p>
+<p>反常态而出生，到底而出生，逆时命而为之者，取之反义诫之。</p>
+<p>族里并非每一个婴儿都会得到巫师的垂怜。作为一种荣誉象征，巫师常常绞尽脑汁，只为族里伟大的贡献者的子女取名，又或是那些最美丽的女子，最英勇的成年男子才会从前辈那里继承闪亮的称谓。那些称谓是重复的，交替着传给一代又一代。多年们人们不会记得最美丽的女子是谁，最英勇的男子是谁，留下的只有他们的名字。</p>
+<p>巫师们毕竟不是造字的仓颉，取名所经受的痛苦不啻于让他们在祭坛永夜不灭的火焰里跳舞。</p>
+<p>可她却因出生怪异得了名，幼年与同伴的游戏与追逐中也因名落了下风。在那狩猎和追捕为雏形的嬉戏中，名字让她无处遁形。如同后世那些泄露了名字被定住的妖魔。</p>
+<p>在之后很长一段时间里都是如此。</p>
+<h4 id="03"><a href="#03" class="headerlink" title="03"></a>03</h4><p>她的父亲是个编织竹篾的匠人，凭借着一双巧手在族里的大大小小的会议里有了吱声的席位。竹子之外的知识不在他的专长里，对于族里的事宜安排他常呈现出懵懂孩童的痴笑。惹不得人烦也收不到尊敬。她的母亲是多年前从山南那一拨逃难的流民中幸存的一员，凭借着几捆干草和一股韧劲在牛棚里同牛犊一起长大，出落成一个肤色黝黑而健硕的女子，有着牛一般宽厚却倔犟的脾性。他们生育的子女奇迹般撑过灾荒和瘟疫，一个都没有少。唯一这一点能让夫妇感到骄傲。</p>
+<p>她是最小的孩子。她的母亲本想继续生几个，但生产时的水田冰凉的气息侵入了温暖隐秘的腹地，破坏了她的强盛，落得一身病。期待已久的下一个孩子始终没有到来，她在父母的不情不愿中成为家里最小的孩子。</p>
+<p>幼年的仪并没有展露出同她出生般的非凡之举，更多的时候她承袭了父亲的静默痴笑，喉咙里仿佛是哽着一团无形的荆棘，使得她的出声裹挟着短促而破碎的尖锐，在牙牙学语的孩童中是一声失败的哨音。母亲不喜欢这个出生让她受了难的女儿，更何况不似她的其他孩子出生时光洁平滑的面庞，仪是干皱的皮肤和瘪平五官，浑身像一颗脱水的果实，被神明放在她的肚子里。这样的女儿是神明的恶意，也是一辈子困顿于家中的累赘。</p>
+<p>仪浑然不觉母亲的忧愁于厌恶。她开始有梦境了，在她意识完备之前、分得清现实与虚幻之前，一条诡谲的河流反复出现在她的世界里。一条澄黄晶莹的河流，其间游荡着无数奇异的生物和景象无时不刻在召唤着她潜入水底，邀请着她进入水底那个迷你王国。多年之后无论身处何地，只要闭上眼睛，她就能看见潮水向她涌来，甚至能嗅到腐败了的藻类的浊腥气息。更深处的潮水是融合了世间所有植物的香醇甘美迸发出的精彩乐章，从她的嗅觉与味觉跌宕至听觉甚至痛觉。气味一层又一层地叠加，耳畔地乐章一首又一首地炸裂，缠绕着风中飘荡的花瓣，全部吞进了她的腹腔。她幼小的身躯发出一声沉重的叹息，那叹息不应属于这初来乍到的躯体，那本该来自一个更古老的亡灵，一个比他们存在的村落的历史要更长的天神，一个要比这世界上所有的种族与生灵都要古老的遗迹，一个每一次都会被遗忘久而又复生的传奇。</p>
+<p>但此刻，高悬的太阳肆意将炎热蚕食着着这片水田，纵横交错的田野如一头被慵懒的巨兽，千百年前由先民开垦驯化，唯有水道尽头的湍急河口才显露出一丝野性的端倪。她坐在由不怀好意的兄长们临时制成的木盆里，在水田与河流接壤出的水道里漫然穿梭，划过比她还高的芦苇丛进入了缓冲地带，她笨拙地从木盆里起身踏进那片满是芦苇的小岛被赶来的姐姐救起。</p>
+<p>姐姐凫水带她回了家。</p>
+<p>她坐在姐姐肩头，露出了一如从前的痴笑。</p>
 ]]></content>
       <categories>
-        <category>搭博客的血与泪</category>
+        <category>解忧</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>神话传说</tag>
       </tags>
   </entry>
   <entry>
-    <title>【记录向】为了拥有评论区我心力交瘁之评论区的启动与测试</title>
-    <url>/2020/10/16/%E4%B8%BA%E4%BA%86%E6%8B%A5%E6%9C%89%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%88%91%E5%BF%83%E5%8A%9B%E4%BA%A4%E7%98%81%E4%B9%8B%E8%AF%84%E8%AE%BA%E5%8C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<blockquote>
-<p>hexo的主题从next跳转到insulin再到orange，我的评论区终于能用了！  来讲讲这中间遇到让人心塞的小问题。</p>
-</blockquote>
-<h3 id="1、不是所有主题都自带评论区的"><a href="#1、不是所有主题都自带评论区的" class="headerlink" title="1、不是所有主题都自带评论区的"></a>1、不是所有主题都自带评论区的</h3><p>我第一眼相中的是hexo的热门主题next，黑白配色很极简，侧边栏也有种梦回百度空间的时代，更何况next主题的自设教程也是最多。……但就在这种情况下不知道出了什么问题，我的侧边栏死活不显示，对刚入门的我而言，那段时间翻遍谷歌都没遇到解决方式（当然很有可能是我关键词搜索有问题）。我怀疑是站点设置文件和主题设置文件哪里冲突了但那个时候我看不懂报错……我就直接换主题了。</p>
-<p>可能next主题的配置过于全面了点给了我“所有主题都自带评论区”的错觉，在换到insulin之前我试的几个主题都！没！有！评论区！！！</p>
-<p>我试图造轮子从修改主题站点文件_config.yml到修改ejs/swig文件再到报错……我放弃，这样我不如自己从头开始设计主题。由于不熟悉语法经常有种走着走着就偏了自己还不知道错哪的无力感……</p>
-<p>于是当我换到白月光主题insulin时我以为终于守得云开见月明见月明了。</p>
-<p>然而并没有。</p>
-<p>这是另一个悲伤故事的开始。</p>
-<h3 id="2、insulin很好，是我不配"><a href="#2、insulin很好，是我不配" class="headerlink" title="2、insulin很好，是我不配"></a>2、insulin很好，是我不配</h3><p>Insulin简洁的画风类lofter，对我等lofter逃难民众而言很是亲切。</p>
-<p>设计者还设计更新发表日期和更新日期与结束语标识，而且提供了本地搜索。</p>
-<p>Insulin的主题长这个样子，原谅我直接把设计者博客页面搬上来了：</p>
-<p><img src="https://i.loli.net/2020/10/16/QSkAKwd5mRGaFZv.png" alt="image-20201016214214486"></p>
-<p>打开文档后是这样的：</p>
-<p><img src="https://i.loli.net/2020/10/16/mZwntecYdHA4E26.png" alt="image-20201016214401732"></p>
-<p>主题配置文件_config.yml提供了好几种评论插件：</p>
-<p><img src="https://i.loli.net/2020/10/16/6SP89DbHY4Wvtas.jpg" alt="insulin评论区"></p>
-<p>我选了Valine。因为Valine的模板是最简洁的而且不要求登录。</p>
-<p>主题是已经集成的Valine，我们只需要去LeanCoud注册并查找appid和appkey就好了。具体教程见 <a href="https://valine.js.org/quickstart.html">https://valine.js.org/quickstart.html</a> 教程里面关于html那段如果你的主题自带了评论系统就可以跳过，npm那一步也可以跳过……我试过，无事发生。</p>
-<p>然后三连<code>hexo s</code>，<code>hexo g</code>，<code>hexo d</code>，这个故事没如我预期那么顺利，它报错了：</p>
-<p><img src="https://i.loli.net/2020/10/16/VD2pfMla5XhAq7y.png" alt="image-20201016220923935"></p>
-<p>可能是路径没有查找到，但文件夹相关路径下ejs文件明明存在，也不是常见的app_id和appid的错误。拖着程序员基友，我们从layout改到head再改到post……仍然是同样的报错。我觉得我得缓缓。</p>
-<p>我发了一份邮件给设计者就不知道对方会不会回复了。</p>
-<h3 id="3、Orange自带的评论Valine和Gitalk可用"><a href="#3、Orange自带的评论Valine和Gitalk可用" class="headerlink" title="3、Orange自带的评论Valine和Gitalk可用"></a>3、Orange自带的评论Valine和Gitalk可用</h3><h4 id="3-1、Valine的安全域名需要注意"><a href="#3-1、Valine的安全域名需要注意" class="headerlink" title="3.1、Valine的安全域名需要注意"></a>3.1、Valine的安全域名需要注意</h4><p>这个很宝藏的主题是我无意间发现的，网站的橙子的图标一下戳中了我。</p>
-<p>页面也极其极简，没有字数统计阅读统计这类的（虽然我挺希望它有的），而且字体设置得还算舒服？于是我选用了它。</p>
-<p>Orange的评论也提供了几个选择，我还是Valine。最初我的想法是我已经申请到了id和key，我不想再申请其他的了……不过后面我还是用Gitalk做了一个对比。</p>
-<p>修改好主题配置文件后没有像Insulin出现同样的问题，是个好兆头。</p>
-<p>本地测试结果是可以的，但网页端出现了无法提交的问题：</p>
-<p><img src="https://i.loli.net/2020/10/16/rAMY57E3KXDGHwa.png" alt="image-20201016222612141"></p>
-<p><strong>这是安全域名设定有问题。</strong></p>
-<p>这是正确的写法：</p>
-<p><img src="https://i.loli.net/2020/10/16/WT1PYrJoECyBdg4.png" alt="image-20201016222804123"></p>
-<p>最开始我直接把自己的域名写成了：<a href="https://ximou.ren/">https://ximou.ren/</a></p>
-<p>就是多的那个s导致LeanCloud没有放我的域名通过……</p>
-<p>我总是会被这种很不小心的错误给绊住。</p>
-<p>然后再刷新就可以愉快评论了，下图是一个Valine评论区的测试：</p>
-<p><img src="https://i.loli.net/2020/10/16/k4v9inga6ACJdOW.png" alt="image-20201016223139964"></p>
-<p>需要删除哪些评论，进LeanCloud删除就可以了：</p>
-<p><img src="https://i.loli.net/2020/10/16/J3ls6avIrntVEUD.png" alt="image-20201016224255758"></p>
-<h4 id="3-2、Gitalk是依托于Github"><a href="#3-2、Gitalk是依托于Github" class="headerlink" title="3.2、Gitalk是依托于Github"></a>3.2、Gitalk是依托于Github</h4><p>其实Gitalk的评论区和我的看板娘更适配，毕竟都是猫。</p>
-<p>Gitalk的启动要比Valine简单的多，我是按照 <a href="https://www.jianshu.com/p/02fc71f3633f">https://www.jianshu.com/p/02fc71f3633f</a> 来的，这篇讲得详细，也考虑到会发生的问题。</p>
-<p>Gitalk在网页端的效果是这样的：</p>
-<p><img src="https://i.loli.net/2020/10/16/6lor37UVXCdztEP.png" alt="image-20201016223931627"></p>
-<p>每次都需要登录才能发言太劝退了。考虑到Valine后续会不会崩，Gitalk做个备选也不错。其他的评论区我还没做测试……</p>
-<hr>
-<p>当然还有一些小问题想什么默认头像亟待解决，等后续有时间再一一补上。解决完了我再去看看友邻界面出了啥问题一直显示失败，再我加了Categories页面后手机端显示也有点问题……<del>还有字数统计和阅读统计，这些我都要有，就算自己搭也要有</del></p>
-]]></content>
-      <categories>
-        <category>搭博客的血与泪</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【记录向】搭建hexo的各种bug</title>
-    <url>/2020/10/14/hexo%E7%9A%84%E5%90%84%E7%A7%8Dbug/</url>
-    <content><![CDATA[<h4 id="1、不要直接复制粘贴代码"><a href="#1、不要直接复制粘贴代码" class="headerlink" title="1、不要直接复制粘贴代码"></a>1、不要直接复制粘贴代码</h4><p>安装百度推送插件<code>npm install hexo-baidu-url-submit –-save</code></p>
-<p>按照网上给的教程 <a href="https://zhuanlan.zhihu.com/p/128033054">https://zhuanlan.zhihu.com/p/128033054</a> 打开站点文件_config.yml添加配置：</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">baidu_url_submit</span><span class="token punctuation">:</span> 
- <span class="token key atrule">count</span><span class="token punctuation">:</span> <span class="token number">200  </span><span class="token comment" spellcheck="true"># 比如200，代表提交最新的200个链接  </span>
-<span class="token key atrule">host</span><span class="token punctuation">:</span> xxxx.xxx <span class="token comment" spellcheck="true"># 在百度站长平台中注册的域名  </span>
-<span class="token key atrule">token</span><span class="token punctuation">:</span> your_token <span class="token comment" spellcheck="true"># 百度站长密钥  </span>
-<span class="token key atrule">path</span><span class="token punctuation">:</span> baidu_urls.txt <span class="token comment" spellcheck="true"># 文本文档的地址， 新链接会保存在此文本文档里，这个默认</span></code></pre>
-<p>和</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span> 
-<span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> git
-  <span class="token key atrule">repo</span><span class="token punctuation">:</span> 
-    <span class="token key atrule">github</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 域名格式是git@github.com:xx/xx.github,io.git,即你存放静态网页的仓库地址</span>
-  <span class="token key atrule">branch</span><span class="token punctuation">:</span> master
-
-<span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> baidu_url_submitter <span class="token comment" spellcheck="true">#百度推送</span></code></pre>
-<p><strong>这里需要注意一点，type是baidu_url_submitter，配置是baidu_url_submit ，这俩不一样</strong>，不然会报错<code>ERROR Deployer not found: baidu_url_submitter</code></p>
-<p>不过上面那个问题是我后续才遇到的，最开始我遇到的问题是不能愉快地<code>hexo clean</code>……出现：</p>
-<p><em>can not read a block mapping entry; a multiline key may not be an implicit key at line 2, column 5:</em></p>
-<p>有很大概率是你在2行5列的空格或是缩进有问题。这是由于直接复制别人的代码可能会缺省空格和缩进，这里提供一个 <a href="http://www.bejson.com/validators/yaml_editor/">http://www.bejson.com/validators/yaml_editor/</a> 来验证你打代码，^指向处代表你哪里缺空格。</p>
-<p>虽然方法很简单……实际上我几乎耗费了半天时间去调整空格，没办法小白对语言书写规则不熟。</p>
-<p>再接下来就可以<code>hexo clean</code>了。</p>
-<h4 id="2、-ERROR-Deployer-not-found-git"><a href="#2、-ERROR-Deployer-not-found-git" class="headerlink" title="2、 ERROR Deployer not found: git"></a>2、 ERROR Deployer not found: git</h4><p>这个是在上一步结束后遇到的。<code>hexo g</code>没问题，但<code>hexo d</code>出现：</p>
-<p><em>ERROR Deployer not found: git repo锛歡<a href="mailto:&#105;&#116;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#105;&#116;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;</a>:Simark-west/mouxi.github.io.git</em></p>
-<p>我先开始怀疑是没有安装git，于是：</p>
-<pre class=" language-yaml"><code class="language-yaml">npm install  hexo<span class="token punctuation">-</span>deployer<span class="token punctuation">-</span>git <span class="token punctuation">-</span><span class="token punctuation">-</span>save</code></pre>
-<p>然而还是相同的报错，看着那个乱码我十分怀疑是不是冒号有问题，原文本是：</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span> 
- <span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> git
-    <span class="token key atrule">repo</span><span class="token punctuation">:</span> git@github.com<span class="token punctuation">:</span>Simark<span class="token punctuation">-</span>west/mouxi.github.io.git 
-   <span class="token key atrule">branch</span><span class="token punctuation">:</span> master
-
- <span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> baidu_url_submitter <span class="token comment" spellcheck="true"># 百度推送</span></code></pre>
-<p>看起来是git没有被识别。</p>
-<p>为了消除乱码，我把<code>git@github.com:Simark-west/mouxi.github.io.git</code> 改写成<code>https//:github.com:Simark-west/mouxi.github.io.git </code>，然后用YAML校验器 <a href="http://www.bejson.com/validators/yaml_editor/">http://www.bejson.com/validators/yaml_editor/</a> 检查发现仍然是空格的问题！！！</p>
-<p><img src="https://i.loli.net/2020/10/13/j1xp9nsYBgMuSIN.png" alt="image-20201013155501358"></p>
-<p>把冒号后面的空格消除之后再<code>hexo clean</code>和<code>hexo d</code>就没有报错提示了。我不太明白为什么我之前打空格验证时没有报错……</p>
-<hr>
-<p>先记录这么多吧，目前先折腾到了看板娘也出现很多奇奇怪怪的问题，有些网上有解决方案有些没有（大概是我自带debug体质），在另一篇草稿里。等到什么时候把个人博客折腾到比较满意的状态我在发上来。</p>
-<p>写于10月13日</p>
-<hr>
-<p>10月14日继续折腾……</p>
-<p>今天报错又推翻了我前几天的努力，在疯狂翻阅了好几个网页后，看着大家说yaml是个严格的语法还是需要在冒号：后加入空格<strong>（注意是在英文状态下）</strong>。</p>
-<p>于是我重新修改了语法调整空格，发现这样也没有报错（<strong>在本地调试</strong>）:</p>
-<p><img src="https://i.loli.net/2020/10/14/K9rxP4851wzWElg.png" alt="image-20201014113211840"></p>
-<p>看到有说法git 2.0之后的版本type要写成git而不是github，repo的格式也是git模式，我又改回去了……</p>
-<p><code>hexo clean</code>和<code>hexo d</code>十分丝滑……我觉得我要好好琢磨它的语法了。</p>
-]]></content>
-      <categories>
-        <category>搭博客的血与泪</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>起篇04</title>
-    <url>/2020/10/05/%E8%B5%B7%E7%AF%8704/</url>
-    <content><![CDATA[<p>原本以为只是增加一项招待宾客内容的亲族宴会，丹朱也并没有特意穿着隆重的缁撮锦衣出席，仍旧是平日玩闹的纻衣纁裳。</p>
-<p>这样的打扮方便他随时能溜王宫跑去乡野玩耍。</p>
-<p>之前京畿的亲族宴会的参与者都是他的族人或者相识许久的长辈，他们看惯了帝尧之子随性无拘的作风，只要不在祭典上失礼都不会言语过多。</p>
-<p>然而，当他和饕餮被梼杌领着进了大殿落座，虽然他首先注意力大部分被大殿中央的东夷少年吸引，他也发现在座所有人也包括东夷少年都打扮的隆重得体。</p>
-<p>特余光里丹朱注意到羲和皱眉，显然对他们的随意的装扮不满。</p>
-<p>他心虚地往座位饕餮身后躲了躲。</p>
-<p>他目不转睛地观察了幼年有过一面之缘的东夷少年一阵子，偶尔和身旁的饕餮交头接耳。</p>
-<p>他的目光随着东夷少年的落座收了回来，盯着摆放刚呈上来还冒着热气的糕点。</p>
-<p>随后他将糕点移到饕餮的案几上，叹了一口气说道：</p>
-<p>“我吃不下。”</p>
-<p>获得了双倍糕点的饕餮的心情很好，但并不影响她感受到身旁人的低落的情绪。</p>
-<p>她问道：“你怎么了？”</p>
-<p>“你也听到我父亲刚刚夸他的话了。”</p>
-<p>“……”饕餮无语，不想理会丹朱。</p>
-<p>丹朱惆怅：“要是我们当初努力一把，说不定青阳卷就是我们拿到的了。”</p>
-<p>饕餮塞了一块糕点堵住了丹朱的话。</p>
-<p>她说道：“有你在我们想都不要想。”</p>
-<p>丹朱郁闷地咀嚼着糕点，温度适宜的粟米糕的香甜在口齿中漫溢开来，冲淡他少许低落的情绪。</p>
-<p>庖厨的饭膳还未端上来，案几上的两样糕点很快一扫而光，两人都有点意犹未尽。</p>
-<p>不过这没什么关系，趁着混沌沉醉在舞乐，饕餮把他的装着糕点的漆盘悄无声息地捞过来与丹朱平分了。</p>
-<p>回过神的混沌怔怔盯着案面上糕点凭空消失的地方，面容上满是忧伤。</p>
-<p>梼杌注意到这边的动静，本来不爱吃甜食的他将自己的那份传到混沌案上。</p>
-<p>混沌感动地回望梼杌一眼。</p>
-<p>目睹整个过程的女英对他们的行为感到可笑，扭身轻声唤来侍者。</p>
-<p>不一会每人面前多了一盘糕点。</p>
-<p>她拿起一块桃花蒸，心想什么时候在京畿糕点都需要抢了。</p>
-<p>丹朱感到一道似曾相识的灼热视线落到了身上，隔着衣香鬓影的缝隙，落座在对面离他较远处的东夷向他遥遥举杯，宛如祝祷的庄重姿势让他一愣。</p>
-<p>等他想回以相同的礼仪时对方已放下陶杯，专心沉浸于舞乐欣赏，不再看他。</p>
-<p>丹朱低头审视自己的一身穿着。</p>
-<p>……有种被轻视的感觉呢，果然应该先去换一身？</p>
-<p>由于迟到他错过了帝尧向亲族介绍东夷少年的环节，所以丹朱现在也不知道该怎么称呼这个有过一面之缘的东夷少年，即使想私下去结交也得先问问道对方之名。</p>
-<p>不过好像，对方告诉过自己，但……年岁有点远，想不起来了。</p>
-<p>丹朱懊恼，求知欲在记忆的中来回穿梭特却没找到线索。他的思绪是拧缠一团的乱绳，想要解开却勒紧了活路。</p>
-<p>他甚至感到头在隐隐作痛，索性不再理会凝固在脑海里的困惑，专心享受着逐一呈上来的膳肴。</p>
-<p>鼎中炮豚的热气扑缭着熏得丹朱冒出汗，他伸手去拿陶杯准备消些热，余光里看到东夷少年起身离座，在一片喧嚣热闹中悄然无声地出了殿门。</p>
-<p>丹朱怏怏地抿了一舌蜂浆，突然觉得宴会好像也没什么意思了。</p>
-<p>他起身从后道准备溜走，途中饕餮扯住他的衣袖小声问：“你又要跑出去玩了？宴会还没结束。”</p>
-<p>丹朱拉回了衣袖也小声回复道：“我一会就回来。”</p>
-<p>饕餮投以怀疑的眼神但也没再加阻止。</p>
-<p>丹朱出了殿门左右张望，均没有发现早先出来的东夷少年的踪影。</p>
-<p>墙上的爝火才被点燃，还不是很旺，映在墙壁上的暗影倒更将周围一切漫入更深的黑暗中。</p>
-<p>月光从天穹穿云而来，铺在石砖上仿佛泼上一淌溪流，顺着石砖的走势由近及远照亮幽暗的角落。</p>
-<p>他站在过道中不禁纳闷对方怎么跑那么快。</p>
-<p>丹朱凭感觉选了一边打算先去那边看看能不能找到东夷少年。</p>
-<p>没想没有走很久的距离，他想找的那个人冷不丁从拐角处阴影里冒出来。</p>
-<p>丹朱吓了一跳，虽然没有惨叫出声，但连连后退时他忘记了之前石砖的徒然升高的走势。</p>
-<p>摔倒在地的同时他还听到自己脚踝处传来咔哒的声音。</p>
-<p>“你在找我。”</p>
-<p>东夷少年没有意识到自己的过错，看起来也不打算帮忙，只对丹朱先前追踪行为做了陈述。</p>
-<p>丹朱摸到自己脚踝突起的地方，心里哀叹着果然错位了。忍着疼痛，双手用力一旋将起归位。稍微动了动脚踝感觉疼痛在散去，他才抬头望向眼前的少年。</p>
-<p>“重华。”脚踝的扭伤一刹那的疼痛击穿了他脑海凝结着的思绪，他突然就想起了之前怎么也想不起那个名字。</p>
-<p>重华没有反应，面容沉静如水。</p>
-<p>要不是对方的目光一直看着自己，丹朱都快错以为重华只是低头沉思。</p>
-<p>难道还是因为自己装着不够庄重，所以对方生气了？</p>
-<p>丹朱想着，一面双手撑地重新站了起来，等脚上的疼痛感更能忍受一些，他走向了阴影处的少年。</p>
-<p>重华却从阴影里走了出来，进入到月光完全能照见的区域，他扶着走廊前侧的栏杆，目光飘向庭院某一点。</p>
-<p>丹朱不明所以地也着看，好奇有什么吸引了对方的注意力，却发现庭院里处了一棵栽植了多年的桃花树外并没有什么其他的地方。</p>
-<p>丹朱想开口说些什么来让气氛不要陷入尴尬的沉默中。</p>
-<p>他想问的有很多，包括他是怎么去不周山找到的神器，一路上的所见所闻，各种惊心动魄的冒险故事，是不是见到了嘉果，遇到了不周山上的神人……</p>
-<p>思绪千回百转，问题太多反而让他不知道该先问那个。</p>
-<p>丹朱很遗憾自己当初没有更坚决，也许羲和说的对，自己的确没有成大事的气魄。</p>
-<p>这世上有那么多比自己优秀的人，这一点他从小就知道。</p>
-<p>自己的父亲是世间唯一的神这一点毋庸置疑。</p>
-<p>羲和、许由他们既是少有的智者也是自己的老师，自己肯定也比不过。</p>
-<p>同辈里的女英继承了父亲的许多特质……出色也是自然。</p>
-<p>可是这个少年……</p>
-<p>丹朱转头看向身旁的少年。</p>
-<p>他长得好看。</p>
-<p>丹朱想重华应该是自己见过最好看的人了……小时候怎么没察觉呢，只记得重瞳了。如此好看的人自己怎么会忘记呢……</p>
-<p>想到这里，他又觉得自己什么都问不出了。</p>
-<p>丹朱慢慢把视线收回来，捏紧了栏杆。</p>
-<p>正在胡思乱想，却听到久久沉默的人开口说话：</p>
-<p>“在宴会开始之前……你在哪？”</p>
-<p>……宴会开始之前？</p>
-<p>丹朱脑海里立刻回放自己溜出夏至祭礼跑到从前的祭坛玩耍的场景：</p>
-<p>“我在学习。”</p>
-<p>重华的目光终于从庭院中央的那棵树调转到丹朱身上。</p>
-<p>难道他也有看穿人心的本领？</p>
-<p>丹朱心虚。</p>
-<p>重华没有追问，换了一个话题：</p>
-<p>“这里居然有桃花树。”</p>
-<p>丹朱一时摸不清对方的意图，他看了看庭院中央的桃花树又看看重华，不知道对方从何而来：</p>
-<p>“我父亲一直很喜欢桃花树，就搬回来了。应该在我出生前就有了。”</p>
-<p>丹朱想起来在自己小时候父亲也常常带自己来这棵树下玩耍，或者用手掌比划自己到树干的位置，每年都会在树身上和自己身高的位置仔细围绕一圈红绳。</p>
-<p>是什么时候自己就厌烦了就废弃了自己仪式了呢。</p>
-<p>丹朱突然好奇上面会不会还有之前的留下的痕迹，自己明明几乎每天都会路过桃花树，但几乎再也没有认真停留过。</p>
-<p>此刻重华提起来，让他生出一丝怀念之意。</p>
-<p>他翻过栏杆进入庭院，快步走向桃花树。重华看着他莫名的行动，也跟了上来。</p>
-<p>痕迹还留着。</p>
-<p>丹朱抚摸着树身缠绕的红绳，因经历风吹日晒，又年久未管，绳伤痕斑驳，红色几乎要褪去大半。</p>
-<p>“向木神借命。”重华看起来知道的很多，他走到丹朱身边看到了红绳如是说到，“不过，你们也信仰木神？”</p>
-<p>丹朱否认：“这算不上祭祀，也非习俗。”</p>
-<p>他问过父亲这样做的含义，父亲说祈福用的，希望桃花树能帮自己挡到一部分厄运与疾病。</p>
-<p>今天他又听到重华的解释，似乎还有别的说法？</p>
-<p>“东夷也有相同的习惯吗？”丹朱问道。</p>
-<p>“我们不会把社木种在庭院里。”</p>
-<p>“那……种在哪？”丹朱好奇，虽然他也不觉得这棵桃花树就是伊祁氏的社树。</p>
-<p>“祭祀的地方。”对话似乎勾起了重华的思乡情绪，他望着月亮脸上露出伤感的神情。</p>
-<p>丹朱也被传染的有点伤感……</p>
-<p>他想重华应该离开有虞氏很久了，毕竟如果按照曾经对方的说法，走到不周山又要一年多，又听到饕餮说他找到神器也没有回家看看。</p>
-<p>丹朱没有体会过思乡的情绪，即使离家出走得再远回家都并非难事，何况有梼杌饕餮他们在身边，其实走多远都感觉和京畿的生活差不多。</p>
-<p>他想安慰重华：</p>
-<p>“你想回去看看吗？”</p>
-<p>“我总会回去的。”重华想了想说。</p>
-<p>丹朱摇头：“你现在想吗？”</p>
-<p>重华看着他：</p>
-<p>“你有办法？”</p>
-<p>丹朱眼里闪耀着得意的小火花：</p>
-<p>“看你敢不敢跟我一起了。”</p>
-<p>夜奔曾经对丹朱来说是习以为常的事。</p>
-<p>但自父亲的发布的宵禁令以来他收敛了许多，气味相投的混沌、穷奇被召回自己封地，留在京畿的梼杌跟随羲和左右忙于各种祭祀典礼，饕餮开始懂事了也不愿陪他继续胡闹。</p>
-<p>他尝试过独自夜晚跑出去，成功地躲过守卫的巡逻，然而没走多远就被守卫捉回来。</p>
-<p>丹朱对于屡次失败的反思是：如果多一个人成功的几率会不会大一些呢。</p>
-<p>重华凝视着他。借着树梢里漏下的月光，身旁少年的面容像是河水里淌过的鹅卵石，莹润而干净。</p>
-<p>丹朱没有等到重华的拒绝，暗自欢呼雀跃，兴冲冲地拉着重华地手臂往一个方向跑去。</p>
-<p>“我们去骑吉量！”</p>
-<hr>
-<p>王宫西侧的宫殿里是伊祁氏收藏多年的珍宝异兽。</p>
-<p>通体雪白绒毛的吉量在丹朱的抚摸下温顺地倾斜躯体，前蹄跪地做出等待御者的姿势。</p>
-<p>丹朱揪了揪吉量的柔软的火红长鬣，发现长鬣长度是够了但当缰绳怕还是难度不低。</p>
-<p>他望了一眼四周盛放的珍玩宝器，也没寻到合适可以当作缰绳的。</p>
-<p>他需要一些可以制成条状物的材料，但房间里大多是玉石面具、陶乐器类古物。父亲对锦衣华服一向不感兴趣，他所珍爱的宫殿里也不会特地腾出空间放置织物染布。</p>
-<p>然后丹朱低头看着自己的衣服，入夏之后炎暑酷热，他嫌麻烦就没有穿上外袍。而纻衣纁裳是极其轻薄简洁的样式，撕出缰绳的长度大概是要衣不蔽体了。</p>
-<p>束身的衣带倒可以利用，但不太结实。</p>
-<p>去其他房间寻找是不是有会消耗一些时间呢。</p>
-<p>丹朱思考着，猛然回头直勾勾地盯着身后从踏进房间那一刻就似乎被震惊地说不出话的少年。</p>
-<p>从刚才开始重华就一直在观察丹朱的举动，轻而易举地看穿他的意图。</p>
-<p>重华脱下外袍子，却直接没有递给丹朱，而是撕成条盘结成多股粗的线绳。他看着吉量头颅户和脖颈的大小估算了所需的长度，迅速绕出一个环形绳笼作为简易辔头，再递给丹朱示意对方套在吉量的面嵴上。</p>
-<p>丹朱直愣愣地接过，心情复杂地拔下的束发用的骨笄缠在绳笼的前端形成嚼子，用拇指摁开吉量的嘴角，神色恍惚地将嚼子塞到吉量嘴中央。</p>
-<p>丹朱很是懊恼，自己怎么光想着光想着缰绳忘了辔头了……</p>
-<p>重华看了一眼丹朱的操作无误后，将外袍余料继续撕剪、盘结缠绕做了一副缰绳。他走到吉量身边，再将缰绳穿过笼头的同时检查一番丹朱先前的操作，确认无虞后看到身边还在人发愣的表情。</p>
-<p>他不禁弯了一下嘴角，很快又收了回去。</p>
-<p>“走吧，你带路。”</p>
-<p>回过神的丹朱爬上吉量的背，牵稳缰绳。他对重华热情地伸出手：“上来。”</p>
-<p>重华后退一步，从侧边自己翻身坐在了吉量的背。</p>
-<p>丹朱悻悻地收回手，觉得这个明明认识多年的朋友并不如想象中好打交道。</p>
-<p>他听到身后传来的声音：“你……第一次骑吉量吧。”</p>
-<p>丹朱立刻反驳：“怎么可能！”</p>
-<p>脑海里划过无数种思绪，难道对方也在不周山遇到过吉量之类的神兽吗？</p>
-<p>他越发对重华感到好奇。</p>
-<p>丹朱握紧缰绳操纵着吉量起身，扬起前蹄，做出冲刺的姿态。在起身一刹那，吉量的背脊弯出的弧度迫使御者不仅要握紧缰绳，还需要俯身搂住吉量脖颈保持不滑落下去。</p>
-<p>丹朱低头盯着环抱在自己腰间的手：“我不介意你抱紧，小心掉下去啊。”</p>
-<p>迅速移开的双手握住了缰绳，身后人深吸一口气，话语里听不出情绪波动：</p>
-<p>“我来操纵。”</p>
-<p>丹朱夺回缰绳：“我可以的。”</p>
-<p>他调转方向冲向宫殿上方的天窗，笑着对身后人说：“据说吉量可以日行千里？我们试试看？”</p>
-<p>身后人微不可闻地叹息着。</p>
-<p>似乎是对自己的行径敢怒不敢言。</p>
-<p>大概是月色太过皎洁，丹朱心情又变好了。</p>
-<p>吉量驮着两人的重量仍不觉吃力，步伐轻灵地在屋脊上跳跃前行，颀长如雄鸡的尾羽在夜空里摇摆着如同耀眼的旗帜猎猎生风。</p>
-<p>这个动静会引起瞭望台的守卫注意的。</p>
-<p>丹朱指挥着吉量放缓脚步从另一条小路走出去。他本来想走以往走的暗道，但暗道估计塞不下吉量的个头。</p>
-<p>他们如一道闪电般从守卫眼前划过，急速得让人意识不到发生什么。</p>
-<p>等到守卫回过神想要通报时连背影都无处寻。</p>
-<p>“你不怕受责骂吗？”</p>
-<p>风驰电掣间丹朱听到重华的疑问。</p>
-<p>丹朱反问：“你不觉现在问这个太晚了吗。”</p>
-<p>重华不再问了。吉量速度之快让他不得不搂紧前面的人，这个尴尬至极的姿势让他后悔没有选择坐在前面。</p>
-<p>吉量狂驰在山林间，穿过一大片水泽时放缓了步伐好让自己半潜水而过。在眼前景色没有那么飞快掠过的间隙，他们也有了喘息的机会看看自己身处何方。</p>
-<p>视野里开阔的伊洛平原让他们意识到已经远离京畿的同时也意识到一丝不对劲。</p>
-<p>沉默许久的重华再一次开口：“你确定你走对了方向？”</p>
-<p>“你看今晚的月亮真好看啊。”丹朱开始乱扯。</p>
-<p>重华突然大笑出声，笑声回荡在寂寥的天地间显得格外嘹亮而肆意，惊起一滩沉睡的鸥鹭：</p>
-<p>“这么多年……你果然还真的一点没变。”</p>
-<p>丹朱：“……”</p>
-<p>丹朱试图补救般地开口询问：“……我们在绕回去？”</p>
-<p>重华不客气地指出真相：“你还记得回去的路？”</p>
-<p>丹朱：“……”</p>
-<p>这对话没办法继续进行下去了！</p>
-<p>难道自己想要带一个思乡人回故乡看看的美好心愿就这样因为迷路而惨烈告终吗？</p>
-<p>丹朱沉痛地进行着自我反省。他现在恨不得一头扎进水泽里化成一条鱼再也不用出来面对身后的人。</p>
-<p>而且离家太远……父亲他们能发现自己在哪吗。</p>
-<p>大笑过后的重华似乎心情没有像先前那样陌生而疏离，他反而兴致变高得稍微高昂了，还有心安慰丹朱：</p>
-<p>“放心吧我们回京畿的，不过，”</p>
-<p>他牵过缰绳，“换我来？”</p>
-<p>丹朱仍不死心地放手。</p>
-<p>“你是真的第一次骑吉量……”重华确认了自己先前的猜测。</p>
-<p>丹朱不情愿地点头承认了。</p>
-<p>被讨论的吉量温顺且尽职尽责地将他们驮到了对岸，由于缰绳地争夺战没有得出结果，它安静地待在原地等待下一步指令，等了一会而发现还没有指令便开始低头啃食地上的草补充狂奔消耗的体力。</p>
-<p>重华从吉量身上跳下来，找了一块湖边的石头蹲坐着休息。</p>
-<p>丹朱抱着吉量的脖颈，甚是郁闷。</p>
-<p>“你……是想拉着我一起挨罚吧。”重华叹息。</p>
-<p>丹朱在内心默默反驳：我是真的想带你回去看看有虞氏。</p>
-<p>但这个结果他实在不好意思再开口。</p>
-<p>思来想去丹朱下定决心开口：“抱歉。”</p>
-<p>重华不为所动：</p>
-<p>“你是想为什么道歉。”</p>
-<p>丹朱有点惭愧：“答应你带你回有虞氏但没能做到。”</p>
-<p>还有……</p>
-<p>他想起那些被他遗忘在时光角落里的回忆。那个初见时手臂上是全是伤痕的重瞳少年，他想起他承诺过会回来找他，一起去不周山。</p>
-<p>然而他都忘记了。</p>
-<p>丹朱盯着重华的衣袖。重华穿着的服饰严实并透不出手臂上的皮肤，但他想哪里一定有什么陈年旧疤，就像庭院的里树上的红绳，时间过得再久绳子仍然缠在上面，绕成某种不可动摇的约定。</p>
-<p>似乎感应到丹朱的心路历程，重华捧起一掬水观察，掌心里有一轮静谧的月影。</p>
-<p>他双掌交握，水从指缝间流走，再打开月亮也消失了：</p>
-<p>“你在等我说‘我原谅你’。”</p>
-<p>无论是这一次，还是从前的事，你都再等这一句话。</p>
-<p>丹朱不明所以：“……重华你。”</p>
-<p>重华侧过头看着丹朱：“我原谅你。”</p>
-<p>虽然被原谅了但这种感觉……并不好受。丹朱更难受了，他不知道为什么会这样，突如其来的负罪感是他一生从未有过的。</p>
-<p>即使自己犯了错惹到父亲生气也没有过如此沉重的愧疚？</p>
-<p>真的是……十分新鲜的体验呢。不过好像跟重华在一起自己总会收获一些奇奇怪怪、前所未有的情绪。</p>
-<p>“你为什么会去找不周山的神器？因为我曾经告诉过你？”</p>
-<p>……因为你想再见我一面？</p>
-<p>虽然丹朱是笃定过，但仔细想想还是太荒谬了。怎么会有人仅仅对一面之缘的人做到如此地步。</p>
-<p>“我想看看不周山的神器长什么样。”</p>
-<p>并不是很令人信服的理由。</p>
-<p>丹朱怀疑地望着他：“难道你对我一见钟情了？！”</p>
-<p>重华：“……”</p>
-<p>“……真的？！”丹朱难以置信，感到一丝窃喜。</p>
-<p>重华抓了一大扎河边的芦苇扑向丹朱：“你还是先学会认路吧。”</p>
-<p>丹朱灵巧翻身离开吉量，躲过重华的芦苇攻击：“你都为我来京畿了！”</p>
-<p>重华徒劳地抓抓头发试图便捷：“虽然是这样没错……”</p>
-<p>这个问题伊祁氏问过他，他当初给的理由的确是为了丹朱。但现在看着眼前这个活蹦乱跳陷入狂喜的人，怎么都觉得是草率给出理由的自己的脑袋不太好使。</p>
-<p>他会想起伊祁氏那诡异的眼神，觉得这对父子俩肯定都误会了什么。</p>
-<p>应该有什么真正的答案是自己都没有察觉的。</p>
-<p>喜欢？爱？</p>
-<p>这种在他人生十几年岁月里都没有体会过的事物怎么可能成为真正的动机。</p>
-<p>他本来以为自己的人生一辈子都会在有虞氏度过。过着和自己祖祖辈辈的人一样的生活，和所有有虞氏的族人一样的命运。</p>
-<p>日复一日，年复一年地制陶、狩猎、种植，直至走向生命终结。</p>
-<p>所以从父母和族长得知有莘氏之子看上自己的消息，他第一反应却也不是欣喜这从天而降的好运气。</p>
-<p>有虞氏中同他年纪相仿的少年们几乎都有了姻缘之约。唯有自己，一个不被疼爱的长子身份，出生克母、重瞳之征都似乎昭示着此生他注定无缘于婚姻。</p>
-<p>甚至一向苛责冷漠的继母都没有反对这门亲事。</p>
-<p>这似乎是最完美而理想的故事结局了。</p>
-<p>可是……</p>
-<p>重华看向丹朱，在兴高采烈手舞足蹈一段时间，丹朱大概是累了，不知道什么时候趴在吉量身上睡着了。</p>
-<p>重华回过头继续扯芦苇。</p>
-<p>自己可能有时候脑袋真的不好使。</p>
+    <title>起篇02</title>
+    <url>/2020/10/05/%E8%B5%B7%E7%AF%8702/</url>
+    <content><![CDATA[<h4 id="02"><a href="#02" class="headerlink" title="02"></a>02</h4><p>丹朱没有想到再和重华的暌违却是多年之后的事情了。</p>
+<p>人类历史上最后一次世界性大洪水刚刚退潮，新一轮人造神的神话从信仰和民族性的土壤里挣扎而出，茁壮成长，喂养着千千万万从洪水中幸存下来的生民，安抚他们脆弱的精神和魂魄。</p>
+<p> 一晃光阴荏苒，等再见到重华时他才恍然原来记忆里曾有这一号人物的存在过。并不是一个如梦境般朦胧的影子，醒来时便觉得惆怅若失。</p>
+<p>那天暴雨过后的宫殿没有像以往一样死气沉沉。相反晴空碧彻，万里无云。</p>
+<p>天暖曛醉，正适贪睡。</p>
+<p>丹朱在宫殿的玉石砌成的栏杆上小憩。</p>
+<p>曾经这地方是给羲和他们占星用的，后来他们搬迁去了更符合规格和秩序的占星台去了后，这里便荒废了。梼杌他们都不知道他常常藏身于此处，成为了自己用来逃避说教的乐园。</p>
+<p>他恰好从一个习以为常的荒诞梦里醒来，在梦里他如同鱼一般潜藏在清澈的海底漫无目的地游弋，好不悠哉。</p>
+<p>这类古怪的梦境理应属于梼杌帮他占卜的范围，不过他常常懒于梳理先前的思绪而作废。</p>
+<p>于是他带着模糊茫然的思绪注意到了侍卫们领着一抹颀长的身影落进他的视野时，仍然有种恍如梦境的错觉。</p>
+<p>距离较远，身影模糊。他看着那个少年的身影在某一刻蓦然顿住，似乎心有所感的侧过身想往自己这个方向来看。</p>
+<p>明明距离遥远，那种灼灼目光落到了自己的身上的触感一下子惊醒了他，当他稍微清醒点再回望过去想要确认时，那里早已空无一人。</p>
+<p>那个时候他并没有想起来是谁。</p>
+<p>心里却无端惆怅了起来，这种少年不识愁滋味的情绪啊，在某一特定时期常常萦绕在他心头。</p>
+<p>丹朱恍惚想起后来自己又吵着闹着想要出去，结果被众人按下。梼杌曾经这样劝他，人生不过萍水相逢，聚散无常。</p>
+<p>聚散无常。</p>
+<p>真的莫名伤感。</p>
+<p>不过随后他又找到了新的乐趣便很快忘记了自己也曾有雄心壮志想去寻找不周山的神器。</p>
+<p>毕竟那只是个传说不是吗？大家都是这么说的。</p>
+<p>羲和嫌弃过他一时新鲜劲后续不足，认为丹朱不可成大事。</p>
+<p>丹朱表示不服气，然而每次有了干劲很快就消退了，于是便无可奈何地任由羲和去指责他。</p>
+<p>当一起长大的饕餮跑过来告诉他真的有人去不周山找到颛顼的神器时，那个有趣的东夷少年的模糊的身影在他记忆里又开始鲜活。</p>
+<p>他莫名笃定是那个人找到了颛顼的神器。</p>
+<p>一定是那个人。</p>
+<p>他真的去了不周山……</p>
+<p>丹朱兴奋地从栏杆上一跃而起，昏昏欲睡的情绪一扫而光，他迫切地想要去见一见那个少年。</p>
+<p>“饕餮，你知道我父亲和那个人现在在哪吗？”</p>
+<p>饕餮点头：“我带你去。”</p>
+<p>“真的有人找到了颛顼的神器啊。”丹朱看向身旁的饕餮，“我们当初也想取得的神器，结果没成功。”</p>
+<p>饕餮的表情十分无奈：“我们明明是被逼迫的好不好。”</p>
+<p>青梅竹马的情谊让饕餮在丹朱面前一向口无遮拦：“然而你每次都会迷路！一点都不可靠。”</p>
+<p>“……那个东夷少年是怎么取得神器的他有说吗？”</p>
+<p>饕餮奇道：“我都没说是谁，你怎么知道是一个东夷少年？”</p>
+<p>“我就是知道。”丹朱瞥向远处的景色回忆似的说道。</p>
+<p>“你的占卜术进步了？”饕餮挑眉。</p>
+<p>一定是他，错不了。</p>
+<p>但是，他长成什么样子了呢？</p>
+<p>丹朱努力去回忆残留的那抹身影。</p>
+<p>……想不起来了，除了那双重瞳。</p>
+<p>不过他会记得自己吗。丹朱逗着身边的饕餮时突然冒出了一个想法：他是为了自己才去找的。</p>
+<p>一定是这样。</p>
+<p>丹朱不禁有点感动。作为一介凡人，他居然真的到达了去了神话中的不周山，而且还找到了颛顼曾用过的神器！而且作为一个东夷少年，他还涉险来到了京畿之地。</p>
+<p>来晚的丹朱和饕餮索性不进入大殿，熟练地爬上了房顶选择偷看。</p>
+<p>饕餮沉默地观摩一会大殿里众人的讨论之后，问丹朱：“你确定不进去看看吗。”</p>
+<p>虽然以她对帝尧的了解，对方肯定知道他们两个在屋顶上偷听，帝尧知道，羲和也肯定知道。平常也就算了，这么重要的场合还胡闹，她有点害怕。</p>
+<p>特别是看到梼杌混沌他们规规矩矩地端坐在两旁，混沌还特地选了个可以跟他们打招呼的位置，使劲给他们递眼色，暗示着要他们快点进来。</p>
+<p>果不其然，她看到梼杌离开位置，然后出了殿门轻车熟路地跃上了屋顶把他们俩抓了下来。</p>
+<p>简直是欲哭无泪。</p>
+<p>丹朱很淡定地被领着进去，在平常的地方落座。饕餮也认命跟着进去，坐在了丹朱身边。</p>
+<p>她感到众人的视线落到了他们的方向。</p>
+<p>包括那个站在中央的少年。丹朱说得没错，看打扮的确是东夷人，年岁估计也比他们几个大不了多少。</p>
+<p>她想转身对丹朱说点什么，却发现对方的注意力全然在中央那个少年身上，眼神亮闪闪的，那是只有他在对什么感兴趣时才会有的目光。</p>
+<p>她顺着丹朱的视线望过去，仔细打量着规规矩矩站在大庭中央的东夷少年。他身姿修长挺拔，很容易在众人中脱颖而出，刚刚他朝这边望过来的时候，饕餮看清楚了那个少年在相貌上五官轮廓分明，特别是一双奇异的重瞳幽深莫测，如同古井水不起波澜又引人无限遐想。清秀的面容倒是让她感慨果然东夷出美人的说法是真的。你看前有金天氏，后有握登氏，眼前还有这么气质出类拔萃的少年。此外，商市往来之间的东夷人高大白皙的特点总是很好辨认的。</p>
+<p>她看了眼身旁的少年。叹了口气。</p>
+<p>……我们这一代少年里真的一个能打的都没有。</p>
+<p>“饕餮，他身上有光芒。”丹朱没有注意到饕餮的嫌弃，悄声对饕餮说。</p>
+<p>光？</p>
+<p>她的目光几乎要把那个东夷少年看穿了，也没找到丹朱口中的光。</p>
+<p>这句话成了饕餮一生中最无法理解的话之一。</p>
+<p>她想，和我一起长大的青梅竹马总是有着异于常人的想法。</p>
+<p>在进入京畿之前，他想过如果没有人愿意相信他手里拿的是颛顼的神器怎么办。</p>
+<p>——青阳卷。</p>
+<p>这个多年前由一个陌生的华夏少年告诉他的神器名字。</p>
+<p>是真实存在的。</p>
+<p>他握紧手里的包裹好的神器，尽管包得严严实实，他仿佛还是能透过厚厚的布料抚摸到神器周身散发的冰雪般的气息。青阳卷在不周山的冰雪之中封存多年，他花了足足一个月几乎踏遍了不周山的每一处才找到了它。当他终于找到神器时几乎累到虚脱，之后稍微休息了一会昼夜不分地赶路来到了华夏腹地的京畿陶唐氏，却发现自己根本进不了内城。</p>
+<p>他并没有华夏部落与东夷部落之间的文牒。</p>
+<p>在这万邦林立的时代里，在东夷各部落之间的穿梭往来也许不需要文牒或者信物认证身份，但东夷和华夏之间却有着严格的律令说明两边黎民若想进行物资交换得到特定地方并且需要携带双方信物，华夏部落的部落长出于私心不顾众人反对把自己的邦国定为了交易场所，华夏人称陶唐氏为京畿，大致是指着他们华夏人首领所居住的地方。东夷族人则称为易地或是有易氏，意味着物品交换之地。</p>
+<p>此刻他站在京畿，也是有易氏的外城边缘，看着队列森严的护卫们沉默了。</p>
+<p>即使他算好了东夷和华夏之间约定的贸易交换的日子想趁机混在同胞的队伍里蒙混过关。不舍昼夜地赶路想赶在约定日期之前，可还是错过了。也许是他在不周山寻找过程中那次偶然的昏迷，使得他的一直以来的计日数出现了误差。</p>
+<p>他可能昏睡了一天或者两天或者更长。</p>
+<p>他要重新回到有虞氏吗？自己明明已经赌上了一切了为什么还会失败。</p>
+<p>他不敢去想若是回到有虞氏，会有怎样的责罚等着他。更何况他已经快离家一年了，自己那不友善的父母兄弟妹妹们估计怒火更甚。</p>
+<p>可是这一切都抵不上他心中的不甘。</p>
+<p>……不甘心，实在不甘心。</p>
+<p>尽管疲倦不堪身体每一处都叫嚣着休憩，他还是继续强撑着。但他意识到自己的力量一直在不断涣散，饥饿感也在蚕食着他。</p>
+<p>时值夏日，即使刚刚下过一场雨也没给他带来丝毫凉爽，反而让他的思绪越发困倦混乱，他感到头痛欲裂浑身发热，眼前的景色断断续续浸向黑暗的边缘。</p>
+<p>身体某一处疼痛剧烈，仿佛裂开了一个口子，血液在疯狂向外蔓延，流过肌肤灌入了黢黑的泥土中。大地仿佛张开血盆大口要将他吞噬殆尽。</p>
+<p>他重重地摔向了大地，耳畔回荡着沉重的风声。</p>
+<p>直到闭眼前他都紧紧握着那把青阳卷。</p>
+<p>我没有死。</p>
+<p>等他再一次劫后余生醒来时，反复确认这一点。</p>
+<p>和天命赌，这一次又是我赢了，他暗自想着，随即立刻看向自己的双手。长时间的手指过于用力蜷曲使他在知觉恢复的一刹那感受到指尖酸痛，差点无法继续张开手指。</p>
+<p>还好青阳卷还在。确认了这一点后他开始从身下睡着的柔软褥垫和盖在身上的被子意识到自己被什么人救了。</p>
+<p>“我给了九夷每个部落候选者的梦境，只有你来了。”</p>
+<p>一个轻快动听的声音由旁边传来，带着点愉快的气息。</p>
+<p>他猛然向那个声音传来处望去。</p>
+<p>“虽然有点晚，我快放弃了，不过你还是来了。”</p>
+<p>说话人是盘坐在窗棂旁的半幕阴影中。黄昏的光影在对方脸上呈现出一条明暗的分界线，使他仅能看清对方露出的半只眼睛，那双眼睛让他意识到是一位年长者，目光和蔼地打量着他。他感受到了被当成货物打量的冒犯。</p>
+<p>他握紧青阳卷。</p>
+<p>他不明白年长者对方话语的意思，他话里所指肯定是青阳卷。</p>
+<p>什么梦境，什么候选人。</p>
+<p>年长者似乎同他心意相通。</p>
+<p>“……你忘了？倒也不是什么大事，白泽果然没有欺骗我。”</p>
+<p>他更加迷惑。</p>
+<p>年长者稍稍向前倾，露出了整张脸。从窗棂透露出黄昏光线与室内的幽暗使对方的脸色呈现出一种诡谲叵测的气氛，莫名让他不喜。</p>
+<p>“有虞氏之子，欢迎来到京畿。我是京畿的主人，伊祁氏。”</p>
+<p>他有一瞬间的愣怔，伊祁氏这个名字在他记忆中和某位幼童的面容渐渐重合。</p>
+<p>他是丹朱的父亲？还是……</p>
+<p>对方丝毫不介意自己近乎无理的沉默，他谨慎地打量着眼前的自称京畿主人的年长者。</p>
+<p>一切都太过于巧合了……太像圈套了。</p>
+<p>一切仿佛都安排好的，以他开口作为落入陷阱的讯号，等待着某种绞杀和献祭。</p>
+<p>可是为什么，如果是圈套又为什么要这么做呢。他想不明白自己身上又有什么值得被夺取的。</p>
+<p>有虞氏又并非东夷大族，甚至快五十年没有出过东夷族族长，没什么可榨取的价值。</p>
+<p>“你不用想那么多的。”伊祁氏愉悦的笑声也并没有缓解凝滞的气氛。</p>
+<p>“既然我所思所想你都能读出来，又何必需要我开口说话。”</p>
+<p>伊祁氏怜爱的目光落在他身上。</p>
+<p>他将青阳卷挡在身前。</p>
+<p>“道理是这样，不过，只有我说话不是很傻吗。”</p>
+<p>不知道怎么回话的少年突然看到有什么发光的东西从伊祁氏的后背慢慢探出了肩线，似乎只有一个成年人手掌大小状。他的注意力全然被那抹诡异的光芒吸引，还没等他看清楚那团光芒到底是什么，那团光芒如野兔跳跃般从伊祁氏的肩头扑到了他脸上。</p>
+<p>他下意识抬起青阳卷一挡，却被一阵难以忍受的剧痛弹得松开双手，青阳卷没有发出预料中掷地沉重的声响。转瞬间青阳卷到了伊祁氏手里。</p>
+<p>对方笑眯眯地看着被那怪异光团变成的光绳捆得严严实实的他。</p>
+<p>牵出的光绳一端连接着一只成年人手掌大小的人偶。</p>
+<p>不像是祭祀时专门用来供奉的陶偶或者木偶，那个人偶浑身泛着不知是什么材质的冷冽光泽，面部线条极其流畅，一双碧绿眼珠沉淀着絮状纹路，半裂的嘴巴里镶嵌着珍珠雕刻成的牙齿，咔哒咔哒的关节扭动声响如同敲打着金石奏乐。</p>
+<p>而现在，那个人偶僵硬地顺着光绳缓慢地向他爬过来。</p>
+<p>恐惧感瞬间淹没了少年，他奋力挣扎着，光绳却越缠越紧，几乎勒得他喘不过气了。</p>
+<p>“白泽，别欺负他了。”</p>
+<p>伊祁氏收起了先前愉快的语调，淡漠却强硬地命令人偶住手。</p>
+<p>人偶碧绿的眼珠滴溜溜地转动着，仿佛在无声地咒骂。</p>
+<p>光绳从他身上脱落。“这是什么？”</p>
+<p>少年厌恶地躲开快要贴近他的人偶。</p>
+<p>人偶停下移动的动作，僵硬地伸长脖子凝视着他。</p>
+<p>“唔，神兽白泽。”</p>
+<p>他不太敢确定自己听到了什么。他原以为这人偶是个什么特殊的机关之类的祭祀用具。</p>
+<p>相传白泽为通达天下万物之情理、通晓天下鬼神万物形貌的神兽，黄帝所遇后奉为上宾，问世间鬼神之事。</p>
+<p>不过白泽居然长成这个样子？</p>
+<p>被嫌弃后又被质疑身份的人偶委屈且安静地坐在离他不远的地方。</p>
+<p>伊祁氏显然明白少年的怀疑，并对此作出了解释：“它原来的肉身被吃掉了，魂魄只能寄居在人偶里。”</p>
+<p>……被吃掉了，听起来真残暴啊。</p>
+<p>人偶张了张嘴试图说话，但没有成功。</p>
+<p>少年看到伊祁氏手里的青阳卷，沉默一会开口：“你现在可以赶我走了。”</p>
+<p>“……”伊祁氏一阵无语，他掂了掂手里的神器，破开封在上面的布，皱眉审视了一会卷轴状的器物的花纹后将青阳卷递给了少年。</p>
+<p>“神器认主，你找到的就是你的，有虞氏之子。”</p>
+<p>少年有些难以置信：“我以为……”</p>
+<p>伊祁氏面容上呈现出一种追忆过往的神态，“我多年前的确向天下发出一道指示，得到颛顼神器者必有重赏……不过你们东夷人好像对此都没有什么兴趣啊。”</p>
+<p>伊祁氏的语气从遗憾很快转向了欣慰：“还好你来了，你叫什么名字。”</p>
+<p>“舜。”他想起一路走来看到路上盛开着生机勃勃的木槿花，那招摇着迎风生长的模样让他不由想到一个人。</p>
+<p>一个和自己完全不同的人。</p>
+<p>伊祁氏面色一滞，“你可真会取名字。”</p>
+<p>少年内心叹息一声，对于一个能读心的人，果然还是瞒不住。</p>
+<p>“重华。”</p>
+<p>重华低头看向从刚刚开始就一直目不转睛凝视着人偶白泽，“我想见一个人。”</p>
+<p>伊祁氏挑眉，“我倒是想不到你会为了这么简单的愿望去寻找青阳卷。”</p>
+<p>伊祁氏能看透人心没错，但他理解不了这种情绪。</p>
+<p>“不需要其他了？”</p>
+<p>重华摇头。</p>
+<p>“……丹朱是我儿子，不是女儿。”伊祁氏说道。</p>
+<p>“我知道。”</p>
+<p>“……”</p>
+<p>伊祁氏看向白泽，他果然还是不太懂白泽的口味，为什么会选了这么一个无欲无求的少年。</p>
+<p>“我有两个尚未婚配的女儿，娥皇和女英，跟你年纪相仿。也许你会喜欢他们其中一个呢。”</p>
+<p>“听说过，可我已有婚配。”重华拒绝得干脆利落。</p>
+<p>伊祁氏深深地看了他一眼。</p>
+<p>“我会让你见丹朱的。不过，在此之前你要把身体养好。”</p>
+<p>伊祁氏将在旁边静静听得入神的人偶抓起来放在肩上，人偶抓紧了他的发丝防止自己随着颠簸滑下去。</p>
+<p>他们离开了暂时安置重华的居室，随后敲开石壁里的机关。墙面分出一条深邃悠长的暗道，在踏入暗道之前，伊祁氏回顾了一眼刚离开的居室。</p>
+<p>“真是一个奇怪的人。”</p>
+<p>白泽安静地趴在他的脖颈处。</p>
+<p>*</p>
+<p>梼杌搬着一堆占卜所用的蓍草龟甲进入祭祀厅时，注意到在门口不知徘徊了多久不敢敲门的饕餮。</p>
+<p>她看起来忧心忡忡但又不敢进祭祀厅。</p>
+<p>梼杌叫住了她：“怎么了，缙云氏。”</p>
+<p>看到梼杌出现的饕餮如释重负般松了口气，她替梼杌分担了一部分重物使他稍微轻松了点。</p>
+<p>“娥皇让我来找女英。”</p>
+<p>梼杌内心核算着祭司们轮班，“这个月不归女英替娥皇占卜释梦。”</p>
+<p>饕餮亦步亦趋地跟在梼杌进入了祭祀厅，她小声说道：“不是为了占卜。”</p>
+<p>那还能为了什么……这俩姐妹关系又不怎么亲近。</p>
+<p>“帝尧打算安排娥皇和女英的婚事。”</p>
+<p>饕餮愉快地向梼杌分享自己从坊间听到的各种流言。</p>
+<p>“缙云氏，人言可畏。”凭着对饕餮的了解，梼杌从不相信她所谓的消息。</p>
+<p>她和丹朱，一个易轻信，一个易冲动，这么多年也不知道惹过多少祸。</p>
+<p>“祭司不会嫁娶的。”梼杌回想起羲和教授过巫覡知识里，从前的十巫为了保持身心一直与尘世隔绝纷纷选择了不参与婚配嫁娶。</p>
+<p>“帝尧一向不遵循旧制。”</p>
+<p>饕餮反驳道。她经历过无数次帝尧和羲和的争吵后都快怀疑要不是为了顾及羲和，帝尧可能真的连祭祀厅都不想重修。</p>
+<p>当时，她在收拾散乱分布着的绘制成地图的布帛和沙盘里零乱散布着的染色的石头和长短不一的、来源不同的木条。</p>
+<p>帝尧和羲和争执激烈完全不会注意到她的存在。</p>
+<p>“信奉一群不会管我们的神明有什么意义。”帝尧是这么说的。</p>
+<p>执着信仰万物有灵的羲和则认为仪式感是不可割舍的。</p>
+<p>“那你也同意他的看法？”梼杌问道。</p>
+<p>饕餮巡视着前厅里成列着羲和从四处搜寻而来的各种祭祀礼器，不同的材质，各种动物形状的器件上雕刻着不同部落的章纹。这些礼器要么是其他部落首领主动献上的，要么是被吞并了土地的逃亡部落遗留的。</p>
+<p>说不定还有缙云氏的。饕餮饶有兴趣地想着。</p>
+<p>然而她也并不知道缙云氏的族纹是什么。</p>
+<p>“帝尧不会错的。”饕餮笃定地回复着梼杌。</p>
+<p>梼杌没有继续追问。两人尴尬着沉默前行，正穿过中央永夜燃烧的火焰的祭坛时遇见从里间出来的女英。</p>
+<p>饕餮悄然松了一口气，无比庆幸羲和不在，她可不想同时面对女英和羲和两个人。</p>
+<p>身穿青色吉服的美丽女子面容倦怠，疑惑的目光向他们投来。</p>
+<p>“羲和暂时不会出来了。”梼杌了然地安慰饕餮，将饕餮之前他分担的礼器摆放在祭坛周围后快步走向里间。</p>
+<p>在路过女英时，他用只有他们两个才能听到的声音说道：“我猜，你们又失败了？”</p>
+<p>女英侧脸瞪了一眼梼杌，对于他话语里的嘲笑不作反驳。</p>
+<p>等到梼杌的脚步声消失在那扇门后，女英将注意力转向了祭坛对面静默不安的饕餮。</p>
+<p>“你来做什么？”</p>
+<p>一宿未眠的疲倦加上方才被梼杌一激，女英此刻的语气说不上友善。</p>
+<p>饕餮瑟缩般地后退一步，自己怎么每次都能撞到女英心情不好。</p>
+<p>“娥皇找你。”</p>
+<p>“知道了。”女英没有如预料般问她具体事宜。饕餮准备的一大段说辞被堵在心里了，这让她十分难受。</p>
+<p>饕餮正想开口女英冷漠的话语打断了：“我知道娥皇想问什么，告诉娥皇，我不答应。”</p>
+<p>“……”</p>
+<p>虽然饕餮一向不敢直接违背女英，但想到一脸期待地委托她的娥皇，有些不忍。</p>
+<p>“娥皇会难过的。”</p>
+<p>女英没有丝毫动摇，“你回去吧。”</p>
+<p>饕餮觉得面对娥皇失望的表情还是比面对女英冷冰冰的态度更让她难受，于是她冒险继续劝说。</p>
+<p>“呃，娥皇好歹是你亲姐姐……”</p>
+<p>然后饕餮被扔出了祭祀厅。</p>
+<p>……果然还是不能找死。</p>
+<p>饕餮望着大门重新紧闭的祭祀厅，内心默默感叹。</p>
+<p>羲和与女英还有巫觋们的意念是与祭祀厅相连的，大概是感受到了女英的怒气，祭坛的苍白火焰直接化成庞然巨浪席卷而来，包裹着她冲出了祭祀厅。</p>
+<p>饕餮重重地摔倒在尘土上，身体的疼痛再一次告诫她冲动不可取。</p>
+<p>她心有余悸，起身拍落衣裙的灰尘。</p>
+<p>……估计有好长一段时间没办法靠近这里了。</p>
+<p>想到急切等着她消息的娥皇，饕餮更头疼了。</p>
+<h4 id="注释："><a href="#注释：" class="headerlink" title="注释："></a>注释：</h4><p>改完第二章之后的一些私设的解释：</p>
+<p>1、我之前一直在纠结到底是完全设定为神话背景走仙侠流，还是参考史学和考古学者的说法走还原流。前者我不擅长且容易走入历史虚无主义的死胡同，后者会稍微有点无趣而且在我不打算写基建文情况下时髦值基本都没有了。</p>
+<p>于是我折中保留了《山海经》里神兽和植物的部分，朴素原始的祭祀仪式和某些神话事例。但是像“颛顼那种撞到不周山、夸父化作邓林、颛顼化为鱼妇”这类我持保留态度，为了不形成那种“宇航员在月球上遇见嫦娥”的诡异感，不借用外物的上天不可能的，大家还是愉快地在地面上玩耍不要触碰大气层的界限。</p>
+<p>时间段设定为公元前三千纪后半段，即考古学上的龙山时代晚期，生活起居这类的也以这个时间段作参考。如果出现Bug并且被发现了……我改。</p>
+<p>2、重华的颜值设定。灵感是来源于“颜如舜华”，重华的号“舜”和名“华”均出现在里面了。舜的一个含义是木槿花，我当初奇怪了好久为什么要选这个为帝号。尧爹他的称号来源于“垚”，意思为高，似乎还比较好理解。后来看到有说法解释“舜草”是一种含义为孝顺的草，但这也不能阻止我联想到屈原的香草美人梗，所以就愉快地设定为美人了。</p>
+<p>3、白泽。白泽并不是《山海经》里的动物，出自《抱朴子》。但不知道为啥白泽常常被放到《山海经》的背景里，而且后人给它的设定太逆天了基本盖过了《山海经》里很多原住民。然后我开脑洞把白泽放在故事里和有虞氏的“传说中的图腾”驺吾相爱相杀。</p>
+<p>4、羲和与女英的祭司身份。灵感来源于《何以中国》里的陶寺天文台（说到这个天文台，我们天文课老师之前还专门提过一次，但我一直没机会去看），“<em>乃命羲、和，钦若昊天，历象日月星辰，敬授人时。</em>”最早的天文台兼具着祭祀的功能，主要观测者、制定历法者也很有可能是祭司阶层。补充一点，祭司在中国古代的称呼是巫觋，且女巫为“巫”，男巫为“觋”。我怀疑《山海经》里的十巫都是妹子…</p>
+<p>5、许宏老师在《何以中国》和《大都无城》里对“陶寺为尧都”这个说法很谨慎，但“陶寺夏文化说”基本上破产了，是不是有虞氏说不准。所以我直接简单粗暴设定陶寺为京畿了……除非在我写完之前考古发现告诉我错了，不然我不改【。</p>
+<p>下面上一段高炜先生的原文，基本是学界的主流看法：</p>
+<p><em>目前学界的认识：“鉴于陶寺文化的中心区同后来的晋国始封地大致重合，根据《左传》昭公元年、定公四年记载这一地域应即‘大夏’、‘夏墟’的中心区，又是唐墟所在。若仅从地域考虑，陶寺遗存族属最大的两种可能，一是陶唐氏，一是夏后氏。所以从考古学文化系统来看，既已判断二里头文化主体为夏文化，而陶寺文化同二里头文化两个类型又都不衔接，则将其族属推断为陶唐氏更为合理。”</em></p>
+<p>我发现我其实是在安利《何以中国》这本书。</p>
 ]]></content>
       <categories>
         <category>有虞谣</category>
@@ -1389,491 +1642,238 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
       </tags>
   </entry>
   <entry>
-    <title>起篇02</title>
-    <url>/2020/10/05/%E8%B5%B7%E7%AF%8702/</url>
-    <content><![CDATA[<h4 id="02"><a href="#02" class="headerlink" title="02"></a>02</h4><p>丹朱没有想到再和重华的暌违却是多年之后的事情了。</p>
-<p>人类历史上最后一次世界性大洪水刚刚退潮，新一轮人造神的神话从信仰和民族性的土壤里挣扎而出，茁壮成长，喂养着千千万万从洪水中幸存下来的生民，安抚他们脆弱的精神和魂魄。</p>
-<p> 一晃光阴荏苒，等再见到重华时他才恍然原来记忆里曾有这一号人物的存在过。并不是一个如梦境般朦胧的影子，醒来时便觉得惆怅若失。</p>
-<p>那天暴雨过后的宫殿没有像以往一样死气沉沉。相反晴空碧彻，万里无云。</p>
-<p>天暖曛醉，正适贪睡。</p>
-<p>丹朱在宫殿的玉石砌成的栏杆上小憩。</p>
-<p>曾经这地方是给羲和他们占星用的，后来他们搬迁去了更符合规格和秩序的占星台去了后，这里便荒废了。梼杌他们都不知道他常常藏身于此处，成为了自己用来逃避说教的乐园。</p>
-<p>他恰好从一个习以为常的荒诞梦里醒来，在梦里他如同鱼一般潜藏在清澈的海底漫无目的地游弋，好不悠哉。</p>
-<p>这类古怪的梦境理应属于梼杌帮他占卜的范围，不过他常常懒于梳理先前的思绪而作废。</p>
-<p>于是他带着模糊茫然的思绪注意到了侍卫们领着一抹颀长的身影落进他的视野时，仍然有种恍如梦境的错觉。</p>
-<p>距离较远，身影模糊。他看着那个少年的身影在某一刻蓦然顿住，似乎心有所感的侧过身想往自己这个方向来看。</p>
-<p>明明距离遥远，那种灼灼目光落到了自己的身上的触感一下子惊醒了他，当他稍微清醒点再回望过去想要确认时，那里早已空无一人。</p>
-<p>那个时候他并没有想起来是谁。</p>
-<p>心里却无端惆怅了起来，这种少年不识愁滋味的情绪啊，在某一特定时期常常萦绕在他心头。</p>
-<p>丹朱恍惚想起后来自己又吵着闹着想要出去，结果被众人按下。梼杌曾经这样劝他，人生不过萍水相逢，聚散无常。</p>
-<p>聚散无常。</p>
-<p>真的莫名伤感。</p>
-<p>不过随后他又找到了新的乐趣便很快忘记了自己也曾有雄心壮志想去寻找不周山的神器。</p>
-<p>毕竟那只是个传说不是吗？大家都是这么说的。</p>
-<p>羲和嫌弃过他一时新鲜劲后续不足，认为丹朱不可成大事。</p>
-<p>丹朱表示不服气，然而每次有了干劲很快就消退了，于是便无可奈何地任由羲和去指责他。</p>
-<p>当一起长大的饕餮跑过来告诉他真的有人去不周山找到颛顼的神器时，那个有趣的东夷少年的模糊的身影在他记忆里又开始鲜活。</p>
-<p>他莫名笃定是那个人找到了颛顼的神器。</p>
-<p>一定是那个人。</p>
-<p>他真的去了不周山……</p>
-<p>丹朱兴奋地从栏杆上一跃而起，昏昏欲睡的情绪一扫而光，他迫切地想要去见一见那个少年。</p>
-<p>“饕餮，你知道我父亲和那个人现在在哪吗？”</p>
-<p>饕餮点头：“我带你去。”</p>
-<p>“真的有人找到了颛顼的神器啊。”丹朱看向身旁的饕餮，“我们当初也想取得的神器，结果没成功。”</p>
-<p>饕餮的表情十分无奈：“我们明明是被逼迫的好不好。”</p>
-<p>青梅竹马的情谊让饕餮在丹朱面前一向口无遮拦：“然而你每次都会迷路！一点都不可靠。”</p>
-<p>“……那个东夷少年是怎么取得神器的他有说吗？”</p>
-<p>饕餮奇道：“我都没说是谁，你怎么知道是一个东夷少年？”</p>
-<p>“我就是知道。”丹朱瞥向远处的景色回忆似的说道。</p>
-<p>“你的占卜术进步了？”饕餮挑眉。</p>
-<p>一定是他，错不了。</p>
-<p>但是，他长成什么样子了呢？</p>
-<p>丹朱努力去回忆残留的那抹身影。</p>
-<p>……想不起来了，除了那双重瞳。</p>
-<p>不过他会记得自己吗。丹朱逗着身边的饕餮时突然冒出了一个想法：他是为了自己才去找的。</p>
-<p>一定是这样。</p>
-<p>丹朱不禁有点感动。作为一介凡人，他居然真的到达了去了神话中的不周山，而且还找到了颛顼曾用过的神器！而且作为一个东夷少年，他还涉险来到了京畿之地。</p>
-<p>来晚的丹朱和饕餮索性不进入大殿，熟练地爬上了房顶选择偷看。</p>
-<p>饕餮沉默地观摩一会大殿里众人的讨论之后，问丹朱：“你确定不进去看看吗。”</p>
-<p>虽然以她对帝尧的了解，对方肯定知道他们两个在屋顶上偷听，帝尧知道，羲和也肯定知道。平常也就算了，这么重要的场合还胡闹，她有点害怕。</p>
-<p>特别是看到梼杌混沌他们规规矩矩地端坐在两旁，混沌还特地选了个可以跟他们打招呼的位置，使劲给他们递眼色，暗示着要他们快点进来。</p>
-<p>果不其然，她看到梼杌离开位置，然后出了殿门轻车熟路地跃上了屋顶把他们俩抓了下来。</p>
-<p>简直是欲哭无泪。</p>
-<p>丹朱很淡定地被领着进去，在平常的地方落座。饕餮也认命跟着进去，坐在了丹朱身边。</p>
-<p>她感到众人的视线落到了他们的方向。</p>
-<p>包括那个站在中央的少年。丹朱说得没错，看打扮的确是东夷人，年岁估计也比他们几个大不了多少。</p>
-<p>她想转身对丹朱说点什么，却发现对方的注意力全然在中央那个少年身上，眼神亮闪闪的，那是只有他在对什么感兴趣时才会有的目光。</p>
-<p>她顺着丹朱的视线望过去，仔细打量着规规矩矩站在大庭中央的东夷少年。他身姿修长挺拔，很容易在众人中脱颖而出，刚刚他朝这边望过来的时候，饕餮看清楚了那个少年在相貌上五官轮廓分明，特别是一双奇异的重瞳幽深莫测，如同古井水不起波澜又引人无限遐想。清秀的面容倒是让她感慨果然东夷出美人的说法是真的。你看前有金天氏，后有握登氏，眼前还有这么气质出类拔萃的少年。此外，商市往来之间的东夷人高大白皙的特点总是很好辨认的。</p>
-<p>她看了眼身旁的少年。叹了口气。</p>
-<p>……我们这一代少年里真的一个能打的都没有。</p>
-<p>“饕餮，他身上有光芒。”丹朱没有注意到饕餮的嫌弃，悄声对饕餮说。</p>
-<p>光？</p>
-<p>她的目光几乎要把那个东夷少年看穿了，也没找到丹朱口中的光。</p>
-<p>这句话成了饕餮一生中最无法理解的话之一。</p>
-<p>她想，和我一起长大的青梅竹马总是有着异于常人的想法。</p>
-<p>在进入京畿之前，他想过如果没有人愿意相信他手里拿的是颛顼的神器怎么办。</p>
-<p>——青阳卷。</p>
-<p>这个多年前由一个陌生的华夏少年告诉他的神器名字。</p>
-<p>是真实存在的。</p>
-<p>他握紧手里的包裹好的神器，尽管包得严严实实，他仿佛还是能透过厚厚的布料抚摸到神器周身散发的冰雪般的气息。青阳卷在不周山的冰雪之中封存多年，他花了足足一个月几乎踏遍了不周山的每一处才找到了它。当他终于找到神器时几乎累到虚脱，之后稍微休息了一会昼夜不分地赶路来到了华夏腹地的京畿陶唐氏，却发现自己根本进不了内城。</p>
-<p>他并没有华夏部落与东夷部落之间的文牒。</p>
-<p>在这万邦林立的时代里，在东夷各部落之间的穿梭往来也许不需要文牒或者信物认证身份，但东夷和华夏之间却有着严格的律令说明两边黎民若想进行物资交换得到特定地方并且需要携带双方信物，华夏部落的部落长出于私心不顾众人反对把自己的邦国定为了交易场所，华夏人称陶唐氏为京畿，大致是指着他们华夏人首领所居住的地方。东夷族人则称为易地或是有易氏，意味着物品交换之地。</p>
-<p>此刻他站在京畿，也是有易氏的外城边缘，看着队列森严的护卫们沉默了。</p>
-<p>即使他算好了东夷和华夏之间约定的贸易交换的日子想趁机混在同胞的队伍里蒙混过关。不舍昼夜地赶路想赶在约定日期之前，可还是错过了。也许是他在不周山寻找过程中那次偶然的昏迷，使得他的一直以来的计日数出现了误差。</p>
-<p>他可能昏睡了一天或者两天或者更长。</p>
-<p>他要重新回到有虞氏吗？自己明明已经赌上了一切了为什么还会失败。</p>
-<p>他不敢去想若是回到有虞氏，会有怎样的责罚等着他。更何况他已经快离家一年了，自己那不友善的父母兄弟妹妹们估计怒火更甚。</p>
-<p>可是这一切都抵不上他心中的不甘。</p>
-<p>……不甘心，实在不甘心。</p>
-<p>尽管疲倦不堪身体每一处都叫嚣着休憩，他还是继续强撑着。但他意识到自己的力量一直在不断涣散，饥饿感也在蚕食着他。</p>
-<p>时值夏日，即使刚刚下过一场雨也没给他带来丝毫凉爽，反而让他的思绪越发困倦混乱，他感到头痛欲裂浑身发热，眼前的景色断断续续浸向黑暗的边缘。</p>
-<p>身体某一处疼痛剧烈，仿佛裂开了一个口子，血液在疯狂向外蔓延，流过肌肤灌入了黢黑的泥土中。大地仿佛张开血盆大口要将他吞噬殆尽。</p>
-<p>他重重地摔向了大地，耳畔回荡着沉重的风声。</p>
-<p>直到闭眼前他都紧紧握着那把青阳卷。</p>
-<p>我没有死。</p>
-<p>等他再一次劫后余生醒来时，反复确认这一点。</p>
-<p>和天命赌，这一次又是我赢了，他暗自想着，随即立刻看向自己的双手。长时间的手指过于用力蜷曲使他在知觉恢复的一刹那感受到指尖酸痛，差点无法继续张开手指。</p>
-<p>还好青阳卷还在。确认了这一点后他开始从身下睡着的柔软褥垫和盖在身上的被子意识到自己被什么人救了。</p>
-<p>“我给了九夷每个部落候选者的梦境，只有你来了。”</p>
-<p>一个轻快动听的声音由旁边传来，带着点愉快的气息。</p>
-<p>他猛然向那个声音传来处望去。</p>
-<p>“虽然有点晚，我快放弃了，不过你还是来了。”</p>
-<p>说话人是盘坐在窗棂旁的半幕阴影中。黄昏的光影在对方脸上呈现出一条明暗的分界线，使他仅能看清对方露出的半只眼睛，那双眼睛让他意识到是一位年长者，目光和蔼地打量着他。他感受到了被当成货物打量的冒犯。</p>
-<p>他握紧青阳卷。</p>
-<p>他不明白年长者对方话语的意思，他话里所指肯定是青阳卷。</p>
-<p>什么梦境，什么候选人。</p>
-<p>年长者似乎同他心意相通。</p>
-<p>“……你忘了？倒也不是什么大事，白泽果然没有欺骗我。”</p>
-<p>他更加迷惑。</p>
-<p>年长者稍稍向前倾，露出了整张脸。从窗棂透露出黄昏光线与室内的幽暗使对方的脸色呈现出一种诡谲叵测的气氛，莫名让他不喜。</p>
-<p>“有虞氏之子，欢迎来到京畿。我是京畿的主人，伊祁氏。”</p>
-<p>他有一瞬间的愣怔，伊祁氏这个名字在他记忆中和某位幼童的面容渐渐重合。</p>
-<p>他是丹朱的父亲？还是……</p>
-<p>对方丝毫不介意自己近乎无理的沉默，他谨慎地打量着眼前的自称京畿主人的年长者。</p>
-<p>一切都太过于巧合了……太像圈套了。</p>
-<p>一切仿佛都安排好的，以他开口作为落入陷阱的讯号，等待着某种绞杀和献祭。</p>
-<p>可是为什么，如果是圈套又为什么要这么做呢。他想不明白自己身上又有什么值得被夺取的。</p>
-<p>有虞氏又并非东夷大族，甚至快五十年没有出过东夷族族长，没什么可榨取的价值。</p>
-<p>“你不用想那么多的。”伊祁氏愉悦的笑声也并没有缓解凝滞的气氛。</p>
-<p>“既然我所思所想你都能读出来，又何必需要我开口说话。”</p>
-<p>伊祁氏怜爱的目光落在他身上。</p>
-<p>他将青阳卷挡在身前。</p>
-<p>“道理是这样，不过，只有我说话不是很傻吗。”</p>
-<p>不知道怎么回话的少年突然看到有什么发光的东西从伊祁氏的后背慢慢探出了肩线，似乎只有一个成年人手掌大小状。他的注意力全然被那抹诡异的光芒吸引，还没等他看清楚那团光芒到底是什么，那团光芒如野兔跳跃般从伊祁氏的肩头扑到了他脸上。</p>
-<p>他下意识抬起青阳卷一挡，却被一阵难以忍受的剧痛弹得松开双手，青阳卷没有发出预料中掷地沉重的声响。转瞬间青阳卷到了伊祁氏手里。</p>
-<p>对方笑眯眯地看着被那怪异光团变成的光绳捆得严严实实的他。</p>
-<p>牵出的光绳一端连接着一只成年人手掌大小的人偶。</p>
-<p>不像是祭祀时专门用来供奉的陶偶或者木偶，那个人偶浑身泛着不知是什么材质的冷冽光泽，面部线条极其流畅，一双碧绿眼珠沉淀着絮状纹路，半裂的嘴巴里镶嵌着珍珠雕刻成的牙齿，咔哒咔哒的关节扭动声响如同敲打着金石奏乐。</p>
-<p>而现在，那个人偶僵硬地顺着光绳缓慢地向他爬过来。</p>
-<p>恐惧感瞬间淹没了少年，他奋力挣扎着，光绳却越缠越紧，几乎勒得他喘不过气了。</p>
-<p>“白泽，别欺负他了。”</p>
-<p>伊祁氏收起了先前愉快的语调，淡漠却强硬地命令人偶住手。</p>
-<p>人偶碧绿的眼珠滴溜溜地转动着，仿佛在无声地咒骂。</p>
-<p>光绳从他身上脱落。“这是什么？”</p>
-<p>少年厌恶地躲开快要贴近他的人偶。</p>
-<p>人偶停下移动的动作，僵硬地伸长脖子凝视着他。</p>
-<p>“唔，神兽白泽。”</p>
-<p>他不太敢确定自己听到了什么。他原以为这人偶是个什么特殊的机关之类的祭祀用具。</p>
-<p>相传白泽为通达天下万物之情理、通晓天下鬼神万物形貌的神兽，黄帝所遇后奉为上宾，问世间鬼神之事。</p>
-<p>不过白泽居然长成这个样子？</p>
-<p>被嫌弃后又被质疑身份的人偶委屈且安静地坐在离他不远的地方。</p>
-<p>伊祁氏显然明白少年的怀疑，并对此作出了解释：“它原来的肉身被吃掉了，魂魄只能寄居在人偶里。”</p>
-<p>……被吃掉了，听起来真残暴啊。</p>
-<p>人偶张了张嘴试图说话，但没有成功。</p>
-<p>少年看到伊祁氏手里的青阳卷，沉默一会开口：“你现在可以赶我走了。”</p>
-<p>“……”伊祁氏一阵无语，他掂了掂手里的神器，破开封在上面的布，皱眉审视了一会卷轴状的器物的花纹后将青阳卷递给了少年。</p>
-<p>“神器认主，你找到的就是你的，有虞氏之子。”</p>
-<p>少年有些难以置信：“我以为……”</p>
-<p>伊祁氏面容上呈现出一种追忆过往的神态，“我多年前的确向天下发出一道指示，得到颛顼神器者必有重赏……不过你们东夷人好像对此都没有什么兴趣啊。”</p>
-<p>伊祁氏的语气从遗憾很快转向了欣慰：“还好你来了，你叫什么名字。”</p>
-<p>“舜。”他想起一路走来看到路上盛开着生机勃勃的木槿花，那招摇着迎风生长的模样让他不由想到一个人。</p>
-<p>一个和自己完全不同的人。</p>
-<p>伊祁氏面色一滞，“你可真会取名字。”</p>
-<p>少年内心叹息一声，对于一个能读心的人，果然还是瞒不住。</p>
-<p>“重华。”</p>
-<p>重华低头看向从刚刚开始就一直目不转睛凝视着人偶白泽，“我想见一个人。”</p>
-<p>伊祁氏挑眉，“我倒是想不到你会为了这么简单的愿望去寻找青阳卷。”</p>
-<p>伊祁氏能看透人心没错，但他理解不了这种情绪。</p>
-<p>“不需要其他了？”</p>
-<p>重华摇头。</p>
-<p>“……丹朱是我儿子，不是女儿。”伊祁氏说道。</p>
-<p>“我知道。”</p>
-<p>“……”</p>
-<p>伊祁氏看向白泽，他果然还是不太懂白泽的口味，为什么会选了这么一个无欲无求的少年。</p>
-<p>“我有两个尚未婚配的女儿，娥皇和女英，跟你年纪相仿。也许你会喜欢他们其中一个呢。”</p>
-<p>“听说过，可我已有婚配。”重华拒绝得干脆利落。</p>
-<p>伊祁氏深深地看了他一眼。</p>
-<p>“我会让你见丹朱的。不过，在此之前你要把身体养好。”</p>
-<p>伊祁氏将在旁边静静听得入神的人偶抓起来放在肩上，人偶抓紧了他的发丝防止自己随着颠簸滑下去。</p>
-<p>他们离开了暂时安置重华的居室，随后敲开石壁里的机关。墙面分出一条深邃悠长的暗道，在踏入暗道之前，伊祁氏回顾了一眼刚离开的居室。</p>
-<p>“真是一个奇怪的人。”</p>
-<p>白泽安静地趴在他的脖颈处。</p>
-<p>*</p>
-<p>梼杌搬着一堆占卜所用的蓍草龟甲进入祭祀厅时，注意到在门口不知徘徊了多久不敢敲门的饕餮。</p>
-<p>她看起来忧心忡忡但又不敢进祭祀厅。</p>
-<p>梼杌叫住了她：“怎么了，缙云氏。”</p>
-<p>看到梼杌出现的饕餮如释重负般松了口气，她替梼杌分担了一部分重物使他稍微轻松了点。</p>
-<p>“娥皇让我来找女英。”</p>
-<p>梼杌内心核算着祭司们轮班，“这个月不归女英替娥皇占卜释梦。”</p>
-<p>饕餮亦步亦趋地跟在梼杌进入了祭祀厅，她小声说道：“不是为了占卜。”</p>
-<p>那还能为了什么……这俩姐妹关系又不怎么亲近。</p>
-<p>“帝尧打算安排娥皇和女英的婚事。”</p>
-<p>饕餮愉快地向梼杌分享自己从坊间听到的各种流言。</p>
-<p>“缙云氏，人言可畏。”凭着对饕餮的了解，梼杌从不相信她所谓的消息。</p>
-<p>她和丹朱，一个易轻信，一个易冲动，这么多年也不知道惹过多少祸。</p>
-<p>“祭司不会嫁娶的。”梼杌回想起羲和教授过巫覡知识里，从前的十巫为了保持身心一直与尘世隔绝纷纷选择了不参与婚配嫁娶。</p>
-<p>“帝尧一向不遵循旧制。”</p>
-<p>饕餮反驳道。她经历过无数次帝尧和羲和的争吵后都快怀疑要不是为了顾及羲和，帝尧可能真的连祭祀厅都不想重修。</p>
-<p>当时，她在收拾散乱分布着的绘制成地图的布帛和沙盘里零乱散布着的染色的石头和长短不一的、来源不同的木条。</p>
-<p>帝尧和羲和争执激烈完全不会注意到她的存在。</p>
-<p>“信奉一群不会管我们的神明有什么意义。”帝尧是这么说的。</p>
-<p>执着信仰万物有灵的羲和则认为仪式感是不可割舍的。</p>
-<p>“那你也同意他的看法？”梼杌问道。</p>
-<p>饕餮巡视着前厅里成列着羲和从四处搜寻而来的各种祭祀礼器，不同的材质，各种动物形状的器件上雕刻着不同部落的章纹。这些礼器要么是其他部落首领主动献上的，要么是被吞并了土地的逃亡部落遗留的。</p>
-<p>说不定还有缙云氏的。饕餮饶有兴趣地想着。</p>
-<p>然而她也并不知道缙云氏的族纹是什么。</p>
-<p>“帝尧不会错的。”饕餮笃定地回复着梼杌。</p>
-<p>梼杌没有继续追问。两人尴尬着沉默前行，正穿过中央永夜燃烧的火焰的祭坛时遇见从里间出来的女英。</p>
-<p>饕餮悄然松了一口气，无比庆幸羲和不在，她可不想同时面对女英和羲和两个人。</p>
-<p>身穿青色吉服的美丽女子面容倦怠，疑惑的目光向他们投来。</p>
-<p>“羲和暂时不会出来了。”梼杌了然地安慰饕餮，将饕餮之前他分担的礼器摆放在祭坛周围后快步走向里间。</p>
-<p>在路过女英时，他用只有他们两个才能听到的声音说道：“我猜，你们又失败了？”</p>
-<p>女英侧脸瞪了一眼梼杌，对于他话语里的嘲笑不作反驳。</p>
-<p>等到梼杌的脚步声消失在那扇门后，女英将注意力转向了祭坛对面静默不安的饕餮。</p>
-<p>“你来做什么？”</p>
-<p>一宿未眠的疲倦加上方才被梼杌一激，女英此刻的语气说不上友善。</p>
-<p>饕餮瑟缩般地后退一步，自己怎么每次都能撞到女英心情不好。</p>
-<p>“娥皇找你。”</p>
-<p>“知道了。”女英没有如预料般问她具体事宜。饕餮准备的一大段说辞被堵在心里了，这让她十分难受。</p>
-<p>饕餮正想开口女英冷漠的话语打断了：“我知道娥皇想问什么，告诉娥皇，我不答应。”</p>
-<p>“……”</p>
-<p>虽然饕餮一向不敢直接违背女英，但想到一脸期待地委托她的娥皇，有些不忍。</p>
-<p>“娥皇会难过的。”</p>
-<p>女英没有丝毫动摇，“你回去吧。”</p>
-<p>饕餮觉得面对娥皇失望的表情还是比面对女英冷冰冰的态度更让她难受，于是她冒险继续劝说。</p>
-<p>“呃，娥皇好歹是你亲姐姐……”</p>
-<p>然后饕餮被扔出了祭祀厅。</p>
-<p>……果然还是不能找死。</p>
-<p>饕餮望着大门重新紧闭的祭祀厅，内心默默感叹。</p>
-<p>羲和与女英还有巫觋们的意念是与祭祀厅相连的，大概是感受到了女英的怒气，祭坛的苍白火焰直接化成庞然巨浪席卷而来，包裹着她冲出了祭祀厅。</p>
-<p>饕餮重重地摔倒在尘土上，身体的疼痛再一次告诫她冲动不可取。</p>
-<p>她心有余悸，起身拍落衣裙的灰尘。</p>
-<p>……估计有好长一段时间没办法靠近这里了。</p>
-<p>想到急切等着她消息的娥皇，饕餮更头疼了。</p>
-<h4 id="注释："><a href="#注释：" class="headerlink" title="注释："></a>注释：</h4><p>改完第二章之后的一些私设的解释：</p>
-<p>1、我之前一直在纠结到底是完全设定为神话背景走仙侠流，还是参考史学和考古学者的说法走还原流。前者我不擅长且容易走入历史虚无主义的死胡同，后者会稍微有点无趣而且在我不打算写基建文情况下时髦值基本都没有了。</p>
-<p>于是我折中保留了《山海经》里神兽和植物的部分，朴素原始的祭祀仪式和某些神话事例。但是像“颛顼那种撞到不周山、夸父化作邓林、颛顼化为鱼妇”这类我持保留态度，为了不形成那种“宇航员在月球上遇见嫦娥”的诡异感，不借用外物的上天不可能的，大家还是愉快地在地面上玩耍不要触碰大气层的界限。</p>
-<p>时间段设定为公元前三千纪后半段，即考古学上的龙山时代晚期，生活起居这类的也以这个时间段作参考。如果出现Bug并且被发现了……我改。</p>
-<p>2、重华的颜值设定。灵感是来源于“颜如舜华”，重华的号“舜”和名“华”均出现在里面了。舜的一个含义是木槿花，我当初奇怪了好久为什么要选这个为帝号。尧爹他的称号来源于“垚”，意思为高，似乎还比较好理解。后来看到有说法解释“舜草”是一种含义为孝顺的草，但这也不能阻止我联想到屈原的香草美人梗，所以就愉快地设定为美人了。</p>
-<p>3、白泽。白泽并不是《山海经》里的动物，出自《抱朴子》。但不知道为啥白泽常常被放到《山海经》的背景里，而且后人给它的设定太逆天了基本盖过了《山海经》里很多原住民。然后我开脑洞把白泽放在故事里和有虞氏的“传说中的图腾”驺吾相爱相杀。</p>
-<p>4、羲和与女英的祭司身份。灵感来源于《何以中国》里的陶寺天文台（说到这个天文台，我们天文课老师之前还专门提过一次，但我一直没机会去看），“<em>乃命羲、和，钦若昊天，历象日月星辰，敬授人时。</em>”最早的天文台兼具着祭祀的功能，主要观测者、制定历法者也很有可能是祭司阶层。补充一点，祭司在中国古代的称呼是巫觋，且女巫为“巫”，男巫为“觋”。我怀疑《山海经》里的十巫都是妹子…</p>
-<p>5、许宏老师在《何以中国》和《大都无城》里对“陶寺为尧都”这个说法很谨慎，但“陶寺夏文化说”基本上破产了，是不是有虞氏说不准。所以我直接简单粗暴设定陶寺为京畿了……除非在我写完之前考古发现告诉我错了，不然我不改【。</p>
-<p>下面上一段高炜先生的原文，基本是学界的主流看法：</p>
-<p><em>目前学界的认识：“鉴于陶寺文化的中心区同后来的晋国始封地大致重合，根据《左传》昭公元年、定公四年记载这一地域应即‘大夏’、‘夏墟’的中心区，又是唐墟所在。若仅从地域考虑，陶寺遗存族属最大的两种可能，一是陶唐氏，一是夏后氏。所以从考古学文化系统来看，既已判断二里头文化主体为夏文化，而陶寺文化同二里头文化两个类型又都不衔接，则将其族属推断为陶唐氏更为合理。”</em></p>
-<p>我发现我其实是在安利《何以中国》这本书。</p>
-]]></content>
-      <categories>
-        <category>有虞谣</category>
-      </categories>
-      <tags>
-        <tag>神话传说</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>起篇01</title>
-    <url>/2020/10/05/%E8%B5%B7%E7%AF%8701/</url>
-    <content><![CDATA[<blockquote>
-<p>很久很久以前。</p>
-<p>沧海如旧，桑田未改。</p>
-<p>山川相缭，云雾浮滥。日出扶桑，月映望舒。</p>
-<p>百鸟尖啸，层林凄飒。湘沅清涧，不见其源。</p>
-<p>风息蛰盛，竹影斑驳，削木而书，终成戏说。</p>
-</blockquote>
-<h4 id="01"><a href="#01" class="headerlink" title="01"></a>01</h4><p>这是一个遗落在文字成熟前的时光里的故事。</p>
-<p>故事的开端，是一个贵族家的少年携着自己的小伙伴们离家出走的熟悉剧目。</p>
-<p>“梼杌啊，你说为什么我爹不待见我。”</p>
-<p>“因为你蠢。”</p>
-<p>有那么一瞬间，丹朱觉得自己差一点就认同了梼杌的说法了。</p>
-<p>彼时，他伫立在阡陌纵横的路口，面对一片郁郁青青茂盛生长着的不知名的农作物发愣。身后背着的风狸杖已然无用，在经过不算漫长的思量后，丹朱不得不认命地转过身去对着后面四个小伙伴承认自己迷路了。</p>
-<p>后者们一副意料之中的淡定回应。</p>
-<p>“明明记得这个方向就是不周山的方向啊。”</p>
-<p>众人闻言默默抬起头，极不信任地盯着眼前信誓旦旦的少年。回想起此人八次离家出走然后七次走错路被乖乖抓回去的记录。</p>
-<p> 这是第八次。</p>
-<p>“等等，我看到那边有人，我去问问，一会儿就回来。”</p>
-<p>混沌目送着丹朱一溜烟消失的方向，一袭朱衣卷起滚滚烟尘。思索半晌，才小心翼翼向同伴们发问：</p>
-<p>“你们觉得，他会记得回来时的路么。”</p>
-<p>回答他的是集体的静默。</p>
-<p>混沌本打算追过去找回丹朱，只是很可惜在迟疑的那会时间里他们就被随后追来的气急败坏的族人们逮到了。</p>
-<p>丹朱跌跌撞撞地绕出那一片密林，身上的华裳尽染泥尘，灰头土面的好像一只逡巡在田野的狸。</p>
-<p>出口处有水声，他循着声音而去，溪流清澈，跃入眼帘，潺潺婉转。</p>
-<p>岸边有嶙峋怪石，姿态若女子哺育时敞开的怀抱，之中盛卧着一个人，不仔细看还会误认为神女母子在人间行泽感怀。</p>
-<p>距离稍远，并不能看清楚对方的模样。</p>
-<p>如若平时，丹朱定会好好打量这对奇怪的组合，但现下他满脑子都是寻找出路。于是他上前去，试探性弄出稍许响声。</p>
-<p>似乎是惊扰了对方的沉湎。那人匆匆瞥了他一眼，而后低头沉浸在刚刚未尽的事情中了。</p>
-<p>丹朱翘望四周都是不熟悉的景色，思索片刻，终是死马当活马医的心里开口问道：</p>
-<p>“你知道不周山在哪么？”</p>
-<p>那人很是讶异：</p>
-<p>“不周山？在这个方向的反面啊。你要去那怎么往这个方向走？”</p>
-<p>原来有人知道不周山的存在啊。</p>
-<p>丹朱的眼睛亮了起来，难道真的有人知道不周山在哪！</p>
-<p>经过无数次询问，但所有人都对他的热切报以不以为然或是嘲笑的态度，他渐渐怀疑起来那真的只是存在传说中的神山而已。</p>
-<p>梼杌他们也曾劝过他把心思收收，但他仍然不死心，现在有人告诉他不周山的传说原来真的有迹可循。</p>
-<p>“我迷路了。”</p>
-<p>“……”</p>
-<p>所幸那个人并没有像梼杌一样逮着机会就说他蠢，而且还非常好脾气地表示自己愿意送他到村落里休息，只是需要等自己一会儿。</p>
-<p>丹朱安静地看着那个似乎和他年纪相当的人在那里结绳。内心有些诧异，自黄帝时代仓颉创造文字开始，他许久没有看到有人结绳了。那些流传在神话之前的技艺如今真正展现在眼前，他起了万分兴趣。</p>
-<p>“你在记录？结绳？”</p>
-<p> “嗯。”</p>
-<p>“记录什么呢？”</p>
-<p>他一向管不住自己泛滥的好奇心，其他人一向不会去拒绝回答他的问题。除了博学多识的羲和偶尔会训斥他成天想些稀奇古怪的东西，但也会知无不言言无不尽。</p>
-<p>那个少年抬头，很是无语地瞥了他一眼。发觉丹朱纯粹好奇，并非带着蓄意伤害的意味，近乎天真的好奇让他觉得如果拒绝了反而是一种残忍。</p>
-<p>“我挨打的次数。”</p>
-<p>“和我一样呢，我每次被我爹打骂之后都会哭着去刻字。”</p>
-<p>虽然自己会在开心起来后又会不计前嫌地把记录自家老爹罪行的龟壳烧掉。丹朱觉得自己发现这世上还有和自己同病相怜的人，不禁对眼前这个既知道不周山又和自己遭遇相似的少年多了一丝奇妙的亲近感。</p>
-<p>“贵族家的少年也会挨打？”</p>
-<p>那个少年上下打量了一眼丹朱身上的华丽的朱红色深衣和束发用的晶莹圆润的珍珠贝壳装饰品，它们在明亮的太阳光映射下夺目而耀眼，让他想起只有祭祀的大祭司才会佩戴珍珠发饰。</p>
-<p>少年一脸不相信。</p>
-<p>“我父亲嫌我没才能，不像他，一点都不喜欢我！”</p>
-<p>“……”</p>
-<p>“你手臂上那些密密麻麻的伤是你父亲打的么？”</p>
-<p>丹朱眼尖地发现少年赤裸的胳臂上布满的伤痕，内心震惊，突然觉得相比起眼前这个少年所经历的打骂，自家老父对自己的打骂简直就是在无聊时逗弄猫儿。</p>
-<p>“……”</p>
-<p>“你不想说就算了，我来给你包扎。”</p>
-<p>说着便准备撕下衣裳的一角，蓦地扫了一眼自己的手掌脏兮兮的，略带嫌弃地思索了会后便转身跳进了那条浅浅的溪流里，细细地洗濯起双手，直至确定里里外外都干净。其实他挺想连带着洗个澡，毕竟风尘仆仆了好几日，但是考虑到有他人在场……</p>
-<p>洗涤后，丹朱从水里爬了出来，不理会自己衣衫浸湿，扯下来袖口一大块细葛布要给少年包扎。</p>
-<p>少年挣扎着不愿意接受。</p>
-<p>“部落里的巫医说伤口需要包扎，不然肉会烂掉，要剁掉手臂。”</p>
-<p>恐吓起了效果，少年果然安静下来任由丹朱包扎。</p>
-<p>一个认真地包扎，另一个则若有所思地沉默着。</p>
-<p>谁都没有说话，耳畔只有清风飒飒的声音和远处竹海澎湃的回响。</p>
-<p>“我叫丹朱，在丹渊出生，以丹为姓，而朱是因为我出生通体彤红，宛如朝霞。”</p>
-<p>丹朱一股脑地把自己的信息给说出来了，全然遗忘了出门在外须警惕陌生人的部落祭司们警句良言。少年笑了笑。</p>
-<p>“重华，有虞氏，姚姓。”</p>
-<p>“重华？两个太阳？好少见的取名法？”</p>
-<p>“你没发现我是重瞳吗？”</p>
-<p>闻言，丹朱这才认认真真端详起那个名为重华的少年的眼瞳。</p>
-<p>他见到了只在传说中听闻过的重瞳子，上古黄帝、仓颉均为传说中的重瞳子，今日见到了果然如黑曜石般晶亮透彻，其中双目重瞳，幽深如井，让他想起曾经西王母氏送来的境外宝石。</p>
-<p>“是啊，真的是很漂亮的眼睛。”丹朱赞叹道。</p>
-<p>他想起日出旸谷悬落于扶桑树下的光辉壮丽的十只金乌，美丽夺目不忍让人直视。而眼前这个重瞳少年的眼睛如同扶桑拂日，遮去过于盛烈的光芒，恰到好处的和煦明亮。让人不禁沉迷。</p>
-<p>重华惊讶地直视着他。</p>
-<p>“怎么了？”</p>
-<p>“你是第一个说它们漂亮的人。”</p>
-<p>“？！”</p>
-<p>“其他人都说这是上古妖魔的眼瞳，是天神的诅咒。我出生的那一日我母亲便去世了，而我父亲则在那一日失去了他的眼睛。部落里的祭司们说我的眼睛吞噬了我父亲的眼睛，我的后母还有族人因此一直想把它们挖掉辟邪。”</p>
-<p>重华顿了顿，似乎下定了某种决心，而后这样解释说道。</p>
-<p>丹朱听了不以为然，他才不会觉得那么漂亮的眼瞳会是妖魔的眼睛亦或是天神的诅咒，倒应该是天神赐予凡人的礼物才对。</p>
-<p>人们总是对过于美丽的事物产生畏惧之心。</p>
-<p>羲和曾这么说过。</p>
-<p>再说了，他自己的父亲就是人间唯一的神，而他的父亲怎么会下那么奇怪的诅咒呢。</p>
-<p>原来在京畿之外的部落里的祭司水准那么差啊。</p>
-<p>他内心默默记录下来，决定回去跟父亲说说各地风土人文，全然忘了自己出门前就做好不打算回家的准备。</p>
-<p>“别挖啊，长在你脸上多好看啊……不过有一天你不想要了，能不能送给我啊？”</p>
-<p> “……”</p>
-<p>“对了重华，你知道附近哪里有村落吗？”丹朱十分自来熟地唤起了那少年之名，他望着日中高悬的太阳，估摸着还是得先歇歇脚才能继续出发。还要等一等梼杌他们，等会合了再去不周山。到时候他还要请这个少年做向导，他们一定可以找到不周山的。</p>
-<p>至于他们怎么找到自己……反正梼杌只要没有被抓回去，总能找到自己的。</p>
-<p>丹朱想，这是他以前离家时得到的经验。</p>
-<p>那名叫重华的少年从丹朱提问起就目不转睛地凝视着他，直到丹朱被看得感觉发毛，打算放弃继续询问时重华才回复。</p>
-<p>“跟我来。”</p>
-<p>丹朱跟在重华身后重新穿过那片他先前迷失的密林。</p>
-<p>他有些奇怪，这不是他方才走过的地方吗。</p>
-<p>难道说，他走了很多次，结果每次完美错过出口？</p>
-<p>果然路痴的悲哀，在任何一个时代都是相似的。</p>
-<p>他重新打量重华，先前只关注对方的眼睛。看身量和声音应该比自己大不了多少岁？</p>
-<p>虽然身量比自己稍高一些，但着实瘦弱了些。</p>
-<p>他想着想着不一会就到了村落里。正值中午，有袅袅炊烟升起。这个村落和他先前经过的村落基本大同小异，京畿之外的生活总是相似，虽然有万国万民，不过还是在同一太阳之下。</p>
-<p>丹朱敲开其中升起炊烟的一户人家的家门，用贝壳项链和一个妇人交换了点蒸好的黍饼。</p>
-<p>重华看着对方轻车熟路地交换，也不考虑这交换是否等价，无法想象这孩子一路上是怎么走到这的。</p>
-<p>他们来到村落里一棵大树底下休息。</p>
-<p>丹朱捧着热乎乎的黍饼，从中间分成两瓣，其中一份递给重华。</p>
-<p>不像之前拒绝包扎，重华没有拒绝直接拿过大口吃了起来。丹朱松了口气，边吃边猜想重华可能没有吃的，经常挨饿。顿时同情心泛滥了，继续掰下自己手里的一半大义凛然地塞到了对方的嘴里。丹朱宣布：“我吃饱了！”</p>
-<p>重华用那双漂亮幽深的眸子深深地看了他一眼，感觉到对方的手指还塞在自己的嘴中，毫不犹豫地用力咬下去了。</p>
-<p>意料之中耳畔传来响遏穹苍的痛呼。</p>
-<p>重华看着在一旁躺在草地上捧着自己肿起的手指暗自腹诽的那人，本来稍阴郁的心情都微微明媚了起来。</p>
-<p>“你把我弄伤了我还要怎么去不周山。”</p>
-<p>丹朱泪眼婆娑地控诉。</p>
-<p>“你走不到的。”</p>
-<p>“路途很遥远么？”</p>
-<p>丹朱无不忧伤地遥望延伸到苍穹的那一端，内心充满着非去不可的决绝。</p>
-<p>“不远。”</p>
-<p>重华语气平淡。</p>
-<p>没等丹朱愤怒地追问，迅速地补充道：</p>
-<p>“可是你会迷路。”</p>
-<p>“……”</p>
-<p>有理有据无法反驳…………</p>
-<p>丹朱一哽。</p>
-<p>“据说不周山上有很多神奇的东西呢。传说中山上生长着一种很美味的果实，叫作嘉果，味道吃起来像桃子，叶子的形状像枣子，黄色的果皮上却是红色的经脉，人吃了之后就不会感到疲劳。”</p>
-<p>“谁告诉你的？”重华看起来有点兴趣了。</p>
-<p>“族里的人都这么说。”</p>
-<p>虽然族里的人大多都不知道不周山在哪，不过丹朱还是再三缠着祭司们才问出了大致方位。重华不置可否。</p>
-<p>“我部落里的歌谣里讲诉过我的祖先曾在不周山上与共工一战，他亲眼见过。”</p>
-<p>“共工……颛顼？！你来自西面的陶地？”虽然是疑问句，但是语气却是肯定。</p>
-<p>丹朱哽然了一下……所幸他反应及时，回应道：</p>
-<p>“好吧，其实我是伊祁氏女，伊祁氏首领与散宜氏之女。”</p>
-<p>丹朱想到了自己并不亲近的名义上的姐姐们，反正千里之外的不明之地，谁也不会认真去追究谁是谁。</p>
-<p>然后眨着无比真诚的双眼，</p>
-<p>“我想出来看看嘛，又怕被父亲担心。”</p>
-<p>千万不要被当成是细作抓起来才好……我父亲愿不愿意交付赎金还是问题。</p>
-<p>“……”</p>
-<p>重华显然一脸不相信，不过看着窘迫到极致的丹朱没有戳穿继续追问这个话题。</p>
-<p>“你是为了嘉果跑了那么远？”</p>
-<p>要知道，陶唐到东夷有虞并非一日之行程。何况多年来，夷夏一向没什么民生往来，也无地域之争，井水不犯河水。虽然流传上归于同一脉，语言也相近，但礼仪祭祀上却微妙地走向了不同的道路。</p>
-<p>“不周山上遗留着颛顼与共工当年一战的神器残骸。我要找到他们，带回去给我父亲看。”</p>
-<p> 这样他就不会一直摇头叹息说我不肖了。</p>
-<p>重华莫名地笑了起来。</p>
-<p>“不周山的神器？”</p>
-<p>丹朱听出了讽刺，他有点沮丧。</p>
-<p>一个个都不相信他说的。</p>
-<p>族人不相信，一起长大的同伴们不相信，重华这个知道不周山的位置的人也不相信。</p>
-<p>“时间不早了，我得上路了，你要不要跟我一起去！”</p>
-<p>丹朱试图邀请新队友。梼杌他们还没有来，估计是被抓回去了。</p>
-<p>他会继续努力前进，完成他们未尽的伟大事业。</p>
-<p>丹朱期待地望向重华。</p>
-<p>“回去吧，你的父亲一定很焦急地等你。”</p>
-<p>重华委婉地拒绝了。</p>
-<p>丹朱有些失望，不过也在他意料之中，他收拾好行囊。把放在一旁的风狸杖背到了身后。</p>
-<p>“你能告诉我不周山在哪里吗？”</p>
-<p>丹朱问道，重华不语。</p>
-<p>僵持了一会看到丹朱似乎没有放弃的想法，重华拿起一根小木枝，在地上开始画图。他指着其中一个圆圈说道：</p>
-<p> “这是我们所在的地方，有虞氏。”</p>
-<p>木棍掠过画着河流标识的图案，重华继续讲解：“这条河流你一定知道，赤水，又称丹水。”</p>
-<p>丹朱点头。</p>
-<p>“逆河而上，向西走到河尽头，有一片干涸荒凉之地，几乎没人居住，叫做北海。”</p>
-<p>丹朱感到奇怪，干涸荒凉之地却叫做海？</p>
-<p>重华看出了他的困惑，解释道：“传闻这里曾经有一望无际不可丈量的湖水，后来消失了。你看这，在这北海大荒之地，有山不合，是你要找的不周山。”</p>
-<p>重华语毕，看了一眼仍然在注视他画的地图的丹朱。</p>
-<p>“你非去不可吗？”</p>
-<p>丹朱盘算了一下这个路程，默默发现还挺遥远的，自己走上一年说不定都不能走到，特别是梼杌他们还不在。出门为了不暴露行踪，他们特地没有选择可以日行千里的神兽。</p>
-<p>看见丹朱似乎有些动摇，重华继续补刀：</p>
-<p>“而且不周山常年飘雪，寒冷至极。”就算到了那里也怕是会冻死。</p>
-<p>“……”丹朱还是挣扎着，好不容易走那么远了他不想放弃。</p>
-<p>他求助地看着重华。</p>
-<p>重华移开目光。</p>
-<p>“我没办法离开有虞氏。”重华看穿了他的想法，拒绝道。</p>
-<p>“丹朱，你太小了，去不了的。”</p>
-<p>第一次，重华叫了丹朱的名字。</p>
-<p>“你真的想要颛顼的神器？有可能丢掉性命也在所不惜？”</p>
-<p>重华问丹朱这个问题时并没有看向他，而是眺望着远方他们进来村落的那片密林。</p>
-<p>丹朱一愣，重华严肃的语气使他不得不认真思考起来。一路上他和同伴们走来基本没遇到什么事，有梼杌混沌在前，穷奇在后，还有个十分能搞到各种干粮的饕餮，自己似乎没有担心过什么，除了害怕被族人追到挨骂。</p>
-<p>“可是……”丹朱心有不甘地开口。</p>
-<p>“丹朱，我送你回去。”重华语气强硬，没有拒绝的余地。</p>
-<p>于是他们又回到最初相见的那条河的河边。</p>
-<p>“要不……你跟我一起回家？”丹朱眼睛一亮。</p>
-<p>如果重华跟自己回家，就不会受人虐待了，自己以后去不周山还有了向导，再也不用担心迷路了。</p>
-<p>重华摇头，“我是有虞氏之子。”</p>
-<p>好吧。丹朱叹息，意料之中，意料之中。</p>
-<p>“你向着这条路一直走，走到尽头然后等着你的族人，应该很快就会看见他们。”</p>
-<p>分别前丹朱十分磨蹭，不想离开。</p>
-<p>“我以后还能见到你吗？”丹朱有些难过地问。</p>
-<p>他想自己这一次跑到这么远，下次出来可就麻烦了。不过他记住了重华刚刚画的地图，从陶唐到东夷的那条路他记住了。</p>
-<p>“会的。你不是擅长离家出走吗。”</p>
-<p>“……”丹朱不想说话。“我有机会就找你玩，我会做好一切准备，然后你要带我去不周山。”</p>
-<p>重华点头：“好，我等你，我也想见识不周山的神器。”</p>
-<p>丹朱很是不舍：“你要等我！！！”</p>
-<p>在后续故事里，丹朱重新百无聊赖地蹲在路口，直至天黑被族人找到然后带回了部落。</p>
-<p>免不了被帝尧一顿骂加上一阵子的絮絮叨叨。但丹朱知道父亲从来舍不得真正生自己的气的。</p>
-<p>就像自己经常宴请朋友到家里来玩，将珍馐玉食大方地分给周围人，常常喜爱身着一身华丽的朱红华服，虽然经常被父亲周围的人指责骄奢浪费。</p>
-<p>但是父亲却不会真正去惩罚他，象征性地批评几句话展示给周围人看。</p>
-<p>年少时，他常以为老爹是真的不喜欢自己，打骂皆因厌恶。</p>
-<p>直至很多年后他伏跪在承载着帝尧的浮厝旁，感觉到手里的温度一点一点流失的时候，他才意识到，原来自己没有真正恨过父亲，就如帝尧那一次次意味深长的“不肖汝父”的叹息里，自己从未读懂过里面不只是痛惜。</p>
-<p>这一次的离家出走范围之远和时间之久引起了帝尧的警惕。他下达了对丹朱的禁足令，且没收一堆法宝后，转身去了祭祀厅和多年的老友羲和讨论怎么教育孩子，最后经过一番谁也不知道的激烈争吵后两者达成共识：丹朱纯粹是闲的。于是他们考虑到丹朱也到了该正规学习治国之道的年纪了，便竭力寻找天下有智之士招为丹朱之师……也不指望他会真的学成什么。</p>
-<p>对于丹朱来说治理之道学习课程并不枯燥。父亲找了很多这世间近乎为神的人跟他讲各种各样的故事，许由、羲和、鲧、放齐，他们会跟自己讲自己祖先的故事，讲那些曾经是人，现在被人们奉为神的英雄的故事。</p>
-<p>丹朱有的时候也慢慢地琢磨出一个道理：英雄之所以是英雄，是因为作出了伟大的事迹。</p>
-<p>现在活着的人里面，世间上唯一能被称为神明的人，是自己的父亲。</p>
-<p>可是身上流着相似血的，以血缘缔结在一起的自己却丝毫没有和他相似之处。意识到这一点使他泄气。“不肖汝父”这是人们对他最多的评价。</p>
-<p>无论是王宫还是民间，大家会把伟大的人所做的伟大的事编成歌谣传唱，伯父弃播种良田而被称颂为“稷”，鲧长年治水，毛发脱落光秃，皮肤苍白透明近乎鱼鳞不像是人类，而被人们描绘为“像一条鱼，从洪水里游到了人间”。</p>
-<p>他也曾向偶尔能抽时间见面的小伙伴打听过，民间是否有过自己相关的传唱歌谣。</p>
-<p>对于这个问题梼杌选择了沉默，混沌的反应是顾左右而言他，穷奇表示京畿地区和少皞氏存在文化代沟所以自己听不懂。而饕餮是个诚实温顺的小女孩，在松软香甜的栗子酥的诱惑下怯声道：“心既顽嚣，又好争讼。”</p>
-<p>……此后丹朱再也没问过这类问题了。</p>
+    <title>起篇04</title>
+    <url>/2020/10/05/%E8%B5%B7%E7%AF%8704/</url>
+    <content><![CDATA[<p>原本以为只是增加一项招待宾客内容的亲族宴会，丹朱也并没有特意穿着隆重的缁撮锦衣出席，仍旧是平日玩闹的纻衣纁裳。</p>
+<p>这样的打扮方便他随时能溜王宫跑去乡野玩耍。</p>
+<p>之前京畿的亲族宴会的参与者都是他的族人或者相识许久的长辈，他们看惯了帝尧之子随性无拘的作风，只要不在祭典上失礼都不会言语过多。</p>
+<p>然而，当他和饕餮被梼杌领着进了大殿落座，虽然他首先注意力大部分被大殿中央的东夷少年吸引，他也发现在座所有人也包括东夷少年都打扮的隆重得体。</p>
+<p>特余光里丹朱注意到羲和皱眉，显然对他们的随意的装扮不满。</p>
+<p>他心虚地往座位饕餮身后躲了躲。</p>
+<p>他目不转睛地观察了幼年有过一面之缘的东夷少年一阵子，偶尔和身旁的饕餮交头接耳。</p>
+<p>他的目光随着东夷少年的落座收了回来，盯着摆放刚呈上来还冒着热气的糕点。</p>
+<p>随后他将糕点移到饕餮的案几上，叹了一口气说道：</p>
+<p>“我吃不下。”</p>
+<p>获得了双倍糕点的饕餮的心情很好，但并不影响她感受到身旁人的低落的情绪。</p>
+<p>她问道：“你怎么了？”</p>
+<p>“你也听到我父亲刚刚夸他的话了。”</p>
+<p>“……”饕餮无语，不想理会丹朱。</p>
+<p>丹朱惆怅：“要是我们当初努力一把，说不定青阳卷就是我们拿到的了。”</p>
+<p>饕餮塞了一块糕点堵住了丹朱的话。</p>
+<p>她说道：“有你在我们想都不要想。”</p>
+<p>丹朱郁闷地咀嚼着糕点，温度适宜的粟米糕的香甜在口齿中漫溢开来，冲淡他少许低落的情绪。</p>
+<p>庖厨的饭膳还未端上来，案几上的两样糕点很快一扫而光，两人都有点意犹未尽。</p>
+<p>不过这没什么关系，趁着混沌沉醉在舞乐，饕餮把他的装着糕点的漆盘悄无声息地捞过来与丹朱平分了。</p>
+<p>回过神的混沌怔怔盯着案面上糕点凭空消失的地方，面容上满是忧伤。</p>
+<p>梼杌注意到这边的动静，本来不爱吃甜食的他将自己的那份传到混沌案上。</p>
+<p>混沌感动地回望梼杌一眼。</p>
+<p>目睹整个过程的女英对他们的行为感到可笑，扭身轻声唤来侍者。</p>
+<p>不一会每人面前多了一盘糕点。</p>
+<p>她拿起一块桃花蒸，心想什么时候在京畿糕点都需要抢了。</p>
+<p>丹朱感到一道似曾相识的灼热视线落到了身上，隔着衣香鬓影的缝隙，落座在对面离他较远处的东夷向他遥遥举杯，宛如祝祷的庄重姿势让他一愣。</p>
+<p>等他想回以相同的礼仪时对方已放下陶杯，专心沉浸于舞乐欣赏，不再看他。</p>
+<p>丹朱低头审视自己的一身穿着。</p>
+<p>……有种被轻视的感觉呢，果然应该先去换一身？</p>
+<p>由于迟到他错过了帝尧向亲族介绍东夷少年的环节，所以丹朱现在也不知道该怎么称呼这个有过一面之缘的东夷少年，即使想私下去结交也得先问问道对方之名。</p>
+<p>不过好像，对方告诉过自己，但……年岁有点远，想不起来了。</p>
+<p>丹朱懊恼，求知欲在记忆的中来回穿梭特却没找到线索。他的思绪是拧缠一团的乱绳，想要解开却勒紧了活路。</p>
+<p>他甚至感到头在隐隐作痛，索性不再理会凝固在脑海里的困惑，专心享受着逐一呈上来的膳肴。</p>
+<p>鼎中炮豚的热气扑缭着熏得丹朱冒出汗，他伸手去拿陶杯准备消些热，余光里看到东夷少年起身离座，在一片喧嚣热闹中悄然无声地出了殿门。</p>
+<p>丹朱怏怏地抿了一舌蜂浆，突然觉得宴会好像也没什么意思了。</p>
+<p>他起身从后道准备溜走，途中饕餮扯住他的衣袖小声问：“你又要跑出去玩了？宴会还没结束。”</p>
+<p>丹朱拉回了衣袖也小声回复道：“我一会就回来。”</p>
+<p>饕餮投以怀疑的眼神但也没再加阻止。</p>
+<p>丹朱出了殿门左右张望，均没有发现早先出来的东夷少年的踪影。</p>
+<p>墙上的爝火才被点燃，还不是很旺，映在墙壁上的暗影倒更将周围一切漫入更深的黑暗中。</p>
+<p>月光从天穹穿云而来，铺在石砖上仿佛泼上一淌溪流，顺着石砖的走势由近及远照亮幽暗的角落。</p>
+<p>他站在过道中不禁纳闷对方怎么跑那么快。</p>
+<p>丹朱凭感觉选了一边打算先去那边看看能不能找到东夷少年。</p>
+<p>没想没有走很久的距离，他想找的那个人冷不丁从拐角处阴影里冒出来。</p>
+<p>丹朱吓了一跳，虽然没有惨叫出声，但连连后退时他忘记了之前石砖的徒然升高的走势。</p>
+<p>摔倒在地的同时他还听到自己脚踝处传来咔哒的声音。</p>
+<p>“你在找我。”</p>
+<p>东夷少年没有意识到自己的过错，看起来也不打算帮忙，只对丹朱先前追踪行为做了陈述。</p>
+<p>丹朱摸到自己脚踝突起的地方，心里哀叹着果然错位了。忍着疼痛，双手用力一旋将起归位。稍微动了动脚踝感觉疼痛在散去，他才抬头望向眼前的少年。</p>
+<p>“重华。”脚踝的扭伤一刹那的疼痛击穿了他脑海凝结着的思绪，他突然就想起了之前怎么也想不起那个名字。</p>
+<p>重华没有反应，面容沉静如水。</p>
+<p>要不是对方的目光一直看着自己，丹朱都快错以为重华只是低头沉思。</p>
+<p>难道还是因为自己装着不够庄重，所以对方生气了？</p>
+<p>丹朱想着，一面双手撑地重新站了起来，等脚上的疼痛感更能忍受一些，他走向了阴影处的少年。</p>
+<p>重华却从阴影里走了出来，进入到月光完全能照见的区域，他扶着走廊前侧的栏杆，目光飘向庭院某一点。</p>
+<p>丹朱不明所以地也着看，好奇有什么吸引了对方的注意力，却发现庭院里处了一棵栽植了多年的桃花树外并没有什么其他的地方。</p>
+<p>丹朱想开口说些什么来让气氛不要陷入尴尬的沉默中。</p>
+<p>他想问的有很多，包括他是怎么去不周山找到的神器，一路上的所见所闻，各种惊心动魄的冒险故事，是不是见到了嘉果，遇到了不周山上的神人……</p>
+<p>思绪千回百转，问题太多反而让他不知道该先问那个。</p>
+<p>丹朱很遗憾自己当初没有更坚决，也许羲和说的对，自己的确没有成大事的气魄。</p>
+<p>这世上有那么多比自己优秀的人，这一点他从小就知道。</p>
+<p>自己的父亲是世间唯一的神这一点毋庸置疑。</p>
+<p>羲和、许由他们既是少有的智者也是自己的老师，自己肯定也比不过。</p>
+<p>同辈里的女英继承了父亲的许多特质……出色也是自然。</p>
+<p>可是这个少年……</p>
+<p>丹朱转头看向身旁的少年。</p>
+<p>他长得好看。</p>
+<p>丹朱想重华应该是自己见过最好看的人了……小时候怎么没察觉呢，只记得重瞳了。如此好看的人自己怎么会忘记呢……</p>
+<p>想到这里，他又觉得自己什么都问不出了。</p>
+<p>丹朱慢慢把视线收回来，捏紧了栏杆。</p>
+<p>正在胡思乱想，却听到久久沉默的人开口说话：</p>
+<p>“在宴会开始之前……你在哪？”</p>
+<p>……宴会开始之前？</p>
+<p>丹朱脑海里立刻回放自己溜出夏至祭礼跑到从前的祭坛玩耍的场景：</p>
+<p>“我在学习。”</p>
+<p>重华的目光终于从庭院中央的那棵树调转到丹朱身上。</p>
+<p>难道他也有看穿人心的本领？</p>
+<p>丹朱心虚。</p>
+<p>重华没有追问，换了一个话题：</p>
+<p>“这里居然有桃花树。”</p>
+<p>丹朱一时摸不清对方的意图，他看了看庭院中央的桃花树又看看重华，不知道对方从何而来：</p>
+<p>“我父亲一直很喜欢桃花树，就搬回来了。应该在我出生前就有了。”</p>
+<p>丹朱想起来在自己小时候父亲也常常带自己来这棵树下玩耍，或者用手掌比划自己到树干的位置，每年都会在树身上和自己身高的位置仔细围绕一圈红绳。</p>
+<p>是什么时候自己就厌烦了就废弃了自己仪式了呢。</p>
+<p>丹朱突然好奇上面会不会还有之前的留下的痕迹，自己明明几乎每天都会路过桃花树，但几乎再也没有认真停留过。</p>
+<p>此刻重华提起来，让他生出一丝怀念之意。</p>
+<p>他翻过栏杆进入庭院，快步走向桃花树。重华看着他莫名的行动，也跟了上来。</p>
+<p>痕迹还留着。</p>
+<p>丹朱抚摸着树身缠绕的红绳，因经历风吹日晒，又年久未管，绳伤痕斑驳，红色几乎要褪去大半。</p>
+<p>“向木神借命。”重华看起来知道的很多，他走到丹朱身边看到了红绳如是说到，“不过，你们也信仰木神？”</p>
+<p>丹朱否认：“这算不上祭祀，也非习俗。”</p>
+<p>他问过父亲这样做的含义，父亲说祈福用的，希望桃花树能帮自己挡到一部分厄运与疾病。</p>
+<p>今天他又听到重华的解释，似乎还有别的说法？</p>
+<p>“东夷也有相同的习惯吗？”丹朱问道。</p>
+<p>“我们不会把社木种在庭院里。”</p>
+<p>“那……种在哪？”丹朱好奇，虽然他也不觉得这棵桃花树就是伊祁氏的社树。</p>
+<p>“祭祀的地方。”对话似乎勾起了重华的思乡情绪，他望着月亮脸上露出伤感的神情。</p>
+<p>丹朱也被传染的有点伤感……</p>
+<p>他想重华应该离开有虞氏很久了，毕竟如果按照曾经对方的说法，走到不周山又要一年多，又听到饕餮说他找到神器也没有回家看看。</p>
+<p>丹朱没有体会过思乡的情绪，即使离家出走得再远回家都并非难事，何况有梼杌饕餮他们在身边，其实走多远都感觉和京畿的生活差不多。</p>
+<p>他想安慰重华：</p>
+<p>“你想回去看看吗？”</p>
+<p>“我总会回去的。”重华想了想说。</p>
+<p>丹朱摇头：“你现在想吗？”</p>
+<p>重华看着他：</p>
+<p>“你有办法？”</p>
+<p>丹朱眼里闪耀着得意的小火花：</p>
+<p>“看你敢不敢跟我一起了。”</p>
+<p>夜奔曾经对丹朱来说是习以为常的事。</p>
+<p>但自父亲的发布的宵禁令以来他收敛了许多，气味相投的混沌、穷奇被召回自己封地，留在京畿的梼杌跟随羲和左右忙于各种祭祀典礼，饕餮开始懂事了也不愿陪他继续胡闹。</p>
+<p>他尝试过独自夜晚跑出去，成功地躲过守卫的巡逻，然而没走多远就被守卫捉回来。</p>
+<p>丹朱对于屡次失败的反思是：如果多一个人成功的几率会不会大一些呢。</p>
+<p>重华凝视着他。借着树梢里漏下的月光，身旁少年的面容像是河水里淌过的鹅卵石，莹润而干净。</p>
+<p>丹朱没有等到重华的拒绝，暗自欢呼雀跃，兴冲冲地拉着重华地手臂往一个方向跑去。</p>
+<p>“我们去骑吉量！”</p>
 <hr>
-<h4 id="注释："><a href="#注释：" class="headerlink" title="注释："></a>注释：</h4><p>1、风狸杖：传说中的风狸（<a href="https://baike.baidu.com/item/%E9%A3%8E%E7%94%9F%E5%85%BD">风生兽</a>）的宝物，状如草茎，长尺许，飞禽走兽随指而毙。</p>
-<p>我也不知道我当初为啥选了这个当做武器，大概觉得好听？？</p>
-<p>四凶：《左传·文公十八年》道：“舜尧，宾于四门，流四凶族<a href="https://baike.baidu.com/item/%E6%B7%B7%E6%B2%8C/16184675">混沌</a>、<a href="https://baike.baidu.com/item/%E7%A9%B7%E5%A5%87/75581">穷奇</a>、<a href="https://baike.baidu.com/item/%E6%A2%BC%E6%9D%8C/79638">梼杌</a>、<a href="https://baike.baidu.com/item/%E9%A5%95%E9%A4%AE/6223">饕餮</a>，投诸<a href="https://baike.baidu.com/item/%E5%9B%9B%E8%A3%94">四裔</a>，以御<a href="https://baike.baidu.com/item/%E9%AD%91%E9%AD%85/7331827">魑魅</a>。”</p>
-<p>虽然本文设定基本基于山海经，会出现各种神兽，但四凶被太史公直接定义为四个大家族的不才子被人取的外号，听起来有点惨烈。其实我是偏向认为神兽们都是存在过后来氏族当做族徽图腾之类。做这里设定为一起长大的小伙伴的外号，他们各自都有自己本来的名字的。</p>
-<p>2、上古男子称氏不称姓，但这里便于理解以及个人真的很喜欢丹朱这两字，就沿用现代人的叫法，重华同理。其实感觉文中写“虞舜”是不是会更有历史同人的感觉，但是重华这个名字太好听我也不想放弃。</p>
-<p>3、重瞳这个就不用说了。反正古人认为重瞳为圣人之相，实质是一种医学病变。不要去百度！不要去百度！不要去百度！（重要的事情说三遍）百度图片掉san而且并不真实。</p>
-<p>4、黍古代专指一种子实叫黍子的一年生草本植物。其子实煮熟后有粘性，可以酿酒、做糕等。——百度。我参考了重华他出生的地方好歹是北方，我当初设定忘了考虑这点，于是这里改成了黍。</p>
-<p>5、《<a href="https://baike.baidu.com/item/%E5%B1%B1%E6%B5%B7%E7%BB%8F">山海经</a>·西山经》：“ 不周之山 ……爰有嘉果，其实如桃，其叶如枣，黄华而赤柎，食之不劳。” </p>
-<p>6、《列子·汤问》：“共工氏与颛顼争为帝，怒而触不周之山，折天柱，地维绝，天倾西北，故日月星辰移焉；地不满东南，故百川水潦归焉。”</p>
-<p>7、《<a href="https://baike.baidu.com/item/%E5%B1%B1%E6%B5%B7%E7%BB%8F">山海经</a>·大荒西经》“西北海之外，大荒之隅，有山而不合，名曰不周。”不周山的原型之说有很多种，这里参考为昆仑山。</p>
-<p>8、《史记·五帝本纪》：“放齐曰：’嗣子丹朱开明。’尧曰：’吁！顽凶，不用。’”张守节正义：“凶，讼也。言丹朱<em>心既顽</em>嚚，<em>又好争讼</em>，不可用之。”</p>
+<p>王宫西侧的宫殿里是伊祁氏收藏多年的珍宝异兽。</p>
+<p>通体雪白绒毛的吉量在丹朱的抚摸下温顺地倾斜躯体，前蹄跪地做出等待御者的姿势。</p>
+<p>丹朱揪了揪吉量的柔软的火红长鬣，发现长鬣长度是够了但当缰绳怕还是难度不低。</p>
+<p>他望了一眼四周盛放的珍玩宝器，也没寻到合适可以当作缰绳的。</p>
+<p>他需要一些可以制成条状物的材料，但房间里大多是玉石面具、陶乐器类古物。父亲对锦衣华服一向不感兴趣，他所珍爱的宫殿里也不会特地腾出空间放置织物染布。</p>
+<p>然后丹朱低头看着自己的衣服，入夏之后炎暑酷热，他嫌麻烦就没有穿上外袍。而纻衣纁裳是极其轻薄简洁的样式，撕出缰绳的长度大概是要衣不蔽体了。</p>
+<p>束身的衣带倒可以利用，但不太结实。</p>
+<p>去其他房间寻找是不是有会消耗一些时间呢。</p>
+<p>丹朱思考着，猛然回头直勾勾地盯着身后从踏进房间那一刻就似乎被震惊地说不出话的少年。</p>
+<p>从刚才开始重华就一直在观察丹朱的举动，轻而易举地看穿他的意图。</p>
+<p>重华脱下外袍子，却直接没有递给丹朱，而是撕成条盘结成多股粗的线绳。他看着吉量头颅户和脖颈的大小估算了所需的长度，迅速绕出一个环形绳笼作为简易辔头，再递给丹朱示意对方套在吉量的面嵴上。</p>
+<p>丹朱直愣愣地接过，心情复杂地拔下的束发用的骨笄缠在绳笼的前端形成嚼子，用拇指摁开吉量的嘴角，神色恍惚地将嚼子塞到吉量嘴中央。</p>
+<p>丹朱很是懊恼，自己怎么光想着光想着缰绳忘了辔头了……</p>
+<p>重华看了一眼丹朱的操作无误后，将外袍余料继续撕剪、盘结缠绕做了一副缰绳。他走到吉量身边，再将缰绳穿过笼头的同时检查一番丹朱先前的操作，确认无虞后看到身边还在人发愣的表情。</p>
+<p>他不禁弯了一下嘴角，很快又收了回去。</p>
+<p>“走吧，你带路。”</p>
+<p>回过神的丹朱爬上吉量的背，牵稳缰绳。他对重华热情地伸出手：“上来。”</p>
+<p>重华后退一步，从侧边自己翻身坐在了吉量的背。</p>
+<p>丹朱悻悻地收回手，觉得这个明明认识多年的朋友并不如想象中好打交道。</p>
+<p>他听到身后传来的声音：“你……第一次骑吉量吧。”</p>
+<p>丹朱立刻反驳：“怎么可能！”</p>
+<p>脑海里划过无数种思绪，难道对方也在不周山遇到过吉量之类的神兽吗？</p>
+<p>他越发对重华感到好奇。</p>
+<p>丹朱握紧缰绳操纵着吉量起身，扬起前蹄，做出冲刺的姿态。在起身一刹那，吉量的背脊弯出的弧度迫使御者不仅要握紧缰绳，还需要俯身搂住吉量脖颈保持不滑落下去。</p>
+<p>丹朱低头盯着环抱在自己腰间的手：“我不介意你抱紧，小心掉下去啊。”</p>
+<p>迅速移开的双手握住了缰绳，身后人深吸一口气，话语里听不出情绪波动：</p>
+<p>“我来操纵。”</p>
+<p>丹朱夺回缰绳：“我可以的。”</p>
+<p>他调转方向冲向宫殿上方的天窗，笑着对身后人说：“据说吉量可以日行千里？我们试试看？”</p>
+<p>身后人微不可闻地叹息着。</p>
+<p>似乎是对自己的行径敢怒不敢言。</p>
+<p>大概是月色太过皎洁，丹朱心情又变好了。</p>
+<p>吉量驮着两人的重量仍不觉吃力，步伐轻灵地在屋脊上跳跃前行，颀长如雄鸡的尾羽在夜空里摇摆着如同耀眼的旗帜猎猎生风。</p>
+<p>这个动静会引起瞭望台的守卫注意的。</p>
+<p>丹朱指挥着吉量放缓脚步从另一条小路走出去。他本来想走以往走的暗道，但暗道估计塞不下吉量的个头。</p>
+<p>他们如一道闪电般从守卫眼前划过，急速得让人意识不到发生什么。</p>
+<p>等到守卫回过神想要通报时连背影都无处寻。</p>
+<p>“你不怕受责骂吗？”</p>
+<p>风驰电掣间丹朱听到重华的疑问。</p>
+<p>丹朱反问：“你不觉现在问这个太晚了吗。”</p>
+<p>重华不再问了。吉量速度之快让他不得不搂紧前面的人，这个尴尬至极的姿势让他后悔没有选择坐在前面。</p>
+<p>吉量狂驰在山林间，穿过一大片水泽时放缓了步伐好让自己半潜水而过。在眼前景色没有那么飞快掠过的间隙，他们也有了喘息的机会看看自己身处何方。</p>
+<p>视野里开阔的伊洛平原让他们意识到已经远离京畿的同时也意识到一丝不对劲。</p>
+<p>沉默许久的重华再一次开口：“你确定你走对了方向？”</p>
+<p>“你看今晚的月亮真好看啊。”丹朱开始乱扯。</p>
+<p>重华突然大笑出声，笑声回荡在寂寥的天地间显得格外嘹亮而肆意，惊起一滩沉睡的鸥鹭：</p>
+<p>“这么多年……你果然还真的一点没变。”</p>
+<p>丹朱：“……”</p>
+<p>丹朱试图补救般地开口询问：“……我们在绕回去？”</p>
+<p>重华不客气地指出真相：“你还记得回去的路？”</p>
+<p>丹朱：“……”</p>
+<p>这对话没办法继续进行下去了！</p>
+<p>难道自己想要带一个思乡人回故乡看看的美好心愿就这样因为迷路而惨烈告终吗？</p>
+<p>丹朱沉痛地进行着自我反省。他现在恨不得一头扎进水泽里化成一条鱼再也不用出来面对身后的人。</p>
+<p>而且离家太远……父亲他们能发现自己在哪吗。</p>
+<p>大笑过后的重华似乎心情没有像先前那样陌生而疏离，他反而兴致变高得稍微高昂了，还有心安慰丹朱：</p>
+<p>“放心吧我们回京畿的，不过，”</p>
+<p>他牵过缰绳，“换我来？”</p>
+<p>丹朱仍不死心地放手。</p>
+<p>“你是真的第一次骑吉量……”重华确认了自己先前的猜测。</p>
+<p>丹朱不情愿地点头承认了。</p>
+<p>被讨论的吉量温顺且尽职尽责地将他们驮到了对岸，由于缰绳地争夺战没有得出结果，它安静地待在原地等待下一步指令，等了一会而发现还没有指令便开始低头啃食地上的草补充狂奔消耗的体力。</p>
+<p>重华从吉量身上跳下来，找了一块湖边的石头蹲坐着休息。</p>
+<p>丹朱抱着吉量的脖颈，甚是郁闷。</p>
+<p>“你……是想拉着我一起挨罚吧。”重华叹息。</p>
+<p>丹朱在内心默默反驳：我是真的想带你回去看看有虞氏。</p>
+<p>但这个结果他实在不好意思再开口。</p>
+<p>思来想去丹朱下定决心开口：“抱歉。”</p>
+<p>重华不为所动：</p>
+<p>“你是想为什么道歉。”</p>
+<p>丹朱有点惭愧：“答应你带你回有虞氏但没能做到。”</p>
+<p>还有……</p>
+<p>他想起那些被他遗忘在时光角落里的回忆。那个初见时手臂上是全是伤痕的重瞳少年，他想起他承诺过会回来找他，一起去不周山。</p>
+<p>然而他都忘记了。</p>
+<p>丹朱盯着重华的衣袖。重华穿着的服饰严实并透不出手臂上的皮肤，但他想哪里一定有什么陈年旧疤，就像庭院的里树上的红绳，时间过得再久绳子仍然缠在上面，绕成某种不可动摇的约定。</p>
+<p>似乎感应到丹朱的心路历程，重华捧起一掬水观察，掌心里有一轮静谧的月影。</p>
+<p>他双掌交握，水从指缝间流走，再打开月亮也消失了：</p>
+<p>“你在等我说‘我原谅你’。”</p>
+<p>无论是这一次，还是从前的事，你都再等这一句话。</p>
+<p>丹朱不明所以：“……重华你。”</p>
+<p>重华侧过头看着丹朱：“我原谅你。”</p>
+<p>虽然被原谅了但这种感觉……并不好受。丹朱更难受了，他不知道为什么会这样，突如其来的负罪感是他一生从未有过的。</p>
+<p>即使自己犯了错惹到父亲生气也没有过如此沉重的愧疚？</p>
+<p>真的是……十分新鲜的体验呢。不过好像跟重华在一起自己总会收获一些奇奇怪怪、前所未有的情绪。</p>
+<p>“你为什么会去找不周山的神器？因为我曾经告诉过你？”</p>
+<p>……因为你想再见我一面？</p>
+<p>虽然丹朱是笃定过，但仔细想想还是太荒谬了。怎么会有人仅仅对一面之缘的人做到如此地步。</p>
+<p>“我想看看不周山的神器长什么样。”</p>
+<p>并不是很令人信服的理由。</p>
+<p>丹朱怀疑地望着他：“难道你对我一见钟情了？！”</p>
+<p>重华：“……”</p>
+<p>“……真的？！”丹朱难以置信，感到一丝窃喜。</p>
+<p>重华抓了一大扎河边的芦苇扑向丹朱：“你还是先学会认路吧。”</p>
+<p>丹朱灵巧翻身离开吉量，躲过重华的芦苇攻击：“你都为我来京畿了！”</p>
+<p>重华徒劳地抓抓头发试图便捷：“虽然是这样没错……”</p>
+<p>这个问题伊祁氏问过他，他当初给的理由的确是为了丹朱。但现在看着眼前这个活蹦乱跳陷入狂喜的人，怎么都觉得是草率给出理由的自己的脑袋不太好使。</p>
+<p>他会想起伊祁氏那诡异的眼神，觉得这对父子俩肯定都误会了什么。</p>
+<p>应该有什么真正的答案是自己都没有察觉的。</p>
+<p>喜欢？爱？</p>
+<p>这种在他人生十几年岁月里都没有体会过的事物怎么可能成为真正的动机。</p>
+<p>他本来以为自己的人生一辈子都会在有虞氏度过。过着和自己祖祖辈辈的人一样的生活，和所有有虞氏的族人一样的命运。</p>
+<p>日复一日，年复一年地制陶、狩猎、种植，直至走向生命终结。</p>
+<p>所以从父母和族长得知有莘氏之子看上自己的消息，他第一反应却也不是欣喜这从天而降的好运气。</p>
+<p>有虞氏中同他年纪相仿的少年们几乎都有了姻缘之约。唯有自己，一个不被疼爱的长子身份，出生克母、重瞳之征都似乎昭示着此生他注定无缘于婚姻。</p>
+<p>甚至一向苛责冷漠的继母都没有反对这门亲事。</p>
+<p>这似乎是最完美而理想的故事结局了。</p>
+<p>可是……</p>
+<p>重华看向丹朱，在兴高采烈手舞足蹈一段时间，丹朱大概是累了，不知道什么时候趴在吉量身上睡着了。</p>
+<p>重华回过头继续扯芦苇。</p>
+<p>自己可能有时候脑袋真的不好使。</p>
 ]]></content>
       <categories>
         <category>有虞谣</category>
-      </categories>
-      <tags>
-        <tag>神话传说</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>初穗</title>
-    <url>/2020/09/21/%E8%A7%A3%E5%BF%A7/</url>
-    <content><![CDATA[<h4 id="00"><a href="#00" class="headerlink" title="00"></a>00</h4><p>她的记忆里始终流淌着一条诡谲的河流。</p>
-<p>不似她后来曾遍历过的世间各异的水路，那条潜藏在她记忆中的河流泛着罕见的澄黄晶莹的波纹，河底是盘亘万年之久的迷你王国。 上万年前天神降下的洪水席卷了陆地上的每一寸生机，也将世界上曾经最富庶奢靡的王朝卷入洪水之下。他们的国民在浩瀚的水域里与幸免生灵结成盟誓，融为一体，相互依存。他们长出了伞状的轻灵躯壳，蛇鳞的双腿和碧绿丝絮般的茸毛，在蜃气浓重的暮夏时节爬上来铺满河道，碧玉的茸毛像发丝一样交错盘结，支撑一张没有缝隙的网面，将流水包络在自身的怀抱里。冬日为躲避陆地的敌人，他们回归河底，蛰伏于一隅暗影。</p>
-<p>从未有人见过她所描述的河流。</p>
-<h4 id="01"><a href="#01" class="headerlink" title="01"></a>01</h4><p>抚育她的村落同生育她的母亲有着如出一辙的荒蛮与敦厚。</p>
-<p>她出生在盛夏入伏日头最毒的时候，临盆前一脚的母亲仍淌在水田里吆喝着水牛的耕作。宽厚的手掌挥舞着盘桓在水牛周围的蚊蚋，下一刻一股急促的疼痛蔓延到她母亲的全身。养育过六个子女的母亲没有被疼痛弄得惊慌失措，她高声呼号请求一旁劳作的女子的帮忙。人群聚拢过来，七手八脚抬起母亲的四肢送往组里巫师的住所，那是族里女人们共同的产房。族人们相信在闯生死关的时刻，巫师的唱祷驱散厄运带来生机。在巫师高低起伏的嗓音里，古老陈旧、如今无人听懂的歌谣遥远得宛若从天界飘来。族里拥有最多子女的妇女会将手探进孕育着生命的盆地，小心翼翼地托起幼嫩脆弱的四肢或头颅，带领懵懂的胎儿滑进狭窄幽暗的小径，挣扎于光与暗的边界。</p>
-<p>她的出生不是从前在巫师的住所上演过无数次的一幕。那是一节崭新而奇异的变调，突兀地将场景由一成不变的巫师住处转回了水田。或许是因为她急切地要来这人世间走一遭。</p>
-<p>关于她出生的场景，她糅合了帮忙接生地妇人的回忆和自己在意识深处残留着某种奇异的幻觉，在想象里补全。</p>
-<p>她的母亲未知巫师的家门预感到自己腹腔中那条生命的蠢蠢欲动。血水从她的双腿间漫溢着，扑落在水田里，如一场突如其来的夏季暴雨。</p>
-<p>女人们钻进她的裙里看到婴儿露出的半只脚掌，惊叫了起来。倒着出生的孩子！在水田里！</p>
-<p>母亲只好在水田里生产，等巫师赶来时她已经平安坠地。从一片温暖的巢穴滑入冰凉的水域，水草和穗的清香于她的哭声之前潜进了她的意识。妇女们将她在水田里洗涤干净，脱离了母体尚未尝到泪水咸涩的她在一片喧嚣中蓦地嗅到来自冰凉河水的温情，一种和母体一致的温情。</p>
-<h4 id="02"><a href="#02" class="headerlink" title="02"></a>02</h4><p>巫师因她不符常理的出生方式为她取名为仪。</p>
-<p>仪者，度也，法制也。</p>
-<p>反常态而出生，到底而出生，逆时命而为之者，取之反义诫之。</p>
-<p>族里并非每一个婴儿都会得到巫师的垂怜。作为一种荣誉象征，巫师常常绞尽脑汁，只为族里伟大的贡献者的子女取名，又或是那些最美丽的女子，最英勇的成年男子才会从前辈那里继承闪亮的称谓。那些称谓是重复的，交替着传给一代又一代。多年们人们不会记得最美丽的女子是谁，最英勇的男子是谁，留下的只有他们的名字。</p>
-<p>巫师们毕竟不是造字的仓颉，取名所经受的痛苦不啻于让他们在祭坛永夜不灭的火焰里跳舞。</p>
-<p>可她却因出生怪异得了名，幼年与同伴的游戏与追逐中也因名落了下风。在那狩猎和追捕为雏形的嬉戏中，名字让她无处遁形。如同后世那些泄露了名字被定住的妖魔。</p>
-<p>在之后很长一段时间里都是如此。</p>
-<h4 id="03"><a href="#03" class="headerlink" title="03"></a>03</h4><p>她的父亲是个编织竹篾的匠人，凭借着一双巧手在族里的大大小小的会议里有了吱声的席位。竹子之外的知识不在他的专长里，对于族里的事宜安排他常呈现出懵懂孩童的痴笑。惹不得人烦也收不到尊敬。她的母亲是多年前从山南那一拨逃难的流民中幸存的一员，凭借着几捆干草和一股韧劲在牛棚里同牛犊一起长大，出落成一个肤色黝黑而健硕的女子，有着牛一般宽厚却倔犟的脾性。他们生育的子女奇迹般撑过灾荒和瘟疫，一个都没有少。唯一这一点能让夫妇感到骄傲。</p>
-<p>她是最小的孩子。她的母亲本想继续生几个，但生产时的水田冰凉的气息侵入了温暖隐秘的腹地，破坏了她的强盛，落得一身病。期待已久的下一个孩子始终没有到来，她在父母的不情不愿中成为家里最小的孩子。</p>
-<p>幼年的仪并没有展露出同她出生般的非凡之举，更多的时候她承袭了父亲的静默痴笑，喉咙里仿佛是哽着一团无形的荆棘，使得她的出声裹挟着短促而破碎的尖锐，在牙牙学语的孩童中是一声失败的哨音。母亲不喜欢这个出生让她受了难的女儿，更何况不似她的其他孩子出生时光洁平滑的面庞，仪是干皱的皮肤和瘪平五官，浑身像一颗脱水的果实，被神明放在她的肚子里。这样的女儿是神明的恶意，也是一辈子困顿于家中的累赘。</p>
-<p>仪浑然不觉母亲的忧愁于厌恶。她开始有梦境了，在她意识完备之前、分得清现实与虚幻之前，一条诡谲的河流反复出现在她的世界里。一条澄黄晶莹的河流，其间游荡着无数奇异的生物和景象无时不刻在召唤着她潜入水底，邀请着她进入水底那个迷你王国。多年之后无论身处何地，只要闭上眼睛，她就能看见潮水向她涌来，甚至能嗅到腐败了的藻类的浊腥气息。更深处的潮水是融合了世间所有植物的香醇甘美迸发出的精彩乐章，从她的嗅觉与味觉跌宕至听觉甚至痛觉。气味一层又一层地叠加，耳畔地乐章一首又一首地炸裂，缠绕着风中飘荡的花瓣，全部吞进了她的腹腔。她幼小的身躯发出一声沉重的叹息，那叹息不应属于这初来乍到的躯体，那本该来自一个更古老的亡灵，一个比他们存在的村落的历史要更长的天神，一个要比这世界上所有的种族与生灵都要古老的遗迹，一个每一次都会被遗忘久而又复生的传奇。</p>
-<p>但此刻，高悬的太阳肆意将炎热蚕食着着这片水田，纵横交错的田野如一头被慵懒的巨兽，千百年前由先民开垦驯化，唯有水道尽头的湍急河口才显露出一丝野性的端倪。她坐在由不怀好意的兄长们临时制成的木盆里，在水田与河流接壤出的水道里漫然穿梭，划过比她还高的芦苇丛进入了缓冲地带，她笨拙地从木盆里起身踏进那片满是芦苇的小岛被赶来的姐姐救起。</p>
-<p>姐姐凫水带她回了家。</p>
-<p>她坐在姐姐肩头，露出了一如从前的痴笑。</p>
-]]></content>
-      <categories>
-        <category>解忧</category>
       </categories>
       <tags>
         <tag>神话传说</tag>
