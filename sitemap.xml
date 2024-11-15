@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ximou.ren/2024/11/12/%E5%A5%87%E6%80%AA%E7%9A%84A/</loc>
+    
+    <lastmod>2024-11-15</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ximou.ren/2023/12/07/%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/</loc>
     
     <lastmod>2024-03-26</lastmod>
@@ -179,6 +186,13 @@
   </url>
   
   <url>
+    <loc>https://ximou.ren/tags/%E8%8B%94%E8%97%93%E8%A7%82%E5%AF%9F%E6%97%A5%E8%AE%B0/</loc>
+    <lastmod>2024-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ximou.ren/tags/%E6%A2%85%E6%9E%97%E4%BC%A0%E5%A5%87/</loc>
     <lastmod>2024-11-15</lastmod>
     <changefreq>daily</changefreq>
@@ -202,7 +216,7 @@
   </url>
   
   <url>
-    <loc>https://ximou.ren/categories/%E8%A7%A3%E5%BF%A7/</loc>
+    <loc>https://ximou.ren/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/</loc>
     <lastmod>2024-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -216,7 +230,7 @@
   </url>
   
   <url>
-    <loc>https://ximou.ren/categories/%E6%9C%89%E8%99%9E%E8%B0%A3/</loc>
+    <loc>https://ximou.ren/categories/%E8%A7%A3%E5%BF%A7/</loc>
     <lastmod>2024-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
