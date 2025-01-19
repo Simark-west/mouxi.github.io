@@ -125,8 +125,8 @@
         <category>有虞谣</category>
       </categories>
       <tags>
-        <tag>神话传说</tag>
         <tag>颛顼×少昊</tag>
+        <tag>神话传说</tag>
         <tag>颛顼</tag>
         <tag>少昊</tag>
         <tag>山海经</tag>
@@ -1085,7 +1085,7 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
 <p>虽然方法很简单……实际上我几乎耗费了半天时间去调整空格，没办法小白对语言书写规则不熟。</p>
 <p>再接下来就可以<code>hexo clean</code>了。</p>
 <h4 id="2、-ERROR-Deployer-not-found-git"><a href="#2、-ERROR-Deployer-not-found-git" class="headerlink" title="2、 ERROR Deployer not found: git"></a>2、 ERROR Deployer not found: git</h4><p>这个是在上一步结束后遇到的。<code>hexo g</code>没问题，但<code>hexo d</code>出现：</p>
-<p><em>ERROR Deployer not found: git repo锛歡<a href="mailto:&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:Simark-west/mouxi.github.io.git</em></p>
+<p><em>ERROR Deployer not found: git repo锛歡<a href="mailto:&#105;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#105;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a>:Simark-west/mouxi.github.io.git</em></p>
 <p>我先开始怀疑是没有安装git，于是：</p>
 <pre class=" language-yaml"><code class="language-yaml">npm install  hexo<span class="token punctuation">-</span>deployer<span class="token punctuation">-</span>git <span class="token punctuation">-</span><span class="token punctuation">-</span>save</code></pre>
 <p>然而还是相同的报错，看着那个乱码我十分怀疑是不是冒号有问题，原文本是：</p>
